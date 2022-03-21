@@ -1,0 +1,27 @@
+<p-table [value]="fsc" responsiveLayout="scroll">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>ID</th>
+      <th>Demandeur</th>
+      <th>Réference</th>
+      <th>Tache</th>
+      <th> chargé </th>
+      <th> Commentaire</th>
+      <th> Date reception</th>
+      <th> Région</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-ikbel>
+    <tr>
+      <td>{{ikbel.id}}</td>
+      <td>{{ikbel.demandeur}}</td>
+      <td>{{ikbel.ref}}</td>
+      <td>{{ikbel.tache}}</td>
+      <td> {{ikbel.charge}}</td>
+      <td> {{ikbel.commentaire}}</td>
+      <td> {{ikbel.datereception | date :'longDate'}}</td>
+      <td> {{ikbel.region.name}}</td>
+    </tr>
+  </ng-template>
+</p-table>
+

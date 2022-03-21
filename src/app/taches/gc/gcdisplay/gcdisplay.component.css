@@ -1,0 +1,7 @@
+
+.p-input-icon-left {
+  float :right;
+}
+span.p-input-icon-left[ type="text"]{
+  padding:0px 50px;
+}

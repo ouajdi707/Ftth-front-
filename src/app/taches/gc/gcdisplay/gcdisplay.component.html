@@ -1,0 +1,80 @@
+<div class="card">
+<p-table #gctable  [value]="gc" [filterDelay]="0" [globalFilterFields]="['id','demandeur','adressegc','nbrpoteaux','reel','action','charge','etat','datereception','commentaire','region.name']"
+         [paginator]="true" [rows]="5" [showCurrentPageReport]="true">
+  <ng-template pTemplate="caption">
+    <div class="datatable-header">
+      List Gc
+      <span class="p-input-icon-left m-lg-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains', gctable)" placeholder="" />
+                </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+      <th pSortableColumn="demandeur"> Demandeur <p-sortIcon field="demandeur"></p-sortIcon> </th>
+      <th pSortableColumn="adressegc"> Adresse Gc <p-sortIcon field="adressegc"></p-sortIcon></th>
+      <th pSortableColumn="nbrpoteaux"> Nombre de poteaux <p-sortIcon field="nbrpoteaux"></p-sortIcon> </th>
+      <th pSortableColumn="reel"> Réel <p-sortIcon field="reel"></p-sortIcon> </th>
+      <th pSortableColumn="action"> Action <p-sortIcon field="action"></p-sortIcon></th>
+      <th pSortableColumn="charge"> Chargé <p-sortIcon field="charge"></p-sortIcon> </th>
+      <th pSortableColumn="etat"> Etat <p-sortIcon field="etat"></p-sortIcon> </th>
+      <th pSortableColumn="datereception"> Date reception <p-sortIcon field="datereception"></p-sortIcon> </th>
+      <th pSortableColumn="commentaire"> Commentaire <p-sortIcon field="commentaire"></p-sortIcon> </th>
+      <th pSortableColumn="region.name"> Region <p-sortIcon field="region.name"></p-sortIcon> </th>
+    </tr>
+    <tr>
+      <th>
+        <p-columnFilter type="text" field="id"></p-columnFilter>
+      </th>
+    <th>
+      <p-columnFilter type="text" field="demandeur"></p-columnFilter>
+    </th>
+      <th>
+        <p-columnFilter type="text" field="adressegc"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="nbrpoteaux"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="reel"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="action"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="charge"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="etat"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="datereception"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="commentaire"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="region.name"></p-columnFilter>
+      </th>
+
+  </ng-template>
+  <ng-template pTemplate="body" let-ikbel >
+    <tr>
+      <td >{{ikbel.id}}</td>
+      <td>{{ikbel.demandeur}}</td>
+      <td>{{ikbel.adressegc}}</td>
+      <td>{{ikbel.nbrpoteaux}}</td>
+      <td> {{ikbel.reel}}</td>
+      <td> {{ikbel.action}}</td>
+      <td> {{ikbel.charge}}</td>
+      <td> {{ikbel.etat}}</td>
+      <td> {{ikbel.datereception | date :'longDate'}}</td>
+      <td> {{ikbel.commentaire}}</td>
+      <td> {{ikbel.region.name}}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+</div>
