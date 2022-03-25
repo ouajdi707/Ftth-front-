@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
@@ -26,6 +25,12 @@ import {GcService} from "./services/gc.service";
 import {DatePipe} from "@angular/common";
 import { FscdisplayComponent } from './taches/fsc/fscdisplay/fscdisplay.component';
 import {FscService} from "./services/fsc.service";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { ToastrModule } from 'ngx-toastr';
+import {RippleModule} from "primeng/ripple";
+import {TreeSelectModule} from "primeng/treeselect";
+import {CalendarModule} from 'primeng/calendar';
+import {RegionComponent} from "./region/region.component";
 
 
 
@@ -38,28 +43,36 @@ import {FscService} from "./services/fsc.service";
     GccreateComponent,
     GcupdateComponent,
     FscdisplayComponent,
+    RegionComponent,
 
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ToastModule,
-    ToolbarModule,
-    ButtonModule,
-    FileUploadModule,
-    TableModule,
-    FormsModule,
-    InputNumberModule,
-    RadioButtonModule,
-    ConfirmDialogModule,
-    DropdownModule,
-    DialogModule,
-    RatingModule,
-    PaginatorModule,
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ToastModule,
+        ToolbarModule,
+        ButtonModule,
+        FileUploadModule,
+        TableModule,
+        FormsModule,
+        InputNumberModule,
+        RadioButtonModule,
+        ConfirmDialogModule,
+        DropdownModule,
+        DialogModule,
+        RatingModule,
+        PaginatorModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(),
+        RippleModule,
+        TreeSelectModule,
+        CalendarModule,
+      FileUploadModule,
 
-  ],
+
+],
   providers: [GcService,DatePipe,FscService],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,63 @@
 <div class="card">
-<p-table #gctable  [value]="gc" [filterDelay]="0" [globalFilterFields]="['id','demandeur','adressegc','nbrpoteaux','reel','action','charge','etat','datereception','commentaire','region.name']"
-         [paginator]="true" [rows]="5" [showCurrentPageReport]="true">
+  <p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="Nouveau Gc" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()" ></button>
+      <p-dialog [(visible)]="NewDialog" [style]="{width: '450px', height:400}" header="Ajout Gc" [modal]="true" styleClass="p-fluid"   >
+        <ng-template pTemplate="content">
+           <div  class="field">
+          <p>Region</p>
+          <select [(ngModel)]="region" name="status" placeholder="select"  class="form-select">
+            <option *ngFor="let region of regions" [ngValue]="region">{{region.name}}</option>
+          </select>
+           </div>
+          <div class="field">
+            <label for="username1" class="block">Demandeur</label>
+            <input  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.demandeur" />
+          </div>
+          <div class="field">
+            <label for="username1" class="block">Adresse gc</label>
+            <input type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.adressegc" />
+          </div>
+          <div class="field">
+            <label for="username1" class="block">Nombre de poteaux</label>
+            <input  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.nbrpoteaux" />
+          </div>
+          <div class="field">
+            <label for="username1" class="block">Real</label>
+            <input  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.reel" />
+          </div>
+          <div class="field">
+            <label for="username1" class="block">Action </label>
+            <input  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.action" />
+          </div>
+          <div class="field">
+            <label for="username1" class="block">Charge</label>
+            <input  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.charge" />
+          </div>
+          <div class="field">
+            <label for="username1" class="block">Etat</label>
+            <input  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.etat" />
+          </div>
+          <div class="field">
+            <label for="username1" class="block">Date de reception </label>
+            <input  type="date" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.datereception" />
+          </div>
+          <div class="field">
+            <label for="username1" class="block">Commentaire</label>
+            <input  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.commentaire" />
+          </div>
+          <p-button label="Ajouter" (click)="save(gcs)"> </p-button>
+        </ng-template></p-dialog>
+    </ng-template>
+    <ng-template pTemplate="right">
+      <p-fileUpload mode="basic" accept=".xlsx" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block" ></p-fileUpload>
+      &nbsp;&nbsp;
+      <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="Onexportexcel()"></button>
+    </ng-template>
+  </p-toolbar>
+<div style="font-size: 5px ;">
+<p-table #gctable  [value]="gc" [responsive]="true"  columnResizeMode="expand"  [tableStyle]="{width: 'max-content'  }" [filterDelay]="0" [globalFilterFields]="['id','demandeur','adressegc','nbrpoteaux','reel','action','charge','etat','datereception','commentaire','region.name']"
+         [paginator]="true" [rows]="4" [showCurrentPageReport]="true"  [resizableColumns]='true' [autoLayout]="true" id="excel-table" >
   <ng-template pTemplate="caption">
     <div class="datatable-header">
       List Gc
@@ -8,11 +65,12 @@
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains', gctable)" placeholder="" />
                 </span>
+
     </div>
   </ng-template>
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+      <th  pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
       <th pSortableColumn="demandeur"> Demandeur <p-sortIcon field="demandeur"></p-sortIcon> </th>
       <th pSortableColumn="adressegc"> Adresse Gc <p-sortIcon field="adressegc"></p-sortIcon></th>
       <th pSortableColumn="nbrpoteaux"> Nombre de poteaux <p-sortIcon field="nbrpoteaux"></p-sortIcon> </th>
@@ -23,6 +81,7 @@
       <th pSortableColumn="datereception"> Date reception <p-sortIcon field="datereception"></p-sortIcon> </th>
       <th pSortableColumn="commentaire"> Commentaire <p-sortIcon field="commentaire"></p-sortIcon> </th>
       <th pSortableColumn="region.name"> Region <p-sortIcon field="region.name"></p-sortIcon> </th>
+      <th > </th>
     </tr>
     <tr>
       <th>
@@ -58,6 +117,7 @@
       <th>
         <p-columnFilter type="text" field="region.name"></p-columnFilter>
       </th>
+    <th></th>
 
   </ng-template>
   <ng-template pTemplate="body" let-ikbel >
@@ -73,8 +133,70 @@
       <td> {{ikbel.datereception | date :'longDate'}}</td>
       <td> {{ikbel.commentaire}}</td>
       <td> {{ikbel.region.name}}</td>
+      <td>
+        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="openDialog(ikbel)"></button>
+        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="Ondeletegc(ikbel.id)"></button>
+        <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="GC Details" [modal]="true" styleClass="p-fluid"   >
+          <ng-template pTemplate="content">
+
+            <div class="field">
+              <label for="username1" class="block">ID</label>
+              <input id="username198" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.id" />
+
+            </div>
+
+            <div class="field">
+              <label for="username1" class="block">Demandeur</label>
+              <input id="username19" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.demandeur" />
+
+            </div>
+
+            <div class="field">
+              <label for="username1" class="block">Adresse gc</label>
+              <input id="username18" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.adressegc" />
+
+            </div>
+
+            <div class="field">
+              <label for="username1" class="block">Nombre de poteaux</label>
+              <input id="username17" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.nbrpoteaux" />
+
+            </div>
+
+            <div class="field">
+              <label for="username1" class="block">Real</label>
+              <input id="username14" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.reel" />
+
+            </div>
+
+            <div class="field">
+              <label for="username1" class="block">Action </label>
+              <input id="username15" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.action" />
+             </div>
+            <div class="field">
+              <label for="username1" class="block">Charge</label>
+              <input id="username157" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.charge" />
+            </div>
+
+            <div class="field">
+              <label for="username1" class="block">Etat</label>
+              <input id="username158" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.etat" />
+            </div>
+            <div class="field">
+              <label for="username1" class="block">Date de reception </label>
+              <input id="usernam8" type="date" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.datereception" />
+            </div>
+            <div class="field">
+              <label for="username1" class="block">Username</label>
+              <input id="username159" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.commentaire" />
+            </div>
+            <p-button label="modifier" (click)="editgc(gcs)"></p-button>
+          </ng-template></p-dialog>
+      </td>
+
     </tr>
   </ng-template>
 </p-table>
 
+</div>
 </div>

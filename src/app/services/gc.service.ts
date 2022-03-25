@@ -1,20 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {Gc} from "../model/gc";
 
 
-export interface Gc {
-  id:bigint;
-  demandeur:string;
-  adressegc:string;
-  nbrpoteaux:bigint;
-  reel:bigint;
-  action:string;
-  charge:string;
-  datereception:any;
-  etat:string;
-  commentaire:string;
-
-}
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +18,10 @@ export class GcService {
     return this.httpClient.post("http://localhost:8085/Gc/Add-gc",data)
   }
   update_Gc(id:number , data:any ){
-    return this.httpClient.put("http://localhost:8085/Gc/modifygc/${gc-id}",data)
+    return this.httpClient.put("http://localhost:8085/Gc/modifygc/"+id,data)
   }
-  Remove_Gc(id:number , data:any) {
-    return this.httpClient.delete("http://localhost:8085/Gc/remove-gc/${gc-id}")
+  Remove_Gc(id:number ) {
+    return this.httpClient.delete("http://localhost:8085/Gc/remove-gc/"+id)
   }
 
 }
