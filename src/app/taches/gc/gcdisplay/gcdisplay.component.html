@@ -2,57 +2,104 @@
   <p-toolbar styleClass="p-mb-4">
     <ng-template pTemplate="left">
       <button pButton pRipple label="Nouveau Gc" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()" ></button>
-      <p-dialog [(visible)]="NewDialog" [style]="{width: '450px', height:400}" header="Ajout Gc" [modal]="true" styleClass="p-fluid"   >
+      <p-dialog [(visible)]="NewDialog" [style]="{width: '580px', height:530}" header="Ajout Gc" [modal]="true" styleClass="p-fluid"   >
         <ng-template pTemplate="content">
-           <div  class="field">
-          <p>Region</p>
-          <select [(ngModel)]="region" name="status" placeholder="select"  class="form-select">
-            <option *ngFor="let region of regions" [ngValue]="region">{{region.name}}</option>
-          </select>
-           </div>
-          <div class="field">
+
+          <div class="row pt-2">
+            <div class="col-6">
             <label for="username1" class="block">Demandeur</label>
-            <input  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.demandeur" />
+
+            </div>
+            <div class="col-6">
+
+            <input    type="text" class="form-control text-black" id="test" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.demandeur" />
+            </div>
           </div>
-          <div class="field">
+          <div class="row pt-2">
+            <div class="col-6">
             <label for="username1" class="block">Adresse gc</label>
-            <input type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.adressegc" />
+            </div>
+            <div class="col-6">
+            <input type="text" class="form-control text-black" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.adressegc" />
+            </div>
           </div>
-          <div class="field">
+          <div class="row pt-2">
+            <div class="col-6">
             <label for="username1" class="block">Nombre de poteaux</label>
-            <input  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.nbrpoteaux" />
+            </div>
+            <div class="col-6">
+            <input  type="number" class="form-control text-black" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.nbrpoteaux" />
+            </div>
           </div>
-          <div class="field">
+          <div class="row pt-2">
+            <div class="col-6">
             <label for="username1" class="block">Real</label>
-            <input  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.reel" />
+            </div>
+            <div class="col-6">
+            <input  type="number" class="form-control text-black" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.reel" />
+            </div>
           </div>
-          <div class="field">
+          <div class="row pt-2">
+            <div class="col-6">
             <label for="username1" class="block">Action </label>
-            <input  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.action" />
+            </div>
+            <div class="col-6">
+            <input  type="text" class="form-control text-black" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.action" />
+            </div>
           </div>
-          <div class="field">
-            <label for="username1" class="block">Charge</label>
-            <input  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.charge" />
+          <div class="row pt-2">
+            <div class="col-6">
+            <label for="username1" class=" block">Charge</label>
+            </div>
+            <div class="col-6">
+            <input  type="text" aria-describedby="username1-help" class="form-control text-black" pInputText [(ngModel)]="gcs.charge" />
+            </div>
           </div>
-          <div class="field">
+          <div class="row pt-2">
+            <div class="col-6">
             <label for="username1" class="block">Etat</label>
-            <input  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.etat" />
+            </div>
+            <div class="col-6">
+            <input  type="text" class="form-control text-black" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.etat" />
+            </div>
           </div>
-          <div class="field">
+          <div class="row pt-2">
+            <div class="col-6">
             <label for="username1" class="block">Date de reception </label>
-            <input  type="date" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.datereception" />
+            </div>
+            <div class="col-6">
+            <input  type="date" class="form-control text-black" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.datereception" />
+            </div>
           </div>
-          <div class="field">
+          <div class="row pt-2">
+            <div class="col-6">
             <label for="username1" class="block">Commentaire</label>
-            <input  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.commentaire" />
+            </div>
+            <div class="col-6">
+            <input  type="text" class="form-control text-black" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.commentaire" />
           </div>
-          <p-button label="Ajouter" (click)="save(gcs)"> </p-button>
+          </div>
+          <div  class="row pt-2">
+            <div class="col-6">
+            <label class="block">
+            Region
+            </label>
+            </div>
+            <div class="col-6">
+            <select [(ngModel)]="region" name="status" placeholder="select"  class="form-select">
+              <option *ngFor="let region of regions" [ngValue]="region">{{region.name}}</option>
+            </select>
+            </div>
+          </div>
+          <div class="row">
+          <button class="btn btn-success" label="Ajouter" (click)="save(gcs)"> Ajouter </button>
+          </div>
         </ng-template></p-dialog>
     </ng-template>
     <ng-template pTemplate="right">
-      <p-fileUpload mode="basic" accept=".xlsx" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block" ></p-fileUpload>
+      <p-fileUpload mode="basic" accept=".xlsx" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block" chooseIcon="pi pi-download"  ></p-fileUpload>
       &nbsp;&nbsp;
-      <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="Onexportexcel()"></button>
+      <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="Onexportexcel()"  icon="pi pi-upload"></button>
     </ng-template>
   </p-toolbar>
 <div style="font-size: 5px ;">
@@ -138,59 +185,90 @@
         <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="Ondeletegc(ikbel.id)"></button>
         <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="GC Details" [modal]="true" styleClass="p-fluid"   >
           <ng-template pTemplate="content">
-
-            <div class="field">
+            <div class="row pt-2">
+              <div class="col-6">
               <label for="username1" class="block">ID</label>
-              <input id="username198" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.id" />
-
+              </div>
+              <div class="col-6">
+              <label id="username198" > {{gcs.id}}</label>
+              </div>
             </div>
-
-            <div class="field">
+            <div class="row pt-2">
+              <div class="col-6">
               <label for="username1" class="block">Demandeur</label>
-              <input id="username19" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.demandeur" />
-
+              </div>
+              <div class="col-6">
+              <input class="form-control text-black" id="username19" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.demandeur" />
+              </div>
             </div>
-
-            <div class="field">
+            <div class="row pt-2">
+              <div class="col-6">
               <label for="username1" class="block">Adresse gc</label>
-              <input id="username18" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.adressegc" />
-
+              </div>
+              <div class="col-6">
+              <input class="form-control text-black" id="username18" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.adressegc" />
+              </div>
             </div>
 
-            <div class="field">
+            <div class="row pt-2">
+              <div class="col-6">
               <label for="username1" class="block">Nombre de poteaux</label>
-              <input id="username17" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.nbrpoteaux" />
-
+              </div>
+              <div class="col-6">
+              <input  class="form-control text-black" id="username17" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.nbrpoteaux" />
+              </div>
             </div>
-
-            <div class="field">
+            <div class="row pt-2">
+              <div class="col-6">
               <label for="username1" class="block">Real</label>
-              <input id="username14" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.reel" />
-
+              </div>
+              <div class="col-6">
+              <input class="form-control text-black" id="username14" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.reel" />
+              </div>
             </div>
-
-            <div class="field">
+            <div class="row pt-2">
+              <div class="col-6">
               <label for="username1" class="block">Action </label>
-              <input id="username15" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.action" />
+              </div>
+              <div class="col-6">
+              <input class="form-control text-black" id="username15" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.action" />
+              </div>
              </div>
-            <div class="field">
+            <div class="row pt-2">
+              <div class="col-6">
               <label for="username1" class="block">Charge</label>
-              <input id="username157" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.charge" />
+              </div>
+              <div class="col-6">
+              <input class="form-control text-black" id="username157" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.charge" />
+              </div>
             </div>
-
-            <div class="field">
+            <div class="row pt-2">
+              <div class="col-6">
               <label for="username1" class="block">Etat</label>
-              <input id="username158" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.etat" />
+              </div>
+              <div class="col-6">
+              <input class="form-control text-black" id="username158" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.etat" />
+              </div>
             </div>
-            <div class="field">
+            <div class="row pt-2">
+              <div class="col-6">
               <label for="username1" class="block">Date de reception </label>
-              <input id="usernam8" type="date" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.datereception" />
+              </div>
+              <div class="col-6">
+              <input class="form-control text-black" id="usernam8" type="date" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.datereception" />
+              </div>
             </div>
-            <div class="field">
+            <div class="row pt-2">
+              <div class="col-6">
               <label for="username1" class="block">Username</label>
-              <input id="username159" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.commentaire" />
+              </div>
+              <div class="col-6">
+              <input class="form-control text-black" id="username159" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.commentaire" />
+              </div>
             </div>
+            <div class="row pt-2">
             <p-button label="modifier" (click)="editgc(gcs)"></p-button>
+            </div>
           </ng-template></p-dialog>
       </td>
 

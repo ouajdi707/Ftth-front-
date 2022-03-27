@@ -69,7 +69,7 @@ import {RegionComponent} from "./region/region.component";
         RippleModule,
         TreeSelectModule,
         CalendarModule,
-      FileUploadModule,
+        FileUploadModule,
 
 
 ],

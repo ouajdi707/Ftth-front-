@@ -59,7 +59,7 @@ export class GcdisplayComponent implements OnInit {
         })
   }
 
-  Ondeletegc(id: number) {
+    Ondeletegc(id: number) {
     Swal.fire({
       title: 'Etes-vous sur?',
       icon: 'warning',

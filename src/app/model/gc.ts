@@ -8,7 +8,7 @@ export class Gc{
   reel:number;
   action:string;
   charge:string;
-datereception:Date;
+  datereception:Date;
   etat:string;
   region:Region;
   commentaire:string;
