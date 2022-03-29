@@ -6,8 +6,6 @@ import {HttpClientModule} from "@angular/common/http";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { GcdisplayComponent } from './taches/gc/gcdisplay/gcdisplay.component';
-import { GccreateComponent } from './taches/gc/gccreate/gccreate.component';
-import { GcupdateComponent } from './taches/gc/gcupdate/gcupdate.component';
 import {ToastModule} from "primeng/toast";
 import {ToolbarModule} from "primeng/toolbar";
 import {ButtonModule} from "primeng/button";
@@ -40,8 +38,6 @@ import {RegionComponent} from "./region/region.component";
     DashboardComponent,
     HeaderComponent,
     GcdisplayComponent,
-    GccreateComponent,
-    GcupdateComponent,
     FscdisplayComponent,
     RegionComponent,
 

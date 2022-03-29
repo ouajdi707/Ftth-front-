@@ -14,13 +14,13 @@ getAll():Observable<any>{
   return this.httpClient.get("http://localhost:8085/Region/retrieve-all-region");
   }
 addRegion(data:any){
-return this.httpClient.get("http://localhost:8085/Region/Add-region",data);
+return this.httpClient.post("http://localhost:8085/Region/Add-region",data);
 }
 updateRegion(id:number , data:any ){
-    return this.httpClient.get("http://localhost:8085/Region/modifyregion/${region-id}",data)
+    return this.httpClient.put("http://localhost:8085/Region/modifyregion/"+id,data)
 }
 removeRegion(id:number){
-    return this.httpClient.get("http://localhost:8085/Region/retrieve-all-region/${region-id}")
+    return this.httpClient.delete("http://localhost:8085/Region/remove-region"+id)
 }
 
 }
