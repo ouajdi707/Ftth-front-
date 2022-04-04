@@ -11,11 +11,13 @@ import Swal from "sweetalert2";
   styleUrls: ['./region.component.css']
 })
 export class RegionComponent implements OnInit {
-  regions:Region[];
-  region =new Region();
+  region:Region[];
+  regions =new Region();
   productDialog: boolean;
   NewDialog =false ;
-
+  applyFilterGlobal($event: any, stringVal: any, dt: any) {
+    dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
+  }
   constructor( private regionService:RegionService ,private toast: ToastrService) { }
 
   ngOnInit(): void {
@@ -26,8 +28,7 @@ export class RegionComponent implements OnInit {
 getallregions(){
   this.regionService.getAll().subscribe(data=>{
       console.table(data)
-      this.regions=data;
-
+      this.region=data;
     },
 
     error =>{
@@ -35,13 +36,10 @@ getallregions(){
     })
 
 }
-
   openNew() {
-    this.region =new Region();
+    this.regions =new Region();
     this.NewDialog = true;
-
   }
-
   save(regions: Region) {
     this.regionService.addRegion(regions).subscribe(res => {
         this.toast.success("done")
@@ -52,7 +50,7 @@ getallregions(){
     )
   }
   openDialog(region:Region) {
-    this.region = region;
+    this.regions = region;
     this.productDialog = true;
   }
 
@@ -90,4 +88,12 @@ getallregions(){
   }
 
 
+  editregion(region: any) {
+    this.regionService.updateRegion(region.id, region).subscribe(data => {
+        this.toast.success('done');
+        this.productDialog = false;
+      },
+      error => this.toast.error('some things wrong'))
+
+  }
 }

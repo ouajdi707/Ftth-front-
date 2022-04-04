@@ -10,7 +10,7 @@ export class RegieService {
 
   constructor(public httpClient:HttpClient) { }
   getregie() {
-    return this.httpClient.get<Regie>("http://localhost:8085/Regie/retrieve-all-regie");
+    return this.httpClient.get<Regie[]>("http://localhost:8085/Regie/retrieve-all-regie");
   }
   addregie(data: any) {
     return this.httpClient.post("http://localhost:8085/Regie/Add-regie", data)
@@ -19,6 +19,6 @@ export class RegieService {
     return this.httpClient.put("http://localhost:8085/Regie/modifyregie/" + id, data)
   }
   removeregie(id: number) {
-    return this.httpClient.delete("http://localhost:8085/Regie/remove-racco/" + id)
+    return this.httpClient.delete("http://localhost:8085/Regie/remove-regie/" + id)
   }
 }

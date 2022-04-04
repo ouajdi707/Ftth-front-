@@ -9,7 +9,7 @@ export class ModelisationpboService {
 
   constructor(public httpClient:HttpClient) { }
   getModelisationpbo() {
-    return this.httpClient.get<Modelisationpbo>("http://localhost:8085/Modelisationpbo/retrieve-all-modelisationpbo");
+    return this.httpClient.get<Modelisationpbo[]>("http://localhost:8085/Modelisationpbo/retrieve-all-modelisationpbo");
   }
   addModelisationpbo(data: any) {
     return this.httpClient.post("http://localhost:8085/Modelisationpbo/Add-modelisationpbo", data)

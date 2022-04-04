@@ -7,12 +7,12 @@ export class Racco{
   idra:string;
   nblgts:number;
   idimmeuble:string;
-  distancepbpoto:string;
+  distancepbopto:number;
   action:string;
   pbo:string;
   distance:number;
   commentaire:string;
-  chargé:string;
+  charge:string;
   majnetworks:string;
   majsadirah:string;
   ancienpm:string;

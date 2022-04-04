@@ -10,7 +10,7 @@ export class RaccoService {
 
   constructor(public httpClient:HttpClient) { }
   getracco() {
-    return this.httpClient.get<Racco>("http://localhost:8085/Racco/retrieve-all-racco");
+    return this.httpClient.get<Racco[]>("http://localhost:8085/Racco/retrieve-all-racco");
   }
   addracco(data: any) {
     return this.httpClient.post("http://localhost:8085/Racco/Add-racco", data)

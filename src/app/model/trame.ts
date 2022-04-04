@@ -9,7 +9,7 @@ export class Trame{
   libellevoie:string;
   typevoie:string;
   nomvoie:string;
-  codepostale:number;
+  codepostal:number;
   ville:string;
   insee:number;
   charge:string;

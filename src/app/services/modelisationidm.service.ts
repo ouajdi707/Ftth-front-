@@ -9,7 +9,7 @@ import {Modelisatioidm} from "../model/Modelisatioidm";
 export class ModelisationidmService {
   constructor(public httpClient:HttpClient) { }
   getModelisationidm() {
-    return this.httpClient.get<Modelisatioidm>("http://localhost:8085/Modelisationidm/retrieve-all-modelisationidm");
+    return this.httpClient.get<Modelisatioidm[]>("http://localhost:8085/Modelisationidm/retrieve-all-modelisationidm");
   }
   addModelisationidm(data: any) {
     return this.httpClient.post("http://localhost:8085/Modelisationidm/Add-modelisationidm", data)

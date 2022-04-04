@@ -29,6 +29,15 @@ import {RippleModule} from "primeng/ripple";
 import {TreeSelectModule} from "primeng/treeselect";
 import {CalendarModule} from 'primeng/calendar';
 import {RegionComponent} from "./region/region.component";
+import { CreationidmComponent } from './taches/creationidm/creationidm.component';
+import { CreationsadirahComponent } from './taches/creationsadirah/creationsadirah.component';
+import { IdentificationimmeubleComponent } from './taches/identificationimmeuble/identificationimmeuble.component';
+import { ModelisationidmComponent } from './taches/modelisationidm/modelisationidm.component';
+import { ModelisationpboComponent } from './taches/modelisationpbo/modelisationpbo.component';
+import { RaccoComponent } from './taches/racco/racco.component';
+import { RegieComponent } from './taches/regie/regie.component';
+import { VtlComponent } from './taches/vtl/vtl.component';
+import { TrameComponent } from './taches/trame/trame.component';
 
 
 
@@ -40,6 +49,15 @@ import {RegionComponent} from "./region/region.component";
     GcdisplayComponent,
     FscdisplayComponent,
     RegionComponent,
+    CreationidmComponent,
+    CreationsadirahComponent,
+    IdentificationimmeubleComponent,
+    ModelisationidmComponent,
+    ModelisationpboComponent,
+    RaccoComponent,
+    RegieComponent,
+    VtlComponent,
+    TrameComponent,
 
 
   ],

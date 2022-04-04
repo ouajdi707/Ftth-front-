@@ -18,7 +18,7 @@ export class FscService {
   update_Fsc(id:number , data:any ){
     return this.httpClient.put("http://localhost:8085/fsc/modifyfsc/"+id,data)
   }
-  Remove_Fsc(id:number , data:any) {
+  Remove_Fsc(id:number ) {
     return this.httpClient.delete("http://localhost:8085/fsc/remove-fsc/"+id)
   }
 }

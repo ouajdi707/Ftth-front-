@@ -9,9 +9,9 @@ export class Creationidm {
   idm:string;
   nlr:number;
   ville:string;
-  codepostale:number;
+  codepostal:number;
   codeinsee:number;
-  chargé:string;
+  charge:string;
   commentaire:string;
   region:Region;
 

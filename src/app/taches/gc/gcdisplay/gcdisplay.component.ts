@@ -87,11 +87,7 @@ export class GcdisplayComponent implements OnInit {
               )
               console.log(error)
             })
-
         }
-
-
-
     })
   }
 

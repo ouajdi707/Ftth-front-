@@ -11,7 +11,7 @@ export class Regie{
   tache:string;
   duree:string;
   etat:string;
-  chargé:string;
+  charge:string;
   commentaire:string;
   region:Region;
 }

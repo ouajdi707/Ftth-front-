@@ -1,3 +1,5 @@
+import {Region} from "./Region";
+
 export class Identificationimmeuble{
   id:number;
   demandeur:string;
@@ -7,5 +9,5 @@ export class Identificationimmeuble{
   charge:string;
   etat:string;
   commentaire:string;
-  
+  region:Region;
 }

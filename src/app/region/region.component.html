@@ -1,40 +1,65 @@
 <div class="card">
-  <p-dialog [(visible)]="NewDialog" [style]="{width: '580px', height:530}" header="Ajout Gc" [modal]="true" styleClass="p-fluid">
-    <ng-template pTemplate="content">
-
-      <div class="row pt-2">
-        <div class="col-6">
-          <label for="username1" class="block">Name</label>
-
+  <p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="Nouveau Region" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()" ></button>
+      <p-dialog [(visible)]="NewDialog" [style]="{width: '580px', height:530}" header="Ajout Region" [modal]="true" styleClass="p-fluid"   >
+        <ng-template pTemplate="content">
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">Name</label>
+            </div>
+            <div class="col-6">
+              <input  type="text" class="form-control text-black" id="test" aria-describedby="username1-help" pInputText [(ngModel)]="regions.name"  />
+            </div>
+          </div>
+          <div class="row">
+            <button class="btn btn-success" label="Ajouter" (click)="save(regions)"> Ajouter </button>
+          </div>
+        </ng-template></p-dialog>
+    </ng-template>
+  </p-toolbar>
+  <div style="font-size: 5px ;">
+    <p-table #gctable  [value]="region" [responsive]="true"  columnResizeMode="expand"  [tableStyle]="{width: 'max-content'  }" [filterDelay]="0" [globalFilterFields]="['name']"
+             [paginator]="true" [rows]="4" [showCurrentPageReport]="true"  [resizableColumns]='true' [autoLayout]="true" id="excel-table" >
+      <ng-template pTemplate="caption">
+        <div class="datatable-header">
+          List Region
+          <span class="p-input-icon-left m-lg-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains', gctable)" placeholder="" />
+                </span>
         </div>
-        <div class="col-6">
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th  field="name"> NAME  </th>
+          <th > </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-region >
+        <tr>
 
-          <input    type="text" class="form-control text-black" id="test" aria-describedby="username1-help" pInputText [(ngModel)]="region.name"  />
-        </div>
-        <div class="row">
-          <button class="btn btn-success" label="Ajouter" (click)="save(region)"> Ajouter </button>
-        </div>
-      </div>
-    </ng-template></p-dialog>
-<p-table [value]="regions" responsiveLayout="scroll">
-  <ng-template pTemplate="header">
-    <tr>
-      <th>List Region</th>
-      <th>
-        <button pButton pRipple label="Ajouter Region" icon="pi pi-plus" class="p-button-success p-mr-2 p-d-inline-block" (click)="openNew()"  ></button>
-      </th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-region>
-    <tr>
-
-      <td>{{region.name}}</td>
-      <td>
-        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="openDialog(region)"></button>
-        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="Ondeletegc(region.id)"></button>
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
+          <td>{{region.name}}</td>
+          <td>
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="openDialog(region)"></button>
+            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="Ondeletegc(region.id)"></button>
+            <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="GC Details" [modal]="true" styleClass="p-fluid"   >
+              <ng-template pTemplate="content">
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Name</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black" id="username19" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="regions.name" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <p-button label="modifier" (click)="editregion(regions)"></p-button>
+                </div>
+              </ng-template></p-dialog>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>
-

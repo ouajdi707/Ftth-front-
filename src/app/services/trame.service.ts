@@ -9,7 +9,7 @@ import {Trame} from "../model/trame";
 export class TrameService {
   constructor(public httpCLient:HttpClient) { }
   gettrame() {
-    return this.httpCLient.get<Trame>("http://localhost:8085/Trame/retrieve-all-trame");
+    return this.httpCLient.get<Trame[]>("http://localhost:8085/Trame/retrieve-all-trame");
   }
   addtrame(data: any) {
     return this.httpCLient.post("http://localhost:8085/Trame/Add-trame", data)

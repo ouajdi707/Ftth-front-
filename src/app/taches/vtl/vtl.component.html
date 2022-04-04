@@ -1,0 +1,336 @@
+<div class="card">
+  <p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="Nouveau VTL" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()" ></button>
+      <p-dialog [(visible)]="NewDialog" [style]="{width: '580px', height:530}" header="Ajout Vtl" [modal]="true" styleClass="p-fluid"   >
+        <ng-template pTemplate="content">
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">Demandeur</label>
+            </div>
+            <div class="col-6">
+              <input type="text" class="form-control text-black" id="test" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.demandeur"  />
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block"> Date de reception </label>
+            </div>
+            <div class="col-6">
+              <input  type="date" class="form-control text-black" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.datereception" />
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">Nom</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.nom" />
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block"> N bal  </label>
+            </div>
+            <div class="col-6">
+              <input class="form-control text-black"  type="number" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.nbal" />
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">Pm</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.pm" />
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">Modelisation</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.modelisation" />
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">APD</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control text-black" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.apd" />
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">PDS</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.pds" />
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block"> DOE</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.doe" />
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">Etat site</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.etatsite" />
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">Chargé</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.charge" />
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">Commentaire</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.commentaire" />
+            </div>
+          </div>
+          <div  class="row pt-2">
+            <div class="col-6">
+              <label class="block">
+                Region
+              </label>
+            </div>
+            <div class="col-6">
+              <select [(ngModel)]="region" name="status" placeholder="select"  class="form-select">
+                <option *ngFor="let region of regions" [ngValue]="region">{{region.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <button class="btn btn-success" label="Ajouter" (click)="save(vtls)"> Ajouter </button>
+          </div>
+        </ng-template></p-dialog>
+
+    </ng-template>
+    <ng-template pTemplate="right">
+      <p-fileUpload mode="basic" accept=".xlsx" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block" chooseIcon="pi pi-download"  ></p-fileUpload>
+      &nbsp;&nbsp;
+      <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="Onexportexcel()"  icon="pi pi-upload"></button>
+    </ng-template>
+  </p-toolbar>
+  <div style="font-size: 5px ;">
+    <p-table #vtltable  [value]="vtl" [responsive]="true"  columnResizeMode="expand"  [tableStyle]="{width: 'max-content'  }" [filterDelay]="0" [globalFilterFields]="['demandeur','datereception','nom','nbal','pm','modelsiation',
+    'apd','pds','doe','etatsite','charge','etat','commentaire','region.name']"
+             [paginator]="true" [rows]="4" [showCurrentPageReport]="true"  [resizableColumns]='true' [autoLayout]="true" id="excel-table" >
+      <ng-template pTemplate="caption">
+        <div class="datatable-header">
+          List VTL
+          <span class="p-input-icon-left m-lg-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains', vtltable)" placeholder="" />
+                </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="demandeur"> Demandeur <p-sortIcon field="demandeur"></p-sortIcon> </th>
+          <th pSortableColumn="datereception"> Date reception <p-sortIcon field="datereception"></p-sortIcon> </th>
+          <th pSortableColumn="nom"> nom  <p-sortIcon field="nom"></p-sortIcon> </th>
+          <th pSortableColumn="nbal"> nbal  <p-sortIcon field="nbal"></p-sortIcon> </th>
+          <th pSortableColumn="pm"> PM <p-sortIcon field="pm"></p-sortIcon> </th>
+          <th pSortableColumn="modelisation"> Modelisation  <p-sortIcon field="modelsiation"></p-sortIcon> </th>
+          <th pSortableColumn="apd"> APD  <p-sortIcon field="apd"></p-sortIcon> </th>
+          <th pSortableColumn="pds"> PDS  <p-sortIcon field="pds"></p-sortIcon> </th>
+          <th pSortableColumn="doe">  DOE <p-sortIcon field="doe"></p-sortIcon> </th>
+          <th pSortableColumn="etatsite"> Etat site  <p-sortIcon field="etatsite"></p-sortIcon> </th>
+          <th pSortableColumn="charge"> Chargé <p-sortIcon field="charge"></p-sortIcon> </th>
+          <th pSortableColumn="commentaire"> Commentaire  <p-sortIcon field="commentaire"></p-sortIcon> </th>
+          <th pSortableColumn="region.name"> Region <p-sortIcon field="region.name"></p-sortIcon> </th>
+          <th></th>
+        </tr>
+        <tr>
+
+          <th>
+            <p-columnFilter type="text" field="demandeur"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="datereception"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="nom"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="nbal"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="pm"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="modelisation"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="apd"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="pds"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="doe"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="etatsite"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="charge"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="commentaire"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="region.name"></p-columnFilter>
+          </th>
+          <th>
+          </th>
+      </ng-template>
+      <ng-template pTemplate="body" let-list >
+        <tr>
+          <td>{{list.demandeur}}</td>
+          <td> {{list.datereception | date :'longDate' }}</td>
+          <td> {{list.nom}}</td>
+          <td> {{list.nbal}}</td>
+          <td> {{list.pm}}</td>
+          <td> {{list.modelisation}}</td>
+          <td> {{list.apd}}</td>
+          <td> {{list.pds}}</td>
+          <td> {{list.doe}}</td>
+          <td> {{list.etatsite}}</td>
+          <td> {{list.charge}}</td>
+          <td> {{list.commentaire}}</td>
+          <td> {{list.region.name}}</td>
+          <td>
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="openDialog(list)"></button>
+            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="Ondeletegc(list.id)"></button>
+            <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Racco Details" [modal]="true" styleClass="p-fluid"   >
+              <ng-template pTemplate="content">
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">ID</label>
+                  </div>
+                  <div class="col-6">
+                    <label id="username198" > {{vtls.id}}</label>
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Demandeur</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.demandeur" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Date de reception </label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="date" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.datereception" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Nom</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.nom" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block"> N bal  </label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="number" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.nbal" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Pm</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.pm" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Modelisation</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.modelisation" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">APD</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.apd" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">PDS</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.pds" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block"> DOE</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.doe" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Etat site</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.etatsite" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Chargé</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.charge" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Commentaire</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.commentaire" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <p-button label="modifier" (click)="edit(vtls)"></p-button>
+                </div>
+              </ng-template></p-dialog>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+

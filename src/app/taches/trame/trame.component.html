@@ -1,0 +1,335 @@
+<div class="card">
+  <p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="Nouveau Trame" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()" ></button>
+      <p-dialog [(visible)]="NewDialog" [style]="{width: '580px', height:530}" header="Ajout Trame" [modal]="true" styleClass="p-fluid"   >
+        <ng-template pTemplate="content">
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">Demandeur</label>
+            </div>
+            <div class="col-6">
+              <input type="text" class="form-control text-black" id="test" aria-describedby="username1-help" pInputText [(ngModel)]="trames.demandeur"  />
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block"> Date de reception </label>
+            </div>
+            <div class="col-6">
+              <input  type="date" class="form-control text-black" aria-describedby="username1-help" pInputText [(ngModel)]="trames.datereception" />
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">Num</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control text-black"  type="number" aria-describedby="username1-help" pInputText [(ngModel)]="trames.num" />
+            </div>
+          </div>
+            <div class="row pt-2">
+              <div class="col-6">
+                <label for="username1" class="block"> Ext  </label>
+              </div>
+              <div class="col-6">
+                <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.ext" />
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col-6">
+                <label for="username1" class="block">Libelle voie</label>
+              </div>
+              <div class="col-6">
+                <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.libellevoie" />
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col-6">
+                <label for="username1" class="block">Type voie</label>
+              </div>
+              <div class="col-6">
+                <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.typevoie" />
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col-6">
+                <label for="username1" class="block">Nom voie</label>
+              </div>
+              <div class="col-6">
+                <input class="form-control text-black" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.nomvoie" />
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col-6">
+                <label for="username1" class="block">Code postale</label>
+              </div>
+              <div class="col-6">
+                <input class="form-control text-black"  type="number" aria-describedby="username1-help" pInputText [(ngModel)]="trames.codepostal" />
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col-6">
+                <label for="username1" class="block"> Ville</label>
+              </div>
+              <div class="col-6">
+                <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.ville" />
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col-6">
+                <label for="username1" class="block">Insee</label>
+              </div>
+              <div class="col-6">
+                <input class="form-control text-black"  type="number" aria-describedby="username1-help" pInputText [(ngModel)]="trames.insee" />
+              </div>
+            </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">Chargé</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.charge" />
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">Commentaire</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.commentaire" />
+            </div>
+          </div>
+          <div  class="row pt-2">
+            <div class="col-6">
+              <label class="block">
+                Region
+              </label>
+            </div>
+            <div class="col-6">
+              <select [(ngModel)]="region" name="status" placeholder="select"  class="form-select">
+                <option *ngFor="let region of regions" [ngValue]="region">{{region.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <button class="btn btn-success" label="Ajouter" (click)="save(trames)"> Ajouter </button>
+          </div>
+        </ng-template></p-dialog>
+
+    </ng-template>
+    <ng-template pTemplate="right">
+      <p-fileUpload mode="basic" accept=".xlsx" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block" chooseIcon="pi pi-download"  ></p-fileUpload>
+      &nbsp;&nbsp;
+      <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="Onexportexcel()"  icon="pi pi-upload"></button>
+    </ng-template>
+  </p-toolbar>
+  <div style="font-size: 5px ;">
+    <p-table #trametable  [value]="trame" [responsive]="true"  columnResizeMode="expand"  [tableStyle]="{width: 'max-content'  }" [filterDelay]="0" [globalFilterFields]="['demandeur','datereception','num','ext','libellevoie','typevoie',
+    'nomvoie','codepostal','ville','insee','charge','commentaire','region.name']"
+             [paginator]="true" [rows]="4" [showCurrentPageReport]="true"  [resizableColumns]='true' [autoLayout]="true" id="excel-table" >
+      <ng-template pTemplate="caption">
+        <div class="datatable-header">
+          List Trame
+          <span class="p-input-icon-left m-lg-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains', trametable)" placeholder="" />
+                </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="demandeur"> Demandeur <p-sortIcon field="demandeur"></p-sortIcon> </th>
+          <th pSortableColumn="datereception"> Date reception <p-sortIcon field="datereception"></p-sortIcon> </th>
+          <th pSortableColumn="num"> Num  <p-sortIcon field="num"></p-sortIcon> </th>
+          <th pSortableColumn="ext"> Ext  <p-sortIcon field="ext"></p-sortIcon> </th>
+          <th pSortableColumn="libellevoie"> Libelle voie<p-sortIcon field="libellevoie"></p-sortIcon> </th>
+          <th pSortableColumn="typevoie"> Type Voie  <p-sortIcon field="typevoie"></p-sortIcon> </th>
+          <th pSortableColumn="nomvoie"> Nom Voir  <p-sortIcon field="nomvoie"></p-sortIcon> </th>
+          <th pSortableColumn="codepostal"> Code Postal  <p-sortIcon field="codepostal"></p-sortIcon> </th>
+          <th pSortableColumn="ville">  Ville <p-sortIcon field="ville"></p-sortIcon> </th>
+          <th pSortableColumn="insee"> Insee  <p-sortIcon field="insee"></p-sortIcon> </th>
+          <th pSortableColumn="charge"> Chargé <p-sortIcon field="charge"></p-sortIcon> </th>
+          <th pSortableColumn="commentaire"> Commentaire  <p-sortIcon field="commentaire"></p-sortIcon> </th>
+          <th pSortableColumn="region.name"> Region <p-sortIcon field="region.name"></p-sortIcon> </th>
+          <th></th>
+        </tr>
+        <tr>
+          <th>
+            <p-columnFilter type="text" field="demandeur"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="datereception"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="num"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="ext"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="libellevoie"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="typevoie"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="nomvoie"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="codepostal"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="ville"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="insee"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="charge"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="commentaire"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="region.name"></p-columnFilter>
+          </th>
+          <th>
+          </th>
+      </ng-template>
+      <ng-template pTemplate="body" let-list >
+        <tr>
+          <td>{{list.demandeur}}</td>
+          <td> {{list.datereception | date :'longDate' }}</td>
+          <td> {{list.num}}</td>
+          <td> {{list.ext}}</td>
+          <td> {{list.libellevoie}}</td>
+          <td> {{list.typevoie}}</td>
+          <td> {{list.nomvoie}}</td>
+          <td> {{list.codepostal}}</td>
+          <td> {{list.ville}}</td>
+          <td> {{list.insee}}</td>
+          <td> {{list.charge}}</td>
+          <td> {{list.commentaire}}</td>
+          <td> {{list.region.name}}</td>
+          <td>
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="openDialog(list)"></button>
+            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="Ondeletegc(list.id)"></button>
+            <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Trame Details" [modal]="true" styleClass="p-fluid"   >
+              <ng-template pTemplate="content">
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">ID</label>
+                  </div>
+                  <div class="col-6">
+                    <label id="username198" > {{trames.id}}</label>
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Demandeur</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.demandeur" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Date de reception </label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="date" aria-describedby="username1-help" pInputText [(ngModel)]="trames.datereception" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Num</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="number" aria-describedby="username1-help" pInputText [(ngModel)]="trames.num" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block"> Ext  </label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.ext" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Libelle voie</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.libellevoie" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Type voie</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.typevoie" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Nom voie</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.nomvoie" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Code postale</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="number" aria-describedby="username1-help" pInputText [(ngModel)]="trames.codepostal" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block"> Ville</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.ville" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Insee</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="number" aria-describedby="username1-help" pInputText [(ngModel)]="trames.insee" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Chargé</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.charge" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Commentaire</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.commentaire" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <p-button label="modifier" (click)="edit(trames)"></p-button>
+                </div>
+              </ng-template></p-dialog>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+
