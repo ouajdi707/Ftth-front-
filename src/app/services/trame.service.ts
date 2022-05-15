@@ -9,15 +9,15 @@ import {Trame} from "../model/trame";
 export class TrameService {
   constructor(public httpCLient:HttpClient) { }
   gettrame() {
-    return this.httpCLient.get<Trame[]>("http://localhost:8085/Trame/retrieve-all-trame");
+    return this.httpCLient.get<Trame[]>("http://localhost:8084/Trame/retrieve-all-trame");
   }
   addtrame(data: any) {
-    return this.httpCLient.post("http://localhost:8085/Trame/Add-trame", data)
+    return this.httpCLient.post("http://localhost:8084/Trame/Add-trame", data)
   }
   updatetrame(id: number, data: any) {
-    return this.httpCLient.put("http://localhost:8085/Trame/modifytrame/" + id, data)
+    return this.httpCLient.put("http://localhost:8084/Trame/modifytrame/" + id, data)
   }
   removetrame(id: number) {
-    return this.httpCLient.delete("http://localhost:8085/Trame/remove-trame/" + id)
+    return this.httpCLient.delete("http://localhost:8084/Trame/remove-trame/" + id)
   }
 }

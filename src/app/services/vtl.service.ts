@@ -10,15 +10,15 @@ export class VtlService {
 
   constructor(public  httpClient:HttpClient) { }
   getVtl() {
-    return this.httpClient.get<Vtl[]>("http://localhost:8085/Vtl/retrieve-all-vtl");
+    return this.httpClient.get<Vtl[]>("http://localhost:8084/Vtl/retrieve-all-vtl");
   }
   addVtl (data: any) {
-    return this.httpClient.post("http://localhost:8085/Vtl/Add-vtl", data)
+    return this.httpClient.post("http://localhost:8084/Vtl/Add-vtl", data)
   }
   updateVtl(id: number, data: any) {
-    return this.httpClient.put("http://localhost:8085/Vtl/modifyvtl/" + id, data)
+    return this.httpClient.put("http://localhost:8084/Vtl/modifyvtl/" + id, data)
   }
   removevtl(id: number) {
-    return this.httpClient.delete("http://localhost:8085/Vtl/remove-vtl/" + id)
+    return this.httpClient.delete("http://localhost:8084/Vtl/remove-vtl/" + id)
   }
 }

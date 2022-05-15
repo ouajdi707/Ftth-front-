@@ -7,6 +7,7 @@ import {CreationidmService} from "../../services/creationidm.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
 
+
 @Component({
   selector: 'app-creationidm',
   templateUrl: './creationidm.component.html',
@@ -24,15 +25,22 @@ export class CreationidmComponent implements OnInit {
 
 
 
+
+
+
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
-  constructor(private toast: ToastrService,private regionService: RegionService , private creationidmService:CreationidmService) { }
+  constructor( private toast: ToastrService,private regionService: RegionService , private creationidmService:CreationidmService) { }
   ngOnInit(): void {
     this.getCreationidm()
     this.getAllRegion()
+
+
   }
- getCreationidm(){
+
+
+  getCreationidm(){
     this.creationidmService.getCreationidm().subscribe(data=>{
       console.table(data)
       this.creationidm=data;
@@ -43,6 +51,7 @@ export class CreationidmComponent implements OnInit {
 }
  getAllRegion(){
   this.regionService.getAll().subscribe(data=>this.regions=data);
+
 }
   openNew() {
     this.creationidms =new Creationidm();
@@ -113,5 +122,20 @@ export class CreationidmComponent implements OnInit {
       }
     })
   }
+
+
+  Onduplicate(list:Creationidm ) {
+
+    this.creationidmService.addCreationidm(list).subscribe(res => {
+        this.creationidm.push({...list});
+        this.toast.success("done")
+
+      },
+      error => this.toast.error('some things wrong')
+    )
   }
+
+
+
+}
 

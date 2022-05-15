@@ -13,6 +13,10 @@ import {RaccoComponent} from "./taches/racco/racco.component";
 import {RegieComponent} from "./taches/regie/regie.component";
 import {VtlComponent} from "./taches/vtl/vtl.component";
 import {TrameComponent} from "./taches/trame/trame.component";
+import {UserComponent} from "./user/user.component";
+import {RoleComponent} from "./role/role.component";
+import {LoginComponent} from "./login/login.component";
+import {RegisterComponent} from "./register/register.component";
 
 const routes: Routes = [
   { path : 'dashboard', component : DashboardComponent},
@@ -28,6 +32,15 @@ const routes: Routes = [
   {path:'regie',component:RegieComponent},
   {path:'vtl',component:VtlComponent},
   {path:'trame',component:TrameComponent},
+  {path:'user',component:UserComponent},
+  {path:'role',component:RoleComponent},
+  {path:'login',component:LoginComponent},
+  {path:'register',component:RegisterComponent},
+
+
+
+
+
 
 
 

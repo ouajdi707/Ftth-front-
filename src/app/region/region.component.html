@@ -2,16 +2,37 @@
   <p-toolbar styleClass="p-mb-4">
     <ng-template pTemplate="left">
       <button pButton pRipple label="Nouveau Region" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()" ></button>
-      <p-dialog [(visible)]="NewDialog" [style]="{width: '580px', height:530}" header="Ajout Region" [modal]="true" styleClass="p-fluid"   >
+      <p-dialog [(visible)]="NewDialog" [style]="{width: '700', height:500}" header="Ajout Region" [modal]="true" styleClass="p-fluid"   >
         <ng-template pTemplate="content">
           <div class="row pt-2">
             <div class="col-6">
               <label for="username1" class="block">Name</label>
             </div>
             <div class="col-6">
-              <input  type="text" class="form-control text-black" id="test" aria-describedby="username1-help" pInputText [(ngModel)]="regions.name"  />
+              <input type="text" class="form-control text-black" id="test" aria-describedby="username1-help" pInputText [(ngModel)]="regions.name"  />
             </div>
           </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">Pays Region</label>
+            </div>
+            <div class="col-6">
+              <input    type="text" class="form-control text-black" aria-describedby="username1-help" pInputText [(ngModel)]="regions.paysregion"  />
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">Departement</label>
+            </div>
+            <div class="col-6">
+              <input    type="text" class="form-control text-black"  aria-describedby="username1-help" pInputText [(ngModel)]="regions.departementregion"  />
+            </div>
+          </div>
+
+
+
+
+
           <div class="row">
             <button class="btn btn-success" label="Ajouter" (click)="save(regions)"> Ajouter </button>
           </div>
@@ -33,6 +54,9 @@
       <ng-template pTemplate="header">
         <tr>
           <th  field="name"> NAME  </th>
+          <th  field="name"> Pays Region  </th>
+          <th  field="name"> Departement Region  </th>
+
           <th > </th>
         </tr>
       </ng-template>
@@ -40,10 +64,12 @@
         <tr>
 
           <td>{{region.name}}</td>
+          <td>{{region.paysregion}}</td>
+          <td>{{region.departementregion}}</td>
           <td>
             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="openDialog(region)"></button>
-            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="Ondeletegc(region.id)"></button>
-            <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="GC Details" [modal]="true" styleClass="p-fluid"   >
+
+            <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Region Details" [modal]="true" styleClass="p-fluid"   >
               <ng-template pTemplate="content">
                 <div class="row pt-2">
                   <div class="col-6">
@@ -51,6 +77,22 @@
                   </div>
                   <div class="col-6">
                     <input class="form-control text-black" id="username19" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="regions.name" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block"> Pays Region</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="regions.paysregion" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Departement Region</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="regions.departementregion" />
                   </div>
                 </div>
                 <div class="row pt-2">

@@ -11,7 +11,7 @@ import {ToolbarModule} from "primeng/toolbar";
 import {ButtonModule} from "primeng/button";
 import {FileUploadModule} from "primeng/fileupload";
 import {TableModule} from "primeng/table";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputNumberModule} from "primeng/inputnumber";
 import {RadioButtonModule} from "primeng/radiobutton";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
@@ -38,6 +38,10 @@ import { RaccoComponent } from './taches/racco/racco.component';
 import { RegieComponent } from './taches/regie/regie.component';
 import { VtlComponent } from './taches/vtl/vtl.component';
 import { TrameComponent } from './taches/trame/trame.component';
+import { UserComponent } from './user/user.component';
+import { RoleComponent } from './role/role.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -58,6 +62,10 @@ import { TrameComponent } from './taches/trame/trame.component';
     RegieComponent,
     VtlComponent,
     TrameComponent,
+    UserComponent,
+    RoleComponent,
+    LoginComponent,
+    RegisterComponent,
 
 
   ],
@@ -84,7 +92,7 @@ import { TrameComponent } from './taches/trame/trame.component';
         TreeSelectModule,
         CalendarModule,
         FileUploadModule,
-
+      ReactiveFormsModule,
 
 ],
   providers: [GcService,DatePipe,FscService],

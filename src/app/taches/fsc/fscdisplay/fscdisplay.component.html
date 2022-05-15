@@ -133,7 +133,7 @@
           <td>{{list.tache}}</td>
           <td> {{list.charge}}</td>
           <td> {{list.commentaire}}</td>
-          <td> {{list.datereception |date:'longDate'}}</td>
+          <td> {{list.datereception |date:'dd/MM/YYYY'}}</td>
           <td> {{list.region.name}}</td>
           <td>
             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="openDialog(list)"></button>
