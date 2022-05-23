@@ -1,4 +1,6 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
+import {TokenStorageService} from "./services/token-storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -8,9 +10,11 @@ import {ChangeDetectorRef, Component} from '@angular/core';
 export class AppComponent {
   title = 'ftth-front';
 
-  constructor( private cdr: ChangeDetectorRef) {
 
+  constructor( private cdr: ChangeDetectorRef , private tokenStorage:TokenStorageService , private router:Router) {
   }
+
+
 
   loadscripts(){
     var s = document.createElement("script");
@@ -71,6 +75,22 @@ export class AppComponent {
     s24.src = "/assets/demo/demo.js";
     s25.src = "/assets/demo/jquery.sharrre.js";
     s26.src = "/assets/js/general.js";
+
+  }
+
+
+  logout() {
+    this.tokenStorage.signOut();
+    window.location.reload();
+    this.router.navigate(['/login']).then(() => { window.location.reload(); })
+
+
+  }
+
+  getauth() {
+    if(this.tokenStorage.getToken())
+    return this.tokenStorage.getToken()
+  else return null;
 
   }
 }
