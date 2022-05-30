@@ -91,6 +91,5 @@ export class AppComponent {
     if(this.tokenStorage.getToken())
     return this.tokenStorage.getToken()
   else return null;
-
   }
 }

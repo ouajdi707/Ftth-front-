@@ -42,6 +42,8 @@ import { UserComponent } from './user/user.component';
 import { RoleComponent } from './role/role.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import {AuthInterceptor, authInterceptorProviders} from "./services/auth-interceptor.service";
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -66,6 +68,7 @@ import { RegisterComponent } from './register/register.component';
     RoleComponent,
     LoginComponent,
     RegisterComponent,
+    HomeComponent,
 
 
   ],
@@ -95,7 +98,7 @@ import { RegisterComponent } from './register/register.component';
       ReactiveFormsModule,
 
 ],
-  providers: [GcService,DatePipe,FscService],
+  providers: [GcService,DatePipe,FscService, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

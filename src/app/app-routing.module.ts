@@ -18,6 +18,7 @@ import {RoleComponent} from "./role/role.component";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 
+
 const routes: Routes = [
   { path : 'dashboard', component : DashboardComponent},
   {path : 'gc', component:GcdisplayComponent},
@@ -26,7 +27,9 @@ const routes: Routes = [
   {path:'creationidm',component:CreationidmComponent},
   {path:'creationsadirah',component:CreationsadirahComponent},
   {path:'identificationimmeuble',component:IdentificationimmeubleComponent},
-  {path:'modelisationidm',component:ModelisationidmComponent},
+  {path:'modelisationidm',component:ModelisationidmComponent,data:{
+      role:['ROLE_ADMIN','ROLE_USER']
+    }},
   {path:'modelisationpbo',component:ModelisationpboComponent},
   {path:'racco',component:RaccoComponent},
   {path:'regie',component:RegieComponent},
@@ -36,7 +39,8 @@ const routes: Routes = [
   {path:'role',component:RoleComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
-  { path: '', redirectTo: 'login', pathMatch: 'full' }
+
+
 
 
 

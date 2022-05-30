@@ -4,7 +4,7 @@
 <link href="/assets/css/paper-dashboard.min.css?v=2.1.1" rel="stylesheet"/>
 <link href="/assets/demo/demo.css" rel="stylesheet"/>
 
-<div class="sidebar"  data-color="default" data-active-color="danger" >
+<div class="sidebar"  data-color="default" data-active-color="danger"   >
   <!--
     Tip 1: You can change the color of the sidebar using: data-color=" default | primary | info | success | warning | danger |"
 -->
@@ -31,7 +31,7 @@
       <div class="info">
         <a data-toggle="collapse" style="color: white;" href="#collapseExample" class="collapsed">
                     <span>
-                        consultant name
+                        {{user.username}}
                       <b class="caret"></b>
             </span>
         </a>
@@ -73,13 +73,13 @@
           <p>Dashboard</p>
         </a>
       </li>
-      <li class="active">
+      <li class="active" *ngIf="isAdmin()">
         <a routerLink="/user" >
           <i class="nc-icon nc-single-02"></i>
           <p>utilisateur</p>
         </a>
       </li>
-      <li class="active">
+      <li class="active"  *ngIf="isAdmin()">
         <a routerLink="/role" >
           <i class="nc-icon nc-simple-add"></i>
           <p>Role</p>

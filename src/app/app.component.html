@@ -1,4 +1,4 @@
-<body>
+<body *ngIf="getauth()!== null">
 <app-header ></app-header>
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
@@ -7,7 +7,7 @@
 <link href="/assets/css/paper-dashboard.min.css?v=2.1.1" rel="stylesheet"/>
 
 
-<div class="main-panel">
+<div class="main-panel" >
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
     <div class="container-fluid">
@@ -36,7 +36,7 @@
 
       </div>
       <div class="ms-auto">
-        <button pButton  label="logout" (click)="logout()"   icon="pi pi-sign-out" iconPos="left" class="btn btn-primary rounded-pill btn-block ">
+        <button pButton  label="logout" (click)="logout()"   icon="pi pi-sign-out" iconPos="left" class="btn btn-primary rounded-pill btn-block " *ngIf="getauth()">
         </button>
       </div>
     </div>
@@ -273,15 +273,15 @@
 
   });
 </script>
-<!--<script>$(document).ready(function () {
+<script>$(document).ready(function () {
   // Javascript method's body can be found in assets/js/demos.js
   demo.initDashboardPageCharts();
   demo.initVectorMap();
 });
-</script>-->
+</script>
 
 </body>
-<!--<div class="login-page" *ngIf="getauth()== null   ">
+<div class="login-page" *ngIf="getauth()== null   ">
   <router-outlet></router-outlet>
-</div>&ndash;&gt;-->
+</div>
 

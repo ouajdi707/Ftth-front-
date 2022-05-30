@@ -5,7 +5,7 @@
     <p-dialog [(visible)]="NewDialog" [style]="{width: '580px', height:530}" header="Ajout Utilisateur" [modal]="true"
               styleClass="p-fluid">
       <ng-template pTemplate="content">
-        <form  >
+        <form>
           <div class="form-group">
             <label>Username</label>
             <input class="form-control text-black" id="username" type="text" [(ngModel)]="users.username"
@@ -27,13 +27,13 @@
               [(ngModel)]="users.password"
             >
 
-            <span *ngIf="password.invalid && password.dirty" class="text-warning " style="font-size: 12px">{{geterrorPassword()}}</span>
+            <span *ngIf="password.invalid && password.dirty" class="text-warning "
+                  style="font-size: 12px">{{geterrorPassword()}}</span>
           </div>
 
 
-
           <div class="row pt-2">
-            <p-button  label="Ajouter" (click)="Onadd(users)"></p-button>
+            <p-button label="Ajouter" (click)="Onadd(users)"></p-button>
           </div>
         </form>
       </ng-template>
@@ -74,14 +74,7 @@
                 {{users.username}}
               </div>
             </div>
-            <div class="row pt-2">
-              <div class="col-6">
-                <label for="username1" class="block">Password : </label>
-              </div>
-              <div class="col-6">
-                {{users.password}}
-              </div>
-            </div>
+
             <div class="row pt-2">
               <div class="col-6">
                 <label for="username1" class="block"> Email :</label>
@@ -141,7 +134,10 @@
           </ng-template>
         </p-dialog>
         &nbsp;&nbsp;
-        <button type="button" class=" btn btn-outline-success">Activer</button>
+        <button type="button" class=" btn btn-outline-success" *ngIf="!user.active" (click)="activer(user)">Activer
+        </button>
+        <button type="button" class=" btn btn-outline-info" *ngIf="user.active" (click)="activer(user)">Desactiver
+        </button>
         &nbsp;&nbsp;
 
 
@@ -150,7 +146,6 @@
 
 
       </td>
-
 
 
     </tr>
