@@ -215,6 +215,9 @@
           <td>
             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="openDialog(list)"></button>
             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="Ondeletegc(list.id)"></button>
+            &nbsp;
+            <button  pButton pRipple icon="pi pi-bookmark" class="p-button-rounded " (click)="Onduplicate(list)"></button>
+
             <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Trame Details" [modal]="true" styleClass="p-fluid"   >
               <ng-template pTemplate="content">
                 <div class="row pt-2">

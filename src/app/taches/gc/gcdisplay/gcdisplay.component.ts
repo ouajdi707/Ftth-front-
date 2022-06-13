@@ -7,6 +7,7 @@ import {RegionService} from "../../../services/region.service";
 import {Region} from "../../../model/Region";
 import * as XLSX from 'xlsx';
 import Swal from "sweetalert2";
+import {Creationsadirah} from "../../../model/Creationsadirah";
 
 
 @Component({
@@ -137,6 +138,16 @@ this.regionService.getAll().subscribe(data=>this.regions=data);
 
     /* save to file */
     XLSX.writeFile(wb, this.fileName);
+
+  }
+  Onduplicate(list: Gc) {
+    this.gcService.Add_Gc(list).subscribe(res => {
+        this.gc.push({...list});
+        this.toast.success("done")
+
+      },
+      error => this.toast.error('some things wrong')
+    )
 
   }
 }

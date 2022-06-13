@@ -7,6 +7,7 @@ import {ToastrService} from "ngx-toastr";
 import {RegionService} from "../../../services/region.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
+import {Creationsadirah} from "../../../model/Creationsadirah";
 
 @Component({
   selector: 'app-fscdisplay',
@@ -127,5 +128,15 @@ export class FscdisplayComponent implements OnInit {
 
   getAllRegion(){
     this.regionService.getAll().subscribe(data=>this.regions=data);
+  }
+  Onduplicate(list: Fsc) {
+    this.fscService.Add_Fsc(list).subscribe(res => {
+        this.fsc.push({...list});
+        this.toast.success("done")
+
+      },
+      error => this.toast.error('some things wrong')
+    )
+
   }
 }

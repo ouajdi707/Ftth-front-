@@ -6,6 +6,7 @@ import {ModelisationidmService} from "../../services/modelisationidm.service";
 import {Modelisatioidm} from "../../model/Modelisatioidm";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
+import {Creationsadirah} from "../../model/Creationsadirah";
 
 @Component({
   selector: 'app-modelisationidm',
@@ -125,6 +126,16 @@ export class ModelisationidmComponent implements OnInit {
     /* save to file */
     XLSX.writeFile(wb, this.fileName);
 
+
+  }
+  Onduplicate(list: Modelisatioidm) {
+    this.modelisationidmService.addModelisationidm(list).subscribe(res => {
+        this.modelisationidm.push({...list});
+        this.toast.success("done")
+
+      },
+      error => this.toast.error('some things wrong')
+    )
 
   }
 }

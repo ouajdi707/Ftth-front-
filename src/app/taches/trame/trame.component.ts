@@ -6,6 +6,7 @@ import {RegionService} from "../../services/region.service";
 import {TrameService} from "../../services/trame.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
+import {Creationsadirah} from "../../model/Creationsadirah";
 
 @Component({
   selector: 'app-trame',
@@ -119,6 +120,16 @@ export class TrameComponent implements OnInit {
         this.productDialog = false;
       },
       error => this.toast.error('some things wrong'))
+
+  }
+  Onduplicate(list: Trame) {
+    this.trameService.addtrame(list).subscribe(res => {
+        this.trame.push({...list});
+        this.toast.success("done")
+
+      },
+      error => this.toast.error('some things wrong')
+    )
 
   }
 }

@@ -6,6 +6,7 @@ import {RegionService} from "../../services/region.service";
 import {VtlService} from "../../services/vtl.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
+import {Creationsadirah} from "../../model/Creationsadirah";
 
 @Component({
   selector: 'app-vtl',
@@ -117,6 +118,16 @@ export class VtlComponent implements OnInit {
     /* save to file */
     XLSX.writeFile(wb, this.fileName);
 
+
+  }
+  Onduplicate(list: Vtl) {
+    this.vtlService.addVtl(list).subscribe(res => {
+        this.vtl.push({...list});
+        this.toast.success("done")
+
+      },
+      error => this.toast.error('some things wrong')
+    )
 
   }
 }

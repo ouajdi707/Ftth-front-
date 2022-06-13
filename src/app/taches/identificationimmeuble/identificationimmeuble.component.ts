@@ -6,6 +6,7 @@ import {RegionService} from "../../services/region.service";
 import {IdentificationimmeubleService} from "../../services/identificationimmeuble.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
+import {Creationsadirah} from "../../model/Creationsadirah";
 
 @Component({
   selector: 'app-identificationimmeuble',
@@ -126,6 +127,16 @@ export class IdentificationimmeubleComponent implements OnInit {
         this.productDialog = false;
       },
       error => this.toast.error('some things wrong'))
+
+  }
+  Onduplicate(list: Identificationimmeuble) {
+    this.identificationimmeubleService.addIdentificationimmeuble(list).subscribe(res => {
+        this.identificationimmeuble.push({...list});
+        this.toast.success("done")
+
+      },
+      error => this.toast.error('some things wrong')
+    )
 
   }
 

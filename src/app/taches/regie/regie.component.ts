@@ -6,6 +6,7 @@ import {RegionService} from "../../services/region.service";
 import {RegieService} from "../../services/regie.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
+import {Creationsadirah} from "../../model/Creationsadirah";
 
 @Component({
   selector: 'app-regie',
@@ -123,6 +124,16 @@ getAllRegie(){
   openNew() {
     this.regies =new Regie();
     this.NewDialog = true;
+
+  }
+  Onduplicate(list: Regie) {
+    this.regieService.addregie(list).subscribe(res => {
+        this.regie.push({...list});
+        this.toast.success("done")
+
+      },
+      error => this.toast.error('some things wrong')
+    )
 
   }
 }

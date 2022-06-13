@@ -17,6 +17,7 @@ import {UserComponent} from "./user/user.component";
 import {RoleComponent} from "./role/role.component";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
+import {AddtacheComponent} from "./taches/addtache/addtache.component";
 
 
 const routes: Routes = [
@@ -39,6 +40,8 @@ const routes: Routes = [
   {path:'role',component:RoleComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
+  {path:'ajouter',component:AddtacheComponent},
+
 
 
 

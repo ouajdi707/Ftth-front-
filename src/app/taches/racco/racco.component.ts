@@ -6,6 +6,7 @@ import {RegionService} from "../../services/region.service";
 import {RaccoService} from "../../services/racco.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
+import {Creationsadirah} from "../../model/Creationsadirah";
 
 @Component({
   selector: 'app-racco',
@@ -121,6 +122,16 @@ getAllRacco(){
 
     /* save to file */
     XLSX.writeFile(wb, this.fileName);
+
+  }
+  Onduplicate(list: Racco) {
+    this.raccoService.addracco(list).subscribe(res => {
+        this.racco.push({...list});
+        this.toast.success("done")
+
+      },
+      error => this.toast.error('some things wrong')
+    )
 
   }
 }

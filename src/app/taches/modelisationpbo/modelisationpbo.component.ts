@@ -6,6 +6,7 @@ import {RegionService} from "../../services/region.service";
 import {ModelisationpboService} from "../../services/modelisationpbo.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
+import {Creationsadirah} from "../../model/Creationsadirah";
 
 @Component({
   selector: 'app-modelisationpbo',
@@ -126,6 +127,15 @@ export class ModelisationpboComponent implements OnInit {
 
 
   }
+  Onduplicate(list: Modelisationpbo) {
+    this.modelisationpboService.addModelisationpbo(list).subscribe(res => {
+        this.modelisationpbo.push({...list});
+        this.toast.success("done")
 
+      },
+      error => this.toast.error('some things wrong')
+    )
+
+  }
 
 }

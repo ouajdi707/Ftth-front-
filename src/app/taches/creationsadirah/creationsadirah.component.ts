@@ -126,4 +126,15 @@ export class CreationsadirahComponent implements OnInit {
     this.creationsadirahs =new Creationsadirah();
     this.NewDialog = true;
   }
+
+  Onduplicate(list: Creationsadirah) {
+    this.creationsadirahservice.addCreationsadirah(list).subscribe(res => {
+        this.creationsadirah.push({...list});
+        this.toast.success("done")
+
+      },
+      error => this.toast.error('some things wrong')
+    )
+
+  }
 }
