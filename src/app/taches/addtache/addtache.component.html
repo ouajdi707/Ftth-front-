@@ -8,6 +8,44 @@
           <input class="form-control" id="nomtache" type="text" formControlName="nomTache">
         </div>
       </div>
+    <div class="d-flex flex-row align-items-center mb-4">
+      <label class="form-label" for="Demandeur"> Demandeur</label>
+      <div class="form-outline px-4 flex-fill mb-0">
+        <input class="form-control"  type="text" formControlName="Demandeur" [(ngModel)]="nvtaches.demandeur">
+      </div>
+    </div>
+    <div class="d-flex flex-row align-items-center mb-4">
+      <label class="form-label" for="Datereception"> Date reception</label>
+      <div class="form-outline px-4 flex-fill mb-0">
+        <input class="form-control" type="date" formControlName="Datereception" [(ngModel)]="nvtaches.datereception">
+      </div>
+    </div>
+    <div class="d-flex flex-row align-items-center mb-4">
+      <label class="form-label" for="Commentaire"> Commentaire</label>
+      <div class="form-outline px-4 flex-fill mb-0">
+        <input class="form-control"  type="text" formControlName="Commentaire" [(ngModel)]="nvtaches.commentaire">
+      </div>
+    </div>
+    <div class="d-flex flex-row align-items-center mb-4">
+      <label class="form-label" for="etat"> etat</label>
+      <div class="form-outline px-4 flex-fill mb-0">
+        <input class="form-control"  type="text" formControlName="etat" [(ngModel)]="nvtaches.etat">
+      </div>
+    </div>
+    <div class="d-flex flex-row align-items-center mb-4">
+      <label class="form-label" for="Region"> Region</label>
+      <div>
+        <select [(ngModel)]="region" name="status" placeholder="select"  class="form-select">
+          <option *ngFor="let region of regions" [ngValue]="region">{{region.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="d-flex flex-row align-items-center mb-4">
+      <label class="form-label" for="chargé"> Chargé</label>
+      <div class="form-outline px-4 flex-fill mb-0">
+        <input class="form-control"  type="text" formControlName="chargé" [(ngModel)]="nvtaches.charge">
+      </div>
+    </div>
 
           <div formArrayName="nomChamp">
             <div *ngFor="let nomchamp of nomChamp.controls; let i=index">
@@ -30,7 +68,7 @@
         </button>
       </div>
       <div class="d-flex justify-content-end ms-auto mx-4 ">
-        <a  class="btn btn-primary mr-275.5 " (click)="OnSubmit()"> SUIVANT
+        <a  class="btn btn-primary mr-275.5 " (click)="save(nvtaches)"> SUIVANT
           <i class="pi pi-forward"> </i>
 
         </a>
@@ -55,18 +93,24 @@
 <p-table  responsiveLayout="scroll">
   <ng-template pTemplate="header">
     <tr>
-      <th>nomchamp</th>
-      <th>nomchamp</th>
-      <th>nomchamp</th>
-      <th>nomchamp</th>
+      <th>Demandeur</th>
+      <th> Date de reception</th>
+      <th> Chargé</th>
+      <th> Etat</th>
+      <th> Commentaire</th>
+      <th> Region</th>
+
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" >
+  <ng-template pTemplate="body" let-list >
     <tr>
-      <td> </td>
-      <td></td>
-      <td> </td>
-      <td></td>
+      <td> {{list.demandeur}}</td>
+      <td> {{list.datereception}}</td>
+      <td> {{list.charge}} </td>
+      <td> {{list.etat}}</td>
+      <td> {{list.commentaire}}</td>
+      <td> {{list.region}}</td>
+
     </tr>
   </ng-template>
 </p-table>
