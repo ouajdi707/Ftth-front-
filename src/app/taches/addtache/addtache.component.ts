@@ -22,35 +22,19 @@ addForm=this.fb.group({
 });
 step:any =1;
   aaaa: any;
-  regions:Region[]
-  region =new Region();
-  nvtache:Nvtache[];
-  nvtaches=new Nvtache();
 
-  constructor(private fb:FormBuilder,private toast: ToastrService,private regionService: RegionService,private nvtacheService:NvtacheService) { }
+
+  constructor(private fb:FormBuilder,private toast: ToastrService) { }
 
 
   ngOnInit(): void {
-    this.getNvtache()
-    this.getAllRegion()
-  }
-  getNvtache(){
-    this.nvtacheService.Get_Nvtache().subscribe(data=>{
-        console.table(data)
-        this.nvtache=data;
-      },
-      error => {
-        console.log(error)
-      })
-  }
-  getAllRegion(){
-    this.regionService.getAll().subscribe(data=>this.regions=data);
 
   }
+
+
+
   OnSubmit() {
-
     this.step=this.step+1;
-
   }
   get nomChamp(){
     return this.addForm.get('nomChamp') as FormArray
@@ -66,15 +50,5 @@ step:any =1;
   Onprevious() {
     this.step=1;
   }
-  save(nvtaches:Nvtache) {
-    nvtaches.region=this.region
-    this.nvtacheService.addTache(nvtaches).subscribe(res => {
-        this.toast.success("done")
 
-      },
-      error => this.toast.error('some things wrong')
-    )
-    this.OnSubmit()
-    this.getNvtache()
-  }
 }

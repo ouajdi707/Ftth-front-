@@ -7,6 +7,8 @@ import {TrameService} from "../../services/trame.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../model/Creationsadirah";
+import {Projet} from "../../model/Projet";
+import {ProjetService} from "../../services/projet.service";
 
 @Component({
   selector: 'app-trame',
@@ -14,6 +16,8 @@ import {Creationsadirah} from "../../model/Creationsadirah";
   styleUrls: ['./trame.component.css']
 })
 export class TrameComponent implements OnInit {
+  projets:Projet[];
+  projet =new Projet();
   regions: Region[]
   region = new Region();
   trame:Trame[];
@@ -26,11 +30,17 @@ export class TrameComponent implements OnInit {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 
-  constructor(private toast: ToastrService, private regionService: RegionService, private trameService : TrameService) { }
+  constructor(  private projetService:ProjetService ,private toast: ToastrService, private regionService: RegionService, private trameService : TrameService) { }
 
   ngOnInit(): void {
+    this.getallprojet()
     this.getAllRegion()
     this.getallTrame()}
+  getallprojet(){
+    this.projetService.getAll().subscribe(res=>{
+      this.projets=res
+    })
+  }
   getallTrame(){
     this.trameService.gettrame().subscribe(data=>{
         console.table(data)
@@ -50,6 +60,8 @@ export class TrameComponent implements OnInit {
   }
 
   save(trames: Trame) {
+    trames.projet=this.projet
+
     trames.region=this.region
     this.trameService.addtrame(trames).subscribe(res => {
         this.toast.success("done")

@@ -1,4 +1,5 @@
 import {Region} from "./Region";
+import {Projet} from "./Projet";
 
 export class Gc{
   id:number
@@ -12,4 +13,5 @@ export class Gc{
   etat:string;
   region:Region;
   commentaire:string;
+  projet:Projet;
 }

@@ -18,13 +18,14 @@ import {RoleComponent} from "./role/role.component";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {AddtacheComponent} from "./taches/addtache/addtache.component";
+import {ProjetComponent} from "./projet/projet.component";
 
 
 const routes: Routes = [
-  { path : 'dashboard', component : DashboardComponent},
-  {path : 'gc', component:GcdisplayComponent},
-  {path : 'fsc', component:FscdisplayComponent},
-  {path : 'region', component:RegionComponent},
+  {path: 'dashboard', component : DashboardComponent},
+  {path: 'gc', component:GcdisplayComponent},
+  {path: 'fsc', component:FscdisplayComponent},
+  {path:'region', component:RegionComponent},
   {path:'creationidm',component:CreationidmComponent},
   {path:'creationsadirah',component:CreationsadirahComponent},
   {path:'identificationimmeuble',component:IdentificationimmeubleComponent},
@@ -41,6 +42,9 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
   {path:'ajouter',component:AddtacheComponent},
+  {path:'projet',component:ProjetComponent},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '**', redirectTo: 'login'},
 
 
 

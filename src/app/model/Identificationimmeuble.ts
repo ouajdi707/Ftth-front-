@@ -1,4 +1,5 @@
 import {Region} from "./Region";
+import {Projet} from "./Projet";
 
 export class Identificationimmeuble{
   id:number;
@@ -10,4 +11,5 @@ export class Identificationimmeuble{
   etat:string;
   commentaire:string;
   region:Region;
+  projet:Projet;
 }

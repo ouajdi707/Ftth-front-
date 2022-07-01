@@ -1,0 +1,66 @@
+<div class="card">
+  <p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="Nouveau Projet" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()" ></button>
+      <p-dialog [(visible)]="NewDialog" [style]="{width: '700', height:500}" header="Ajout Region" [modal]="true" styleClass="p-fluid"   >
+        <ng-template pTemplate="content">
+          <div class="row pt-2">
+            <div class="col-6">
+              <label for="username1" class="block">Name</label>
+            </div>
+            <div class="col-6">
+              <input type="text" class="form-control text-black" id="test" aria-describedby="username1-help" pInputText [(ngModel)]="projets.name"  />
+            </div>
+          </div>
+          <div class="row">
+            <button class="btn btn-success" label="Ajouter" (click)="save(projets)"> Ajouter </button>
+          </div>
+        </ng-template></p-dialog>
+    </ng-template>
+  </p-toolbar>
+  <div style="font-size: 5px ;">
+    <p-table #projettable  [value]="projet" [responsive]="true"  columnResizeMode="expand"  [tableStyle]="{width: 'max-content'  }" [filterDelay]="0" [globalFilterFields]="['name']"
+             [paginator]="true" [rows]="4" [showCurrentPageReport]="true"  [resizableColumns]='true' [autoLayout]="true" id="excel-table" >
+      <ng-template pTemplate="caption">
+        <div class="datatable-header">
+          List Projet
+          <span class="p-input-icon-left m-lg-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains', projettable)" placeholder="" />
+                </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th  field="name"> NAME  </th>
+          <th > </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-list >
+        <tr>
+
+          <td>{{list.name}}</td>
+
+          <td>
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="openDialog(list)"></button>
+
+            <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Region Details" [modal]="true" styleClass="p-fluid"   >
+              <ng-template pTemplate="content">
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="username1" class="block">Name</label>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control text-black" id="username19" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="projets.name" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <p-button label="modifier" (click)="editprojet(projets)"></p-button>
+                </div>
+              </ng-template></p-dialog>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

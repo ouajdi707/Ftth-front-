@@ -1,4 +1,5 @@
 import {Region} from "./Region";
+import {Projet} from "./Projet";
 
 export class Regie{
   id:number
@@ -14,4 +15,5 @@ export class Regie{
   charge:string;
   commentaire:string;
   region:Region;
+  projet:Projet;
 }

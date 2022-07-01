@@ -8,6 +8,8 @@ import {Region} from "../../../model/Region";
 import * as XLSX from 'xlsx';
 import Swal from "sweetalert2";
 import {Creationsadirah} from "../../../model/Creationsadirah";
+import {Projet} from "../../../model/Projet";
+import {ProjetService} from "../../../services/projet.service";
 
 
 @Component({
@@ -17,6 +19,8 @@ import {Creationsadirah} from "../../../model/Creationsadirah";
 })
 
 export class GcdisplayComponent implements OnInit {
+  projets:Projet[];
+  projet =new Projet();
   regions:Region[]
   region =new Region();
   gc: Gc[];
@@ -31,10 +35,12 @@ export class GcdisplayComponent implements OnInit {
 
 
   constructor(private toast: ToastrService,
-              private gcService: GcService, private regionService: RegionService,  private primengConfig: PrimeNGConfig) {
+              private gcService: GcService, private regionService: RegionService,  private primengConfig: PrimeNGConfig,
+  private projetService:ProjetService) {
   }
 
   ngOnInit(): void {
+    this.getallprojet()
     this.getgc();
     this.getAllRegion();
     this.primengConfig.ripple = true;
@@ -46,6 +52,11 @@ export class GcdisplayComponent implements OnInit {
     fontSize: 12
   }
   NewDialog = false;
+  getallprojet(){
+    this.projetService.getAll().subscribe(res=>{
+      this.projets=res
+    })
+  }
 
   getgc() {
 
@@ -117,6 +128,7 @@ this.regionService.getAll().subscribe(data=>this.regions=data);
   }
 
   save(gcs: Gc) {
+    gcs.projet=this.projet
     gcs.region = this.region
     this.gcService.Add_Gc(gcs).subscribe(res => {
         this.toast.success("done")

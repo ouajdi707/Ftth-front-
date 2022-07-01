@@ -7,6 +7,8 @@ import {Modelisatioidm} from "../../model/Modelisatioidm";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../model/Creationsadirah";
+import {Projet} from "../../model/Projet";
+import {ProjetService} from "../../services/projet.service";
 
 @Component({
   selector: 'app-modelisationidm',
@@ -14,6 +16,8 @@ import {Creationsadirah} from "../../model/Creationsadirah";
   styleUrls: ['./modelisationidm.component.css']
 })
 export class ModelisationidmComponent implements OnInit {
+  projets:Projet[];
+  projet =new Projet();
   regions: Region[]
   region = new Region();
   modelisationidm:Modelisatioidm[];
@@ -27,11 +31,18 @@ export class ModelisationidmComponent implements OnInit {
   }
 
   constructor(private toast: ToastrService, private regionService: RegionService,
-              private modelisationidmService:ModelisationidmService) { }
+              private modelisationidmService:ModelisationidmService,
+              private projetService:ProjetService ,) { }
 
   ngOnInit(): void {
+    this.getallprojet()
     this.getmodelisationidm()
     this.getAllRegion()
+  }
+  getallprojet(){
+    this.projetService.getAll().subscribe(res=>{
+      this.projets=res
+    })
   }
   getmodelisationidm(){
     this.modelisationidmService.getModelisationidm().subscribe(data=>{
@@ -102,6 +113,7 @@ export class ModelisationidmComponent implements OnInit {
   }
 
   save(idms: Modelisatioidm) {
+    idms.projet=this.projet
     idms.region=this.region
     this.modelisationidmService.addModelisationidm(idms).subscribe(res => {
         this.toast.success("done")

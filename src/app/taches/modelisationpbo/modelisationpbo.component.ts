@@ -7,6 +7,8 @@ import {ModelisationpboService} from "../../services/modelisationpbo.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../model/Creationsadirah";
+import {Projet} from "../../model/Projet";
+import {ProjetService} from "../../services/projet.service";
 
 @Component({
   selector: 'app-modelisationpbo',
@@ -14,6 +16,8 @@ import {Creationsadirah} from "../../model/Creationsadirah";
   styleUrls: ['./modelisationpbo.component.css']
 })
 export class ModelisationpboComponent implements OnInit {
+  projets:Projet[];
+  projet =new Projet();
   regions: Region[]
   region = new Region();
   modelisationpbo:Modelisationpbo[];
@@ -26,11 +30,17 @@ export class ModelisationpboComponent implements OnInit {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 
-  constructor(private toast: ToastrService, private regionService: RegionService,private modelisationpboService:ModelisationpboService) { }
+  constructor(private toast: ToastrService, private regionService: RegionService,private modelisationpboService:ModelisationpboService,private projetService:ProjetService) { }
 
   ngOnInit(): void {
+    this.getallprojet()
     this.getmodelisationpbo()
     this.getAllRegion()
+  }
+  getallprojet(){
+    this.projetService.getAll().subscribe(res=>{
+      this.projets=res
+    })
   }
   getmodelisationpbo(){
     this.modelisationpboService.getModelisationpbo().subscribe(data=>{
@@ -109,6 +119,7 @@ export class ModelisationpboComponent implements OnInit {
   }
 
   save(modes: Modelisationpbo) {
+    modes.projet=this.projet
     modes.region=this.region
     this.modelisationpboService.addModelisationpbo(modes).subscribe(res => {
         this.toast.success("done")

@@ -104,6 +104,18 @@
               </select>
             </div>
           </div>
+          <div  class="row pt-2">
+            <div class="col-6">
+              <label class="block">
+                Projet
+              </label>
+            </div>
+            <div class="col-6">
+              <select [(ngModel)]="projet" name="status" placeholder="select"  class="form-select">
+                <option *ngFor="let projet of projets" [ngValue]="projet">{{projet.name}}</option>
+              </select>
+            </div>
+          </div>
           <div class="row">
             <button class="btn btn-success" label="Ajouter" (click)="save(regies)"> Ajouter </button>
           </div>
@@ -117,7 +129,7 @@
     </ng-template>
   </p-toolbar>
   <div style="font-size: 5px ;">
-    <p-table #regietable  [value]="regie" [responsive]="true"  columnResizeMode="expand"  [tableStyle]="{width: 'max-content'  }" [filterDelay]="0" [globalFilterFields]="['demandeur','datereception','pm','site','idra','idm','tache','duree','etat','charge','commentaire','region.name']"
+    <p-table #regietable  [value]="regie" [responsive]="true"  columnResizeMode="expand"  [tableStyle]="{width: 'max-content'  }" [filterDelay]="0" [globalFilterFields]="['demandeur','datereception','pm','site','idra','idm','tache','duree','etat','charge','commentaire','region.name','projet.name']"
              [paginator]="true" [rows]="4" [showCurrentPageReport]="true"  [resizableColumns]='true' [autoLayout]="true" id="excel-table" >
       <ng-template pTemplate="caption">
         <div class="datatable-header">
@@ -142,6 +154,8 @@
           <th pSortableColumn="charge"> Chargé  <p-sortIcon field="charge"></p-sortIcon> </th>
           <th pSortableColumn="commentaire"> Commentaire  <p-sortIcon field="commentaire"></p-sortIcon> </th>
           <th pSortableColumn="region.name"> Region <p-sortIcon field="region.name"></p-sortIcon> </th>
+          <th pSortableColumn="projet.name"> Projet <p-sortIcon field="projet.name"></p-sortIcon> </th>
+
           <th></th>
         </tr>
         <tr>
@@ -183,6 +197,9 @@
             <p-columnFilter type="text" field="region.name"></p-columnFilter>
           </th>
           <th>
+            <p-columnFilter type="text" field="projet.name"></p-columnFilter>
+          </th>
+          <th>
           </th>
       </ng-template>
       <ng-template pTemplate="body" let-list >
@@ -200,6 +217,7 @@
           <td> {{list.charge}}</td>
           <td> {{list.commentaire}}</td>
           <td> {{list.region.name}}</td>
+          <td> {{list.projet.name}}</td>
           <td>
             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="openDialog(list)"></button>
             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="Ondeletegc(list.id)"></button>

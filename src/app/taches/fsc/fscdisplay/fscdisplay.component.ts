@@ -8,6 +8,8 @@ import {RegionService} from "../../../services/region.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../../model/Creationsadirah";
+import {Projet} from "../../../model/Projet";
+import {ProjetService} from "../../../services/projet.service";
 
 @Component({
   selector: 'app-fscdisplay',
@@ -16,7 +18,9 @@ import {Creationsadirah} from "../../../model/Creationsadirah";
 })
 export class FscdisplayComponent implements OnInit {
 
-  constructor(private fscService:FscService ,router:Router ,private toast: ToastrService, private regionService: RegionService) { }
+  constructor( private projetService:ProjetService , private fscService:FscService ,router:Router ,private toast: ToastrService, private regionService: RegionService) { }
+  projets:Projet[];
+  projet =new Projet();
   regions:Region[]
   region =new Region();
   fsc : Fsc[];
@@ -30,9 +34,15 @@ export class FscdisplayComponent implements OnInit {
   ngOnInit(): void {
     this.OngetFsc()
     this.getAllRegion();
+    this.getallprojet()
 
 
 
+  }
+  getallprojet(){
+    this.projetService.getAll().subscribe(res=>{
+      this.projets=res
+    })
   }
   OngetFsc(){
     this.fscService.Get_Fsc().subscribe(data=>{
@@ -51,6 +61,7 @@ export class FscdisplayComponent implements OnInit {
   }
 
   save(fscs: Fsc) {
+    fscs.projet=this.projet
     fscs.region = this.region
     this.fscService.Add_Fsc(fscs).subscribe(res => {
         this.toast.success("done")

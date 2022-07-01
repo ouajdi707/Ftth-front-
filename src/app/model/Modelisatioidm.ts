@@ -1,4 +1,5 @@
 import {Region} from "./Region";
+import {Projet} from "./Projet";
 
 export class Modelisatioidm{
   id:number;
@@ -17,4 +18,5 @@ export class Modelisatioidm{
   etat:string;
   commune:string;
   region:Region;
+  projet:Projet;
 }

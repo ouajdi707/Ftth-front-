@@ -1,4 +1,5 @@
 import {Region} from "./Region";
+import {Projet} from "./Projet";
 
 export class Trame{
   id:number;
@@ -15,5 +16,6 @@ export class Trame{
   charge:string;
   commentaire:string;
   region:Region;
+  projet:Projet;
 
 }

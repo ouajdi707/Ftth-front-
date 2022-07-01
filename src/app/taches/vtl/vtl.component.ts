@@ -7,6 +7,8 @@ import {VtlService} from "../../services/vtl.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../model/Creationsadirah";
+import {Projet} from "../../model/Projet";
+import {ProjetService} from "../../services/projet.service";
 
 @Component({
   selector: 'app-vtl',
@@ -14,6 +16,8 @@ import {Creationsadirah} from "../../model/Creationsadirah";
   styleUrls: ['./vtl.component.css']
 })
 export class VtlComponent implements OnInit {
+  projets:Projet[];
+  projet =new Projet();
   regions: Region[]
   region = new Region();
   vtl:Vtl[];
@@ -25,11 +29,17 @@ export class VtlComponent implements OnInit {
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
-  constructor(private toast: ToastrService, private regionService: RegionService, private vtlService:VtlService) { }
+  constructor(  private projetService:ProjetService,private toast: ToastrService, private regionService: RegionService, private vtlService:VtlService) { }
 
   ngOnInit(): void {
+    this.getallprojet()
     this.getallvtl()
     this.getAllRegion()
+  }
+  getallprojet(){
+    this.projetService.getAll().subscribe(res=>{
+      this.projets=res
+    })
   }
   getallvtl(){
     this.vtlService.getVtl().subscribe(data=>{
@@ -96,6 +106,7 @@ export class VtlComponent implements OnInit {
   }
 
   save(vtls: Vtl) {
+    vtls.projet=this.projet
     vtls.region=this.region
     this.vtlService.addVtl(vtls).subscribe(res => {
         this.toast.success("done")

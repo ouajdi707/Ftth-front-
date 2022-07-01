@@ -7,6 +7,8 @@ import {RegieService} from "../../services/regie.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../model/Creationsadirah";
+import {Projet} from "../../model/Projet";
+import {ProjetService} from "../../services/projet.service";
 
 @Component({
   selector: 'app-regie',
@@ -14,6 +16,8 @@ import {Creationsadirah} from "../../model/Creationsadirah";
   styleUrls: ['./regie.component.css']
 })
 export class RegieComponent implements OnInit {
+  projets:Projet[];
+  projet =new Projet();
   regions: Region[]
   region = new Region();
   regie:Regie[];
@@ -26,11 +30,17 @@ export class RegieComponent implements OnInit {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 
-  constructor(private toast: ToastrService, private regionService: RegionService, private regieService:RegieService) { }
+  constructor( private projetService:ProjetService ,private toast: ToastrService, private regionService: RegionService, private regieService:RegieService) { }
 
   ngOnInit(): void {
+    this.getallprojet()
     this.getAllRegie()
     this.getAllRegion()
+  }
+  getallprojet(){
+    this.projetService.getAll().subscribe(res=>{
+      this.projets=res
+    })
   }
 getAllRegie(){
   this.regieService.getregie().subscribe(data=>{
@@ -110,6 +120,8 @@ getAllRegie(){
   }
 
   save(regies: Regie) {
+    regies.projet=this.projet
+
     regies.region=this.region
     this.regieService.addregie(regies).subscribe(res => {
         this.toast.success("done")

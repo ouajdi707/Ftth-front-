@@ -6,6 +6,8 @@ import {RegionService} from "../../services/region.service";
 import {CreationidmService} from "../../services/creationidm.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
+import {ProjetService} from "../../services/projet.service";
+import {Projet} from "../../model/Projet";
 
 
 @Component({
@@ -14,6 +16,8 @@ import * as XLSX from "xlsx";
   styleUrls: ['./creationidm.component.css']
 })
 export class CreationidmComponent implements OnInit {
+  projets:Projet[];
+  projet =new Projet();
   regions:Region[]
   region =new Region();
   creationidm:Creationidm[];
@@ -22,21 +26,21 @@ export class CreationidmComponent implements OnInit {
   creationidms= new Creationidm()
   NewDialog:boolean;
   fileName = 'ExcelSheet.xlsx';
-
-
-
-
-
-
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
-  constructor( private toast: ToastrService,private regionService: RegionService , private creationidmService:CreationidmService) { }
+  constructor( private projetService:ProjetService ,private toast: ToastrService,private regionService: RegionService , private creationidmService:CreationidmService) { }
   ngOnInit(): void {
     this.getCreationidm()
     this.getAllRegion()
+    this.getallprojet()
 
 
+  }
+  getallprojet(){
+    this.projetService.getAll().subscribe(res=>{
+      this.projets=res
+    })
   }
 
 
@@ -58,6 +62,7 @@ export class CreationidmComponent implements OnInit {
     this.NewDialog = true;
   }
   save(creationidms:Creationidm) {
+    creationidms.projet=this.projet
     creationidms.region=this.region
     this.creationidmService.addCreationidm(creationidms).subscribe(res => {
         this.toast.success("done")

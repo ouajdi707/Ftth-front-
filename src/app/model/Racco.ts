@@ -1,4 +1,5 @@
 import {Region} from "./Region";
+import {Projet} from "./Projet";
 
 export class Racco{
   id:number;
@@ -19,6 +20,7 @@ export class Racco{
   nouveaupm:string;
   datereception:Date;
   region:Region;
+  projet:Projet;
 
 
 }

@@ -45,6 +45,7 @@ import { RegisterComponent } from './register/register.component';
 import {AuthInterceptor, authInterceptorProviders} from "./services/auth-interceptor.service";
 import { HomeComponent } from './home/home.component';
 import { AddtacheComponent } from './taches/addtache/addtache.component';
+import { ProjetComponent } from './projet/projet.component';
 
 
 
@@ -71,6 +72,7 @@ import { AddtacheComponent } from './taches/addtache/addtache.component';
     RegisterComponent,
     HomeComponent,
     AddtacheComponent,
+    ProjetComponent,
 
 
   ],

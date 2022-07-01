@@ -7,6 +7,8 @@ import {IdentificationimmeubleService} from "../../services/identificationimmeub
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../model/Creationsadirah";
+import {Projet} from "../../model/Projet";
+import {ProjetService} from "../../services/projet.service";
 
 @Component({
   selector: 'app-identificationimmeuble',
@@ -14,6 +16,8 @@ import {Creationsadirah} from "../../model/Creationsadirah";
   styleUrls: ['./identificationimmeuble.component.css']
 })
 export class IdentificationimmeubleComponent implements OnInit {
+  projets:Projet[];
+  projet =new Projet();
   regions: Region[]
   region = new Region();
   identificationimmeuble:Identificationimmeuble[];
@@ -28,13 +32,19 @@ export class IdentificationimmeubleComponent implements OnInit {
   }
 
   constructor(private toast: ToastrService, private regionService: RegionService,
-              private identificationimmeubleService: IdentificationimmeubleService) {
+              private identificationimmeubleService: IdentificationimmeubleService,private projetService:ProjetService) {
   }
 
   ngOnInit(): void {
+    this.getallprojet()
     this.getidentificationimmeuble()
     this.getAllRegion()
 
+  }
+  getallprojet(){
+    this.projetService.getAll().subscribe(res=>{
+      this.projets=res
+    })
   }
 
   openNew() {
@@ -55,6 +65,7 @@ export class IdentificationimmeubleComponent implements OnInit {
     this.regionService.getAll().subscribe(data => this.regions = data);
   }
   save(idms: Identificationimmeuble) {
+    idms.projet=this.projet
     idms.region=this.region
     this.identificationimmeubleService.addIdentificationimmeuble(idms).subscribe(res => {
         this.toast.success("done")

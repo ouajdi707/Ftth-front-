@@ -1,132 +1,59 @@
 <form [formGroup]="addForm" (ngSubmit)="OnSubmit()">
-
-  <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1" *ngIf="step==1">
-
-      <div class="d-flex flex-row align-items-center mb-4">
-        <label class="form-label" for="nomtache"> Nom Tache</label>
-        <div class="form-outline px-4 flex-fill mb-0">
-          <input class="form-control" id="nomtache" type="text" formControlName="nomTache">
-        </div>
+  <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1" >
+      <label> Demandeur:</label>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="">
       </div>
-    <div class="d-flex flex-row align-items-center mb-4">
-      <label class="form-label" for="Demandeur"> Demandeur</label>
-      <div class="form-outline px-4 flex-fill mb-0">
-        <input class="form-control"  type="text" formControlName="Demandeur" [(ngModel)]="nvtaches.demandeur">
+      <label>Chargé:</label>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="">
       </div>
+    <label>Date de reception: </label>
+    <div class="form-group">
+      <input type="date" class="form-control" placeholder="">
     </div>
-    <div class="d-flex flex-row align-items-center mb-4">
-      <label class="form-label" for="Datereception"> Date reception</label>
-      <div class="form-outline px-4 flex-fill mb-0">
-        <input class="form-control" type="date" formControlName="Datereception" [(ngModel)]="nvtaches.datereception">
-      </div>
+    <label>Etat </label>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="">
     </div>
-    <div class="d-flex flex-row align-items-center mb-4">
-      <label class="form-label" for="Commentaire"> Commentaire</label>
-      <div class="form-outline px-4 flex-fill mb-0">
-        <input class="form-control"  type="text" formControlName="Commentaire" [(ngModel)]="nvtaches.commentaire">
-      </div>
+    <label>Region :</label>
+    <div class="form-group">
+      <input type="email" class="form-control" placeholder="">
     </div>
-    <div class="d-flex flex-row align-items-center mb-4">
-      <label class="form-label" for="etat"> etat</label>
-      <div class="form-outline px-4 flex-fill mb-0">
-        <input class="form-control"  type="text" formControlName="etat" [(ngModel)]="nvtaches.etat">
-      </div>
+    <label>Projet:</label>
+    <div class="form-group">
+      <input type="password" class="form-control" placeholder="">
     </div>
-    <div class="d-flex flex-row align-items-center mb-4">
-      <label class="form-label" for="Region"> Region</label>
-      <div>
-        <select [(ngModel)]="region" name="status" placeholder="select"  class="form-select">
-          <option *ngFor="let region of regions" [ngValue]="region">{{region.name}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="d-flex flex-row align-items-center mb-4">
-      <label class="form-label" for="chargé"> Chargé</label>
-      <div class="form-outline px-4 flex-fill mb-0">
-        <input class="form-control"  type="text" formControlName="chargé" [(ngModel)]="nvtaches.charge">
-      </div>
+    <label>Commentaire:</label>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="">
     </div>
 
-          <div formArrayName="nomChamp">
-            <div *ngFor="let nomchamp of nomChamp.controls; let i=index">
-      <div class="d-flex flex-row align-items-center mb-4">
-        <label  class="form-label" for="nomchamp"> Nom champ</label>
-        <div class="form-outline pe-4 ms-3 flex-fill mb-0">
-              <input class="form-control" id="nomchamp" type="text" formControlName="nomChamp">
-            </div>
-        <div>
-        <button (click)="deleteNomChamp(i)" type="button" class="btn p-3 btn-danger rounded-circle ">
-          <i class="pi pi-trash fs-8" ></i>
-        </button>
-        </div>
-        </div>
-      </div>
-      </div>
-      <div class="d-flex justify-content-end ms-auto mx-5 pe-5">
-        <button (click)="addNomChamp()" type="button" class="btn p-3 btn-warning rounded-circle ">
-          <i class="pi pi-plus fs-8" ></i>
-        </button>
-      </div>
-      <div class="d-flex justify-content-end ms-auto mx-4 ">
-        <a  class="btn btn-primary mr-275.5 " (click)="save(nvtaches)"> SUIVANT
-          <i class="pi pi-forward"> </i>
-
-        </a>
+    <div formArrayName="nomChamp">
+      <div *ngFor="let nomchamp of nomChamp.controls; let i=index">
+          <label for="nomchamp"> Nom champ :</label>
+          <div class="form-group">
+            <input class="form-control" id="nomchamp" type="text" formControlName="nomChamp">
+            <button (click)="deleteNomChamp(i)" type="button" class="btn-danger rounded-circle ">
+              <i class="pi pi-trash fs-8" ></i>
+            </button>
+          </div>
 
       </div>
-      </div>
+    </div>
+    <div class="d-flex justify-content-end ms-auto mx-5 pe-5">
+      <button (click)="addNomChamp()" type="button" class="btn p-3 btn-warning rounded-circle ">
+        <i class="pi pi-plus fs-8" ></i>
+      </button>
+    </div>
+    <div class="d-flex justify-content-end ms-auto mx-4 ">
+      <a  class="btn btn-primary mr-275.5 " (click)="OnSubmit()" > Generer
+        <i class="pi pi-forward"> </i>
+
+      </a>
+
+    </div>
+  </div>
 </form>
-<div *ngIf="step!=1" >
 
-
-  <div class="card">
-    <p-toolbar styleClass="p-mb-4">
-      <ng-template pTemplate="left">
-        NOM TACHE
-      </ng-template>
-      <ng-template pTemplate="right">
-    <p-fileUpload mode="basic" accept=".xlsx" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block " chooseIcon="pi pi-download"  ></p-fileUpload>
-    &nbsp;
-    <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"   icon="pi pi-upload"></button>
-      </ng-template>
-    </p-toolbar>
-<p-table  responsiveLayout="scroll">
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Demandeur</th>
-      <th> Date de reception</th>
-      <th> Chargé</th>
-      <th> Etat</th>
-      <th> Commentaire</th>
-      <th> Region</th>
-
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-list >
-    <tr>
-      <td> {{list.demandeur}}</td>
-      <td> {{list.datereception}}</td>
-      <td> {{list.charge}} </td>
-      <td> {{list.etat}}</td>
-      <td> {{list.commentaire}}</td>
-      <td> {{list.region}}</td>
-
-    </tr>
-  </ng-template>
-</p-table>
-
-
-</div>
-</div>
-<div *ngIf="step!=1">
-  <a  class="btn btn-primary mx-2" (click)="Onprevious()">
-    <i class="pi pi-backward"> </i>
-    Precedent
-  </a>
-  <a  class="btn btn-primary mx-2" >
-    <i class="pi pi-plus"> </i>
-    Génerer
-  </a>
-
-</div>
 

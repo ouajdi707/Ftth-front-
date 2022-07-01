@@ -7,6 +7,8 @@ import {RaccoService} from "../../services/racco.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../model/Creationsadirah";
+import {ProjetService} from "../../services/projet.service";
+import {Projet} from "../../model/Projet";
 
 @Component({
   selector: 'app-racco',
@@ -14,6 +16,8 @@ import {Creationsadirah} from "../../model/Creationsadirah";
   styleUrls: ['./racco.component.css']
 })
 export class RaccoComponent implements OnInit {
+  projets:Projet[];
+  projet =new Projet();
   regions: Region[]
   region = new Region();
   racco:Racco[];
@@ -26,13 +30,15 @@ export class RaccoComponent implements OnInit {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 
-  constructor(private toast: ToastrService, private regionService: RegionService,private raccoService:RaccoService) { }
+  constructor( private projetService:ProjetService ,private toast: ToastrService, private regionService: RegionService,private raccoService:RaccoService) { }
 
   ngOnInit(): void {
     this.getAllRacco()
     this.getAllRegion()
+    this.getallprojet()
 
   }
+
 getAllRacco(){
   this.raccoService.getracco().subscribe(data=>{
       console.table(data)
@@ -99,8 +105,15 @@ getAllRacco(){
     this.NewDialog = true;
 
   }
+  getallprojet(){
+    this.projetService.getAll().subscribe(res=>{
+      this.projets=res
+    })
+  }
 
   save(raccos: Racco) {
+    raccos.projet=this.projet
+
     raccos.region=this.region
     this.raccoService.addracco(raccos).subscribe(res => {
         this.toast.success("done")

@@ -1,4 +1,5 @@
 import {Region} from "./Region";
+import {Projet} from "./Projet";
 
 export class Fsc {
   id:number;
@@ -9,4 +10,5 @@ export class Fsc {
   commentaire:string;
   datereception:Date;
   region:Region;
+  projet:Projet;
 }

@@ -6,6 +6,8 @@ import {RegionService} from "../../services/region.service";
 import {CreationsadirahService} from "../../services/creationsadirah.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
+import {Projet} from "../../model/Projet";
+import {ProjetService} from "../../services/projet.service";
 
 @Component({
   selector: 'app-creationsadirah',
@@ -13,6 +15,8 @@ import * as XLSX from "xlsx";
   styleUrls: ['./creationsadirah.component.css']
 })
 export class CreationsadirahComponent implements OnInit {
+  projets:Projet[];
+  projet =new Projet();
   regions:Region[]
   region =new Region();
   creationsadirah:Creationsadirah[];
@@ -28,11 +32,17 @@ export class CreationsadirahComponent implements OnInit {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 
-  constructor(private toast: ToastrService,private regionService: RegionService , private creationsadirahservice:CreationsadirahService) { }
+  constructor( private projetService:ProjetService ,private toast: ToastrService,private regionService: RegionService , private creationsadirahservice:CreationsadirahService) { }
 
   ngOnInit(): void {
+    this.getallprojet()
     this.getCreationsadirah()
     this.getAllRegion()
+  }
+  getallprojet(){
+    this.projetService.getAll().subscribe(res=>{
+      this.projets=res
+    })
   }
   getCreationsadirah(){
   this.creationsadirahservice.getCreationsadirah().subscribe(data=>{
@@ -112,6 +122,7 @@ export class CreationsadirahComponent implements OnInit {
   }
 
   save(creationsadirahs: Creationsadirah) {
+    creationsadirahs.projet=this.projet
     creationsadirahs.region=this.region
     this.creationsadirahservice.addCreationsadirah(creationsadirahs).subscribe(res => {
         this.toast.success("done")
