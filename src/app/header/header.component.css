@@ -1,0 +1,16 @@
+.off-canvas-sidebar, .sidebarlogout
+{
+  position: fixed;
+  top: 0;
+  height: 100%;
+  bottom: 0;
+  width: 0px;
+  left: 0;
+  z-index: 999;
+  margin-left: -29px;
+}
+
+.scroller {
+  position: relative; /* relative or absolute positioning required by Perfect Scrollbar */
+  max-height: 500px;  /* height must be limited to induce scrolling behavior */
+}

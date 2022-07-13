@@ -4,26 +4,33 @@
 <link href="/assets/css/paper-dashboard.min.css?v=2.1.1" rel="stylesheet"/>
 <link href="/assets/demo/demo.css" rel="stylesheet"/>
 
-<div class="sidebar"  data-color="default" data-active-color="danger"   >
-  <!--
-    Tip 1: You can change the color of the sidebar using: data-color=" default | primary | info | success | warning | danger |"
--->
+<div [ngClass]="isAuth ? 'sidebar' : 'sidebarlogout'"  data-color="default" data-active-color="danger">
+  <div class="main-panel">
+    <!--    <div class="main-panel" *ngIf="isAuth">-->
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <a class="navbar-brand" href="javascript:;">FTTH</a>
+        </div>
+      </div>
+    </nav>
+  </div>
 
   <div class="logo" >
     <a routerLink="/profil" class="simple-text logo-mini">
-      <div class="logo-image-small">
-        <img src="/assets/img/logo-small.png">
-      </div>
-      <!-- <p>CT</p> -->
+      <!--      <div class="logo-image-small">
+              <img src="/assets/img/logo-small.png">
+            </div>-->
+
     </a>
     <a routerLink="/home" class="simple-text logo-normal">
       SPS
-      <!-- <div class="logo-image-big">
-        <img src="../assets/img/logo-big.png">
-      </div> -->
     </a>
   </div>
-  <div  class="sidebar-wrapper">
+
+  <div *ngIf="isAuth" class="sidebar-wrapper">
     <div class="user">
       <div class="photo">
         <img src="../../assets/img/new_logo.png">
@@ -51,7 +58,7 @@
               </a>
             </li>
             <li>
-              <a (click)="logout()">
+              <a (click)="logout()" *ngIf="isAuth">
                 <span class="sidebar-mini-icon">Se</span>
                 <span class="sidebar-normal">Se déconnecter</span>
               </a>
