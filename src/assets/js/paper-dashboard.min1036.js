@@ -1,3 +1,5 @@
+
+<script src="perfect-scrollbar.js"></script> 
 function debounce(n, t, r) {
     var i;
     return function() {
@@ -16,7 +18,8 @@ function hexToRGB(a, e) {
 toggle_initialized = sidebar_mini_active = backgroundOrange = navbar_initialized = fixedTop = !(transparentDemo = transparent = !0), seq = 0, delays = 80, durations = 500, seq2 = 0, delays2 = 80, durations2 = 500,
     function() {
         if (isWindows = -1 < navigator.platform.indexOf("Win"), isWindows) {
-            new PerfectScrollbar(".sidebar"), new PerfectScrollbar(".sidebar-wrapper");
+
+            new PerfectScrollbar(".sidebar").require('perfect-scrollbar').default, new PerfectScrollbar(".sidebar-wrapper").require('perfect-scrollbar').default;
             $("html").addClass("perfect-scrollbar-on")
         } else $("html").addClass("perfect-scrollbar-off")
     }(), $(document).ready(function() {

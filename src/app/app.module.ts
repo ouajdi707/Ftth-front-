@@ -43,10 +43,10 @@ import { RoleComponent } from './role/role.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {AuthInterceptor, authInterceptorProviders} from "./services/auth-interceptor.service";
-import { HomeComponent } from './home/home.component';
 import { AddtacheComponent } from './taches/addtache/addtache.component';
 import { ProjetComponent } from './projet/projet.component';
 import { TacheComponent } from './tache/tache.component';
+import { HomeLayoutComponent } from './home-layout/home-layout.component';
 
 
 
@@ -71,12 +71,10 @@ import { TacheComponent } from './tache/tache.component';
     RoleComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
     AddtacheComponent,
     ProjetComponent,
     TacheComponent,
-
-
+    HomeLayoutComponent,
   ],
     imports: [
         BrowserModule,
@@ -102,7 +100,6 @@ import { TacheComponent } from './tache/tache.component';
         CalendarModule,
         FileUploadModule,
       ReactiveFormsModule,
-
 ],
   providers: [GcService,DatePipe,FscService, authInterceptorProviders],
   bootstrap: [AppComponent]

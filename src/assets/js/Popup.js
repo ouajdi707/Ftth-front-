@@ -5,9 +5,25 @@ $(function () {
       title: localStorage.getItem("filename"),
       width: 600,
       height: 600,
-      open: function () {
-        $("#frame");
-      }
+ 
     });
+  });
+});
+
+$('#btn1').click(function() {
+  // reset modal if it isn't visible
+  if (!($('.modal.in').length)) {
+    $('.modal-dialog').css({
+      top: 0,
+      left: 0
+    });
+  }
+  $('#myModal').modal({
+    backdrop: false,
+    show: true
+  });
+
+  $('.modal-dialog').draggable({
+    handle: ".modal-header"
   });
 });

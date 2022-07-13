@@ -14,8 +14,6 @@ export class AppComponent {
   constructor( private cdr: ChangeDetectorRef , private tokenStorage:TokenStorageService , private router:Router) {
   }
 
-
-
   loadscripts(){
     var s = document.createElement("script");
     var s2= document.createElement("script");
@@ -75,15 +73,6 @@ export class AppComponent {
     s24.src = "/assets/demo/demo.js";
     s25.src = "/assets/demo/jquery.sharrre.js";
     s26.src = "/assets/js/general.js";
-
-  }
-
-
-  logout() {
-    this.tokenStorage.signOut();
-    window.location.reload();
-    this.router.navigate(['/login']).then(() => { window.location.reload(); })
-
 
   }
 

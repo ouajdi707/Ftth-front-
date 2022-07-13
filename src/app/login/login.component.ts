@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
       this.roles = this.tokenStorage.getUser().roles;
     }
   }
+
   onSubmit(): void {
     const { username, password } = this.form;
     this.authService.login(username, password).subscribe(
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
         this.roles = this.tokenStorage.getUser().roles;
         if (this.tokenStorage.getUser().roles == 'ROLE_ADMIN'){
           this.router.navigate(['/user']).then(() => { window.location.reload();
-        })}
+          })}
         else {
           this.router.navigate(['/dashboard']).then(() => { window.location.reload(); })
         }
