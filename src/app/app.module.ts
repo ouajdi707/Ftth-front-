@@ -46,6 +46,7 @@ import {AuthInterceptor, authInterceptorProviders} from "./services/auth-interce
 import { HomeComponent } from './home/home.component';
 import { AddtacheComponent } from './taches/addtache/addtache.component';
 import { ProjetComponent } from './projet/projet.component';
+import { TacheComponent } from './tache/tache.component';
 
 
 
@@ -73,6 +74,7 @@ import { ProjetComponent } from './projet/projet.component';
     HomeComponent,
     AddtacheComponent,
     ProjetComponent,
+    TacheComponent,
 
 
   ],

@@ -19,11 +19,13 @@ import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {AddtacheComponent} from "./taches/addtache/addtache.component";
 import {ProjetComponent} from "./projet/projet.component";
+import {TacheComponent} from "./tache/tache.component";
 
 
 const routes: Routes = [
   {path: 'dashboard', component : DashboardComponent},
   {path: 'gc', component:GcdisplayComponent},
+  {path: 'tache/:id', component:TacheComponent},
   {path: 'fsc', component:FscdisplayComponent},
   {path:'region', component:RegionComponent},
   {path:'creationidm',component:CreationidmComponent},
@@ -61,7 +63,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [ RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' }) ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

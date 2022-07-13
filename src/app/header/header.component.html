@@ -187,11 +187,27 @@
         <div class="collapse " id="pagesExample">
           <ul class="nav">
             <li>
-              <a routerLink="/ajouter"   >
-                <span class="sidebar-mini-icon"> 1 </span>
-                <span class="sidebar-normal"> Tache 1 </span>
+              <a routerLink="/"  (click)="openNew()"  > Ajouter tache
               </a>
+              <p-dialog [(visible)]="NewDialog" [style]="{width: '580px', height:530}" header="Ajouter Tache" [modal]="true" styleClass="p-fluid"   >
+                <ng-template pTemplate="content">
+                  <div class="row pt-2">
+                    <div class="col-6">
+                      <label for="username1" class="block">Name</label>
+                    </div>
+                    <div class="col-6">
+                      <input type="text" class="form-control text-black" id="test" aria-describedby="username1-help" pInputText [(ngModel)]="tache.nom"  />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <button class="btn btn-success" label="Ajouter" (click)="save(tache)"> Ajouter </button>
+                  </div>
+                </ng-template></p-dialog>
             </li>
+
+          </ul>
+          <ul *ngFor="let t of taches">
+            <li><a routerLink="/tache/{{t.nom}}">{{t.nom}}</a></li>
           </ul>
         </div>
       </li>

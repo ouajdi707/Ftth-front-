@@ -1,5 +1,6 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
+import {Tache} from "./Tache";
 
 export class Nvtache {
  id:number;
@@ -9,7 +10,8 @@ export class Nvtache {
  commentaire:string;
  etat:string;
  region:Region;
-  projet:Projet;
+ projet:Projet;
+ nomTache:Tache;
 
 
 
