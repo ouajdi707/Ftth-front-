@@ -187,7 +187,7 @@
         <div class="collapse " id="pagesExample">
           <ul class="nav">
             <li>
-              <a routerLink="/"  (click)="openNew()"  > Ajouter tache
+              <a  (click)="openNew()"  > Ajouter tache
               </a>
               <p-dialog [(visible)]="NewDialog" [style]="{width: '580px', height:530}" header="Ajouter Tache" [modal]="true" styleClass="p-fluid"   >
                 <ng-template pTemplate="content">
@@ -204,7 +204,12 @@
                   </div>
                 </ng-template></p-dialog>
             </li>
-
+            <ul class="nav">
+              <li>
+                <a  routerLink="/ajouter"  > Affecter Tache
+                </a>
+              </li>
+            </ul>
           </ul>
           <ul *ngFor="let t of taches">
             <li><a routerLink="/tache/{{t.nom}}">{{t.nom}}</a></li>

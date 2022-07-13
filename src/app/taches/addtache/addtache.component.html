@@ -2,6 +2,12 @@
 
   <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1" >
     <div class="card-body ">
+      <label>Tache:</label>
+      <div>
+        <select [(ngModel)]="tache" name="status" placeholder="select"  class="form-select" [formControl]="tachee">
+          <option *ngFor="let tache of taches" [ngValue]="tache">{{tache.nom}}</option>
+        </select>
+      </div>
       <label> Demandeur:</label>
       <div class="form-group">
         <input type="text" class="form-control" placeholder="" [ngModel]="nvtaches.demandeur" [formControl]="demandeur">
@@ -34,12 +40,7 @@
           <option *ngFor="let projet of projets" [ngValue]="projet">{{projet.name}}</option>
         </select>
       </div>
-      <label>Tache:</label>
-      <div>
-        <select [(ngModel)]="tache" name="status" placeholder="select"  class="form-select" [formControl]="tachee">
-          <option *ngFor="let tache of taches" [ngValue]="tache">{{tache.nom}}</option>
-        </select>
-      </div>
+
 
 
     <div formArrayName="nomChamp">
