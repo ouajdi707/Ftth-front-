@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NvtacheService} from "../services/nvtache.service";
 import {Nvtache} from "../model/Nvtache";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-tache',
@@ -15,15 +15,17 @@ data:Nvtache[]
   }
 
   nom: string | null =""
-  constructor(private nvTacheService:NvtacheService,private router:ActivatedRoute) {
+  constructor(private nvTacheService:NvtacheService,private router:ActivatedRoute,private route :Router) {
   this.nom=this.router.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
+    this.route.routeReuseStrategy.shouldReuseRoute = () => false;
   this.getAll()
 
   }
 getAll(){
     this.nvTacheService.Get_tache_data(this.nom).subscribe(data=>this.data=data)
 }
+
 }

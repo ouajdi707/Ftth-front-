@@ -136,4 +136,10 @@ export class HeaderComponent implements OnInit {
     s24.src = "/assets/demo/demo.js";
     s25.src = "/assets/demo/jquery.sharrre.js";
   }
+  navigate(id:string){
+    this.router.navigateByUrl("/"+id).then()
+
+
+  }
+
 }

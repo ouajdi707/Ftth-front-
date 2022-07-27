@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import {Creationsadirah} from "../../../model/Creationsadirah";
 import {Projet} from "../../../model/Projet";
 import {ProjetService} from "../../../services/projet.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -36,7 +37,7 @@ export class GcdisplayComponent implements OnInit {
 
   constructor(private toast: ToastrService,
               private gcService: GcService, private regionService: RegionService,  private primengConfig: PrimeNGConfig,
-  private projetService:ProjetService) {
+  private projetService:ProjetService ,private route:Router) {
   }
 
   ngOnInit(): void {
@@ -162,4 +163,5 @@ this.regionService.getAll().subscribe(data=>this.regions=data);
     )
 
   }
+
 }

@@ -213,7 +213,7 @@
             </ul>
           </ul>
           <ul *ngFor="let t of taches">
-            <li><a routerLink="/tache/{{t.nom}}">{{t.nom}}</a></li>
+            <li><a (click)="navigate(t.nom)">{{t.nom}}</a></li>
           </ul>
         </div>
       </li>

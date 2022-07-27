@@ -25,7 +25,7 @@ import {TacheComponent} from "./tache/tache.component";
 const routes: Routes = [
   {path: 'dashboard', component : DashboardComponent},
   {path: 'gc', component:GcdisplayComponent},
-  {path: 'tache/:id', component:TacheComponent},
+
   {path: 'fsc', component:FscdisplayComponent},
   {path:'region', component:RegionComponent},
   {path:'creationidm',component:CreationidmComponent},
@@ -45,6 +45,7 @@ const routes: Routes = [
   {path:'register',component:RegisterComponent},
   {path:'ajouter',component:AddtacheComponent},
   {path:'projet',component:ProjetComponent},
+  {path: ':id', component:TacheComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: '**', redirectTo: 'login'},
 
@@ -63,7 +64,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' }) ],
+  imports: [ RouterModule.forRoot(routes) ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
