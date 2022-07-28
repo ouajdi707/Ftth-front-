@@ -25,7 +25,7 @@ export class AddtacheComponent implements OnInit {
   datereception = new FormControl('', [Validators.required]);
   tachee = new FormControl('', [Validators.required]);
 
-
+  title = 'Affecter Tache';
 
   projets:Projet[];
   projet =new Projet();

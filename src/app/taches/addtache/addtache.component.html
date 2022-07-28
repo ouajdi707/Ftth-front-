@@ -1,80 +1,171 @@
-<form [formGroup]="addForm" (ngSubmit)="OnSubmit()">
-
-  <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1" >
-    <div class="card-body ">
-      <label>Tache:</label>
-      <div>
-        <select [(ngModel)]="tache" name="status" placeholder="select"  class="form-select" [formControl]="tachee">
-          <option *ngFor="let tache of taches" [ngValue]="tache">{{tache.nom}}</option>
-        </select>
+<div class="row">
+  <div class="offset-md-2 col col-md-8 col-sm-12">
+    <div class="card h-auto">
+      <div class="card-header">
+        {{title}}
       </div>
-      <label> Demandeur:</label>
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="" [ngModel]="nvtaches.demandeur" [formControl]="demandeur">
-      </div>
-      <label>Chargé:</label>
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="" [ngModel]="nvtaches.charge" [formControl]="charge">
-      </div>
-    <label>Date de reception: </label>
-    <div class="form-group">
-      <input type="date" class="form-control" placeholder="" [ngModel]="nvtaches.datereception" [formControl]="datereception">
-    </div>
-      <label>Commentaire:</label>
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="" [ngModel]="nvtaches.commentaire " [formControl]="commentaire" >
-      </div>
-    <label>Etat </label>
-    <div class="form-group">
-      <input type="text" class="form-control" placeholder="" [ngModel]="nvtaches.etat" [formControl]="etat">
-    </div>
-    <label>Region :</label>
-      <div >
-        <select [(ngModel)]="region" name="status" placeholder="select"  class="form-select"[formControl]="regionn">
-          <option *ngFor="let region of regions" [ngValue]="region">{{region.name}}</option>
-        </select>
-      </div>
-    <label>Projet:</label>
-      <div >
-        <select  name="status" placeholder="select"  class="form-select" [formControl]="projett">
-          <option *ngFor="let projet of projets" [ngValue]="projet">{{projet.name}}</option>
-        </select>
-      </div>
-    <div formArrayName="nomChamp">
-      <div *ngFor="let nomchamp of nomChamp.controls; let i=index">
-          <label for="nomchamp"> Nom champ :</label>
-          <div class="row g-1">
-            <div class="col-5">
-            <input class="form-control " id="nomchamp" type="text" formControlName="nomChamp" placeholder="entrer le nom ">
-            </div>
-            <div class="col-5">
-            <input class="form-control ps-2" id ="nom" type="text" formControlName="nomChamp" placeholder="entrer la valeur">
-            </div>
-            <div class="col-2">
-            <button (click)="deleteNomChamp(i)" type="button" class="btn-danger rounded-circle  ">
-              <i class="pi pi-trash p-1 fs-8" ></i>
-            </button>
+      <div class="card-body">
+        <form [formGroup]="addForm" (ngSubmit)="OnSubmit()">
+          <div class="row">
+            <div class="col col-md-12 col-sm-12">
+              <div class="row">
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group">
+                    <label>Tache:</label>
+                    <select [(ngModel)]="tache" name="status" placeholder="select" class="form-select"
+                            [formControl]="tachee">
+                      <option *ngFor="let tache of taches" [ngValue]="tache">{{tache.nom}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group">
+                    <label> Demandeur:</label>
+                    <input type="text" class="form-control" placeholder="" [ngModel]="nvtaches.demandeur"
+                           [formControl]="demandeur">
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group">
+                    <label>Chargé:</label>
+                    <input type="text" class="form-control" placeholder="" [ngModel]="nvtaches.charge"
+                           [formControl]="charge">
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group">
+                    <label>Etat </label>
+                    <input type="text" class="form-control" placeholder="" [ngModel]="nvtaches.etat"
+                           [formControl]="etat">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <nav class="nav nav-tabs">
+                <a class="nav-item nav-link active font-weight-bold" href="#p6" data-toggle="tab">Adresse</a>
+              </nav>
+            </div>
+            <div class="col-md-12 col-sm-12">
+              <div class="tab-content table-bordered border-top-0">
+                <div class="tab-pane active p-2" id="p6">
+                  <div class="row">
+                    <div class="col-md-5 col-sm-12">
+                      <div class="form-group">
+                        <label>Date de reception: </label>
+                        <input type="date" class="form-control" placeholder="" [ngModel]="nvtaches.datereception"
+                               [formControl]="datereception">
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div class="form-group">
+                        <label for="codePostal">Code postal</label>
+                        <input type="text" class="form-control" id="codePostal" formControlName="codePostal">
+                      </div>
+                    </div>
 
+                    <div class="col-md-4 col-sm-12">
+                      <div class="form-group">
+                        <label>Region :</label>
+                        <select [(ngModel)]="region" name="status" placeholder="select" class="form-select"
+                                [formControl]="regionn">
+                          <option *ngFor="let region of regions" [ngValue]="region">{{region.name}}</option>
+                        </select>
+                      </div>
+                    </div>
+
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <nav class="nav nav-tabs pt-3">
+                <a class="nav-item nav-link active font-weight-bold" href="#p4" data-toggle="tab">Adresse</a>
+              </nav>
+            </div>
+            <div class="col-md-12 col-sm-12">
+              <div class="tab-content table-bordered border-top-0">
+                <div class="tab-pane active p-2" id="p1">
+                  <div class="row">
+
+
+                    <div class="col-md-5 col-sm-12">
+                      <div class="form-group">
+                        <label>Projet:</label>
+                        <select name="status" placeholder="select" class="form-select" [formControl]="projett">
+                          <option *ngFor="let projet of projets" [ngValue]="projet">{{projet.name}}</option>
+                        </select>
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-7 col-sm-12">
+                      <div class="form-group">
+                        <label>Commentaire:</label>
+                        <input type="text" class="form-control" placeholder="" [ngModel]="nvtaches.commentaire "
+                               [formControl]="commentaire">
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <nav class="nav nav-tabs pt-3">
+                <a class="nav-item nav-link active font-weight-bold" href="#p4" data-toggle="tab">Nouvelles Taches</a>
+              </nav>
+            </div>
+            <div class="col-md-12 col-sm-12">
+              <div class="tab-content table-bordered border-top-0">
+                <div class="tab-pane active p-2" id="p4">
+                  <div class="row">
+                    <div formArrayName="nomChamp">
+                      <div *ngFor="let nomchamp of nomChamp.controls; let i=index">
+                        <label for="nomchamp"> Nom champ :</label>
+                        <div class="row g-1">
+                          <div class="col-5">
+                            <input class="form-control " id="nomchamp" type="text" formControlName="nomChamp"
+                                   placeholder="entrer le nom ">
+                          </div>
+                          <div class="col-5">
+                            <input class="form-control ps-2" id="nom" type="text" formControlName="nomChamp"
+                                   placeholder="entrer la valeur">
+                          </div>
+                          <div class="col-2">
+                            <button (click)="deleteNomChamp(i)" type="button" class="btn-danger rounded-circle  ">
+                              <i class="pi pi-trash p-1 fs-8"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row pe-5 pt-2">
+                      <div class="col-1 ms-auto">
+                        <button (click)="addNomChamp()" type="button" class="btn  btn-warning rounded-circle ">
+                          <i class="pi pi-plus fs-8"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end ms-auto mx-4 ">
+            <button type="button" class="btn  btn-success " (click)="save(nomTache,nvtaches)"> Generer
+            </button>
+          </div>
+        </form>
       </div>
-    </div>
-    <div class="row pe-5 pt-2">
-      <div class="col-1 ms-auto">
-      <button (click)="addNomChamp()" type="button" class="btn  btn-warning rounded-circle ">
-        <i class="pi pi-plus fs-8" ></i>
-      </button>
-    </div>
-    </div>
-      </div>
-    <div class="d-flex justify-content-end ms-auto mx-4 ">
-      <a  class="btn btn-primary mr-275.5 " (click)="save(nomTache,nvtaches)" > Generer
-        <i class="pi pi-forward"> </i>
-
-      </a>
-
     </div>
   </div>
-</form>
-
-
+</div>
