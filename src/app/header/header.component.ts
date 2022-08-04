@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 import $ from 'jquery';
 import {AuthService} from "../services/auth.service";
+import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-header',
@@ -26,8 +27,10 @@ export class HeaderComponent implements OnInit {
   private productDialog: boolean;
   isLoggedIn = false;
   public config: PerfectScrollbarConfigInterface = {};
+  items= new FormArray([]);
+  addForm: FormGroup;
 
-  constructor(private tokenStorage: TokenStorageService, private nvTacheService: NvtacheService, private toast: ToastrService,
+  constructor(private fb:FormBuilder,private tokenStorage: TokenStorageService, private nvTacheService: NvtacheService, private toast: ToastrService,
               private router: Router, private auths: AuthService) {
   }
 
@@ -45,6 +48,9 @@ export class HeaderComponent implements OnInit {
     }
     this.user = this.tokenStorage.getUser();
     this.getTaches()
+    this.addForm = new FormGroup({
+      items: new FormArray([])
+    });
   }
 
   isAdmin() {
@@ -63,7 +69,12 @@ export class HeaderComponent implements OnInit {
   }
 
   save(tache: Tache) {
-
+    tache.columnsSuplimentaires=""
+    for(let item of this.items.controls){
+      tache.columnsSuplimentaires= tache.columnsSuplimentaires+","+item.get('value')?.value
+    }
+  tache.columnsSuplimentaires= tache.columnsSuplimentaires.substring(1,this.tache.columnsSuplimentaires.length)
+    console.log( tache.columnsSuplimentaires)
     this.nvTacheService.addnvtache(tache).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
@@ -141,5 +152,20 @@ export class HeaderComponent implements OnInit {
 
 
   }
+  createItem(): FormGroup {
+    return this.fb.group({
+      value: '',
+
+    });
+  }
+
+  addItem(): void {
+    this.items = this.addForm.get('items') as FormArray;
+    this.items.push(this.createItem());
+  }
+  deleteItem(index:number): void {
+    this.items.removeAt(index);
+    this.items.markAsDirty();
+}
 
 }

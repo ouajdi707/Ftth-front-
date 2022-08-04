@@ -6,32 +6,19 @@
     </div>
   </ng-template>
 
-  <ng-template pTemplate="header">
-    <tr>
-      <th > Demandeur  </th>
-      <th > Date de reception</th>
-      <th > Chargé  </th>
-      <th >Commentaire </th>
-      <th >Etat </th>
-      <th > Region  </th>
-      <th > Projet  </th>
-      <th > </th>
-    </tr>
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let col of header">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
 
-
-
-
-
-  </ng-template>
   <ng-template pTemplate="body" let-list >
     <tr>
-      <td>{{list.demandeur}}</td>
-      <td> {{list.datereception |date:'dd/MM/YYYY'}}</td>
-      <td>{{list.charge}}</td>
-      <td>{{list.commentaire}}</td>
-      <td> {{list.etat}}</td>
-      <td> {{list.region.name}}</td>
-      <td> {{list.projet.name}}</td>
+      <td *ngFor="let col of header">
+        {{list[col.field]}}
+      </td>
     </tr>
   </ng-template>
 </p-table>

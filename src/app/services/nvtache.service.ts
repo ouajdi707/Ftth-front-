@@ -17,6 +17,9 @@ export class NvtacheService {
     return this.httpClient.get<Tache[]>("http://localhost:8084/tache/retrieve-all-taches");
   }
 
+  Get_taches_BY_ID(nom: string | null){
+    return this.httpClient.get<Tache>("http://localhost:8084/retrieve-tache/"+nom);
+  }
   Get_tache_data(nom: string | null){
     return this.httpClient.get<Nvtache[]>("http://localhost:8084/tache/retrieve-by-name/"+nom);
   }

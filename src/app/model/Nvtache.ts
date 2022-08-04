@@ -1,6 +1,7 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
 import {Tache} from "./Tache";
+import {colsup} from "./colsup";
 
 export class Nvtache {
  id:number;
@@ -12,6 +13,7 @@ export class Nvtache {
  region:Region;
  projet:Projet;
  nomTache:Tache;
+  columnsSuplimentaires:colsup[];
 
 
 

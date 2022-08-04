@@ -9,6 +9,7 @@ import {NvtacheService} from "../../services/nvtache.service";
 import {Projet} from "../../model/Projet";
 import {ProjetService} from "../../services/projet.service";
 import {Tache} from "../../model/Tache";
+import {colsup} from "../../model/colsup";
 
 @Component({
   selector: 'app-addtache',
@@ -35,14 +36,8 @@ export class AddtacheComponent implements OnInit {
   nvtaches=new Nvtache();
   taches:Tache[];
   tache :Tache;
-
-addForm=this.fb.group({
-  nomTache:['',Validators.required],
-
-  nomChamp:this.fb.array([
-    this.fb.control('')
-  ])
-});
+  addForm: FormGroup;
+  items= new FormArray([]);
 step:any =1;
   aaaa: any;
   nomTache: string;
@@ -55,6 +50,9 @@ step:any =1;
     this.getallprojet()
     this.getAllRegion()
     this.getalltaches()
+    this.addForm = new FormGroup({
+      items: new FormArray([])
+    });
 
   }
   getalltaches(){
@@ -71,6 +69,15 @@ step:any =1;
     this.regionService.getAll().subscribe(data=>this.regions=data);
   }
   save(nomTache:string,nvtaches:Nvtache){
+//console.log(this.addForm.controls..controls[i].controls.name.value)
+    console.log(this.items.value)
+    nvtaches.columnsSuplimentaires=[]
+    for(let item of this.items.controls){
+let col=new colsup();
+      col.name=item.get('name')?.value
+      col.value=item.get('value')?.value
+      nvtaches.columnsSuplimentaires.push(col)
+    }
     nvtaches.projet=this.projett.value
     nvtaches.region = this.regionn.value
     nvtaches.charge=this.charge.value
@@ -95,19 +102,27 @@ step:any =1;
 
   OnSubmit() {
     this.step=this.step+1;
-  }
-  get nomChamp(){
-    return this.addForm.get('nomChamp') as FormArray
-  }
-  addNomChamp(){
-    this.nomChamp.push(this.fb.control(''));
-  }
-  deleteNomChamp(index:number){
-    this.nomChamp.removeAt(index)
-    this.nomChamp.markAsDirty();
+}
+  createItem(c:any): FormGroup {
+    return this.fb.group({
+      value: '',
+      name: c,
+
+    });
   }
 
-  Onprevious() {
+  addItem(c:any): void {
+    this.items = this.addForm.get('items') as FormArray;
+    this.items.push(this.createItem(c));
   }
 
+  getTache(tache:Tache) {
+    this.addForm = new FormGroup({
+      items: new FormArray([])
+    });
+    for(let  t of tache.columnsSuplimentaires.split(',')){
+      this.addItem(t);
+    }
+
+  }
 }

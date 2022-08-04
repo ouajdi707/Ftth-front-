@@ -13,7 +13,7 @@
                   <div class="form-group">
                     <label>Tache:</label>
                     <select [(ngModel)]="tache" name="status" placeholder="select" class="form-select"
-                            [formControl]="tachee">
+                            [formControl]="tachee" (ngModelChange)="getTache(tache)">
                       <option *ngFor="let tache of taches" [ngValue]="tache">{{tache.nom}}</option>
                     </select>
                   </div>
@@ -121,38 +121,24 @@
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <nav class="nav nav-tabs pt-3">
-                <a class="nav-item nav-link active font-weight-bold" href="#p4" data-toggle="tab">Nouvelles Taches</a>
+                <a class="nav-item nav-link active font-weight-bold" href="#p4" data-toggle="tab">Nouvelles Colonnes</a>
               </nav>
             </div>
             <div class="col-md-12 col-sm-12">
               <div class="tab-content table-bordered border-top-0">
                 <div class="tab-pane active p-2" id="p4">
                   <div class="row">
-                    <div formArrayName="nomChamp">
-                      <div *ngFor="let nomchamp of nomChamp.controls; let i=index">
-                        <label for="nomchamp"> Nom champ :</label>
-                        <div class="row g-1">
+                    <div [formGroup]="addForm">
+
+                      <div formArrayName="items" *ngFor="let item of items.controls; let i = index;">
+                        <label for="nomchamp"> {{item.get('name')?.value}} :</label>
+                        <div class="row g-1" [formGroupName]="i">
                           <div class="col-5">
-                            <input class="form-control " id="nomchamp" type="text" formControlName="nomChamp"
-                                   placeholder="entrer le nom ">
-                          </div>
-                          <div class="col-5">
-                            <input class="form-control ps-2" id="nom" type="text" formControlName="nomChamp"
+                            <input class="form-control ps-2" id="value" type="text" formControlName="value"
                                    placeholder="entrer la valeur">
                           </div>
-                          <div class="col-2">
-                            <button (click)="deleteNomChamp(i)" type="button" class="btn-danger rounded-circle  ">
-                              <i class="pi pi-trash p-1 fs-8"></i>
-                            </button>
-                          </div>
+
                         </div>
-                      </div>
-                    </div>
-                    <div class="row pe-5 pt-2">
-                      <div class="col-1 ms-auto">
-                        <button (click)="addNomChamp()" type="button" class="btn  btn-warning rounded-circle ">
-                          <i class="pi pi-plus fs-8"></i>
-                        </button>
                       </div>
                     </div>
                   </div>

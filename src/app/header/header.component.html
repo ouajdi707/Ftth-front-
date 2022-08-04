@@ -194,12 +194,36 @@
                 <ng-template pTemplate="content">
                   <div class="row pt-2">
                     <div class="col-6">
-                      <label for="username1" class="block">Name</label>
+                      <label for="username1" class="block">Nom :</label>
                     </div>
                     <div class="col-6">
                       <input type="text" class="form-control text-black" id="test" aria-describedby="username1-help" pInputText [(ngModel)]="tache.nom"  />
                     </div>
                   </div>
+                  <div >
+                    <div [formGroup]="addForm">
+                    <div formArrayName="items"
+                         *ngFor="let item of items.controls; let i = index;">
+                      <div [formGroupName]="i">
+                        <div class="row pt-2">
+                        <div class="col-6">
+                          <label for="username1" class="block">Nom colonne :</label>
+                        </div>
+                        <div class="col-6">
+                        <input formControlName="value" placeholder="">
+                          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteItem(i)" ></button>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="row">
+                  <div class="pull-right">
+                    <button pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-success btn pull-right " (click)="addItem()" ></button>
+                  </div>
+                  </div>
+
                   <div class="row">
                     <button class="btn btn-success" label="Ajouter" (click)="save(tache)"> Ajouter </button>
                   </div>
