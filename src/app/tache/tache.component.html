@@ -2,7 +2,7 @@
 <p-table [value]="data" [responsive]="true" responsiveLayout="scroll"   >
   <ng-template pTemplate="caption">
     <div class="datatable-header">
-      List  {{nom}}
+      Liste de {{nom}}
     </div>
   </ng-template>
 
@@ -32,11 +32,7 @@
      <th> Commentaire  </th>
      <th> Region  </th>
      <th> Projet  </th>
-
-
    </tr>
-
-
    <tr *ngFor="let d of data">
      <td>{{d.demandeur}}</td>
      <td>{{d.datereception |date}}</td>
@@ -45,8 +41,5 @@
      <td>{{d.commentaire}}</td>
      <td>{{d.region.name}}</td>
      <td>{{d.projet.name}}</td>
-
-
-
    </tr>
  </table>-->

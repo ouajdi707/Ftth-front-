@@ -4,28 +4,11 @@
 <link href="/assets/css/paper-dashboard.min.css?v=2.1.1" rel="stylesheet"/>
 <link href="/assets/demo/demo.css" rel="stylesheet"/>
 
-<div [ngClass]="isAuth ? 'sidebar' : 'sidebarlogout'"  data-color="default" data-active-color="danger">
-  <div class="main-panel">
-    <!--    <div class="main-panel" *ngIf="isAuth">-->
+<div [ngClass]="isAuth ? 'sidebar' : 'sidebarlogout'" data-color="default" data-active-color="danger">
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
-      <div class="container-fluid">
-        <div class="navbar-wrapper">
-          <a class="navbar-brand" href="javascript:;">FTTH</a>
-        </div>
-      </div>
-    </nav>
-  </div>
-
-  <div class="logo" >
-    <a routerLink="/profil" class="simple-text logo-mini">
-      <!--      <div class="logo-image-small">
-              <img src="/assets/img/logo-small.png">
-            </div>-->
-
-    </a>
-    <a routerLink="/home" class="simple-text logo-normal">
+  <div class="logo">
+    <a routerLink="/profil" class="simple-text logo-mini"></a>
+    <a class="simple-text logo-normal">
       SPS
     </a>
   </div>
@@ -46,13 +29,13 @@
         <div class="collapse" id="collapseExample">
           <ul class="nav">
             <li>
-              <a routerLink="/profil">
+              <a>
                 <span class="sidebar-mini-icon">MP</span>
                 <span class="sidebar-normal">Mon Profile</span>
               </a>
             </li>
             <li>
-              <a routerLink="/fichePersonel">
+              <a>
                 <span class="sidebar-mini-icon">MOD</span>
                 <span class="sidebar-normal">Modifier profile</span>
               </a>
@@ -68,53 +51,51 @@
       </div>
     </div>
     <ul class="nav">
-      <li  >
-        <a routerLink="/dashboard" >
+      <li>
+        <a routerLink="/dashboard">
           <i class="nc-icon nc-bank"></i>
           <p>Dashboard</p>
         </a>
       </li>
-      <li   *ngIf="isAdmin()">
-        <a routerLink="/user" >
+      <li *ngIf="isAdmin()">
+        <a routerLink="/user">
           <i class="nc-icon nc-single-02"></i>
           <p>utilisateur</p>
         </a>
       </li>
-      <li    *ngIf="isAdmin()">
-        <a routerLink="/role" >
+      <li *ngIf="isAdmin()">
+        <a routerLink="/role">
           <i class="nc-icon nc-simple-add"></i>
           <p>Role</p>
         </a>
       </li>
-      <li  >
-        <a routerLink="/region" >
+      <li>
+        <a routerLink="/region">
           <i class="nc-icon nc-pin-3"></i>
           <p>Region</p>
         </a>
       </li>
-      <li  >
-        <a routerLink="/projet" >
+      <li>
+        <a routerLink="/projet">
           <i class=" nc-icon nc-bullet-list-67"></i>
           <p>Projet</p>
         </a>
       </li>
-      <li  >
+      <li>
         <a data-toggle="collapse" href="#pagesExamples">
           <i class="nc-icon nc-book-bookmark"></i>
           <p>
             Les taches <b class="caret"></b>
-
           </p>
         </a>
         <div class="collapse " id="pagesExamples">
           <ul class="nav">
             <li>
-              <a routerLink="/gc"   >
+              <a routerLink="/gc">
                 <span class="sidebar-mini-icon">gc</span>
                 <span class="sidebar-normal"> Gc </span>
               </a>
             </li>
-
             <li>
               <a routerLink="/fsc">
                 <span class="sidebar-mini-icon">fsc</span>
@@ -178,7 +159,7 @@
           </ul>
         </div>
       </li>
-      <li  >
+      <li>
         <a data-toggle="collapse" href="#pagesExample">
           <i class="nc-icon nc-book-bookmark"></i>
           <p>
@@ -188,50 +169,54 @@
         <div class="collapse " id="pagesExample">
           <ul class="nav">
             <li>
-              <a  (click)="openNew()"  > Ajouter tache
+              <a (click)="openNew()"> Ajouter tache
               </a>
-              <p-dialog [(visible)]="NewDialog" [style]="{width: '580px', height:530}" header="Ajouter Tache" [modal]="true" styleClass="p-fluid"   >
+              <p-dialog [(visible)]="NewDialog" [style]="{width: '580px', height:530}" header="Ajouter Tache"
+                        [modal]="true" styleClass="p-fluid">
                 <ng-template pTemplate="content">
                   <div class="row pt-2">
                     <div class="col-6">
                       <label for="username1" class="block">Nom :</label>
                     </div>
                     <div class="col-6">
-                      <input type="text" class="form-control text-black" id="test" aria-describedby="username1-help" pInputText [(ngModel)]="tache.nom"  />
+                      <input type="text" class="form-control text-black" id="test" aria-describedby="username1-help"
+                             pInputText [(ngModel)]="tache.nom"/>
                     </div>
                   </div>
-                  <div >
+                  <div>
                     <div [formGroup]="addForm">
-                    <div formArrayName="items"
-                         *ngFor="let item of items.controls; let i = index;">
-                      <div [formGroupName]="i">
-                        <div class="row pt-2">
-                        <div class="col-6">
-                          <label for="username1" class="block">Nom colonne :</label>
-                        </div>
-                        <div class="col-6">
-                        <input formControlName="value" placeholder="">
-                          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteItem(i)" ></button>
-                        </div>
+                      <div formArrayName="items"
+                           *ngFor="let item of items.controls; let i = index;">
+                        <div [formGroupName]="i">
+                          <div class="row pt-2">
+                            <div class="col-6">
+                              <label for="username1" class="block">Nom colonne :</label>
+                            </div>
+                            <div class="col-6">
+                              <input formControlName="value" placeholder="">
+                              &nbsp;<button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                                      (click)="deleteItem(i)"></button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                  <div class="row">
+                    <div>
+                      <button pButton pRipple icon="pi pi-plus"
+                              class="p-button-rounded p-button-success btn pull-right " (click)="addItem()"></button>
+                    </div>
                   </div>
                   <div class="row">
-                  <div class="pull-right">
-                    <button pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-success btn pull-right " (click)="addItem()" ></button>
+                    <button class="btn btn-success" label="Ajouter" (click)="save(tache)"> Ajouter</button>
                   </div>
-                  </div>
-
-                  <div class="row">
-                    <button class="btn btn-success" label="Ajouter" (click)="save(tache)"> Ajouter </button>
-                  </div>
-                </ng-template></p-dialog>
+                </ng-template>
+              </p-dialog>
             </li>
             <ul class="nav">
               <li>
-                <a  routerLink="/ajouter"  > Affecter Tache
+                <a routerLink="/ajouter"> Affecter Tache
                 </a>
               </li>
             </ul>
