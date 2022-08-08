@@ -14,10 +14,10 @@
       </tr>
     </ng-template>
 
-  <ng-template pTemplate="body" let-list >
+  <ng-template pTemplate="body" let-list  >
     <tr>
       <td *ngFor="let col of header">
-        {{list[col.field]}}
+        {{list[col.field] }}
       </td>
     </tr>
   </ng-template>
