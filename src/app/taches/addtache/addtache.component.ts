@@ -10,6 +10,8 @@ import {Projet} from "../../model/Projet";
 import {ProjetService} from "../../services/projet.service";
 import {Tache} from "../../model/Tache";
 import {colsup} from "../../model/colsup";
+import {User} from "../../model/User";
+import {TokenStorageService} from "../../services/token-storage.service";
 
 @Component({
   selector: 'app-addtache',
@@ -22,9 +24,9 @@ export class AddtacheComponent implements OnInit {
   demandeur = new FormControl('', [Validators.required]);
   etat = new FormControl('', [Validators.required]);
   commentaire = new FormControl('', [Validators.required]);
-  charge = new FormControl('', [Validators.required]);
   datereception = new FormControl('', [Validators.required]);
   tachee = new FormControl('', [Validators.required]);
+  usernamee= new FormControl('', [Validators.required]);
 
   title = 'Affecter Tache';
 
@@ -36,14 +38,18 @@ export class AddtacheComponent implements OnInit {
   nvtaches=new Nvtache();
   taches:Tache[];
   tache :Tache;
+  user:User
   addForm: FormGroup;
   items= new FormArray([]);
 step:any =1;
   aaaa: any;
   nomTache: string;
+  username:string;
 
 
-  constructor(private fb:FormBuilder,private toast: ToastrService ,private regionService: RegionService, private projetService:ProjetService,  private nvTacheService:NvtacheService) { }
+  constructor(private fb:FormBuilder,private toast: ToastrService ,private regionService: RegionService,
+              private projetService:ProjetService,  private nvTacheService:NvtacheService,
+  private tokenStorage: TokenStorageService) { }
 
 
   ngOnInit(): void {
@@ -53,6 +59,8 @@ step:any =1;
     this.addForm = new FormGroup({
       items: new FormArray([])
     });
+    
+
 
   }
   getalltaches(){
@@ -68,7 +76,8 @@ step:any =1;
   getAllRegion(){
     this.regionService.getAll().subscribe(data=>this.regions=data);
   }
-  save(nomTache:string,nvtaches:Nvtache){
+
+  save(nomTache:string, username:string,nvtaches:Nvtache,){
 //console.log(this.addForm.controls..controls[i].controls.name.value)
     console.log(this.items.value)
     nvtaches.columnsSuplimentaires=[]
@@ -80,15 +89,19 @@ let col=new colsup();
     }
     nvtaches.projet=this.projett.value
     nvtaches.region = this.regionn.value
-    nvtaches.charge=this.charge.value
     nvtaches.demandeur=this.demandeur.value
     nvtaches.datereception=this.datereception.value
     nvtaches.etat=this.etat.value
     nvtaches.commentaire=this.commentaire.value
     this.tache= this.tachee.value
     nomTache=this.tache.nom
+    nvtaches.username = this.usernamee.value
+    username=this.usernamee.value
 
-    this.nvTacheService.addTache(nomTache,nvtaches).subscribe(res => {
+
+
+
+    this.nvTacheService.addTache(nomTache,username,nvtaches).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
 

@@ -2,12 +2,13 @@ import {Region} from "./Region";
 import {Projet} from "./Projet";
 import {Tache} from "./Tache";
 import {colsup} from "./colsup";
+import {User} from "./User";
 
 export class Nvtache {
  id:number;
  demandeur:string;
  datereception:Date;
- charge:string;
+ username:User;
  commentaire:string;
  etat:string;
  region:Region;

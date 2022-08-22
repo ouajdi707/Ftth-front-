@@ -23,8 +23,8 @@ export class NvtacheService {
   Get_tache_data(nom: string | null){
     return this.httpClient.get<Nvtache[]>("http://localhost:8084/tache/retrieve-by-name/"+nom);
   }
-  addTache(nomTache:string ,data:any){
-    return this.httpClient.post("http://localhost:8084/tache/Add-Tache/"+nomTache,data)
+  addTache(nomTache:string ,username:string ,data:any){
+    return this.httpClient.post("http://localhost:8084/tache/AddTache/"+nomTache+"/"+username,data)
   }
   updateTache(id:number , data:any ){
     return this.httpClient.put("http://localhost:8084/tache/modifytache/"+id,data)

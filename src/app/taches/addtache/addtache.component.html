@@ -28,8 +28,8 @@
                 <div class="col-md-3 col-sm-12">
                   <div class="form-group">
                     <label>Chargé:</label>
-                    <input type="text" class="form-control" placeholder="" [ngModel]="nvtaches.charge"
-                           [formControl]="charge">
+                    <input type="text" class="form-control" placeholder="" [ngModel]="user"
+                           [formControl]="usernamee">
                   </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
@@ -147,7 +147,7 @@
             </div>
           </div>
           <div class="d-flex justify-content-end ms-auto mx-4 ">
-            <button type="button" class="btn  btn-success " (click)="save(nomTache,nvtaches)"> Generer
+            <button type="button" class="btn  btn-success " (click)="save(nomTache,username,nvtaches)"> Generer
             </button>
           </div>
         </form>
