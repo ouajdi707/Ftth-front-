@@ -8,13 +8,14 @@ export class Nvtache {
  id:number;
  demandeur:string;
  datereception:Date;
- username:User;
+ user:User;
  commentaire:string;
  etat:string;
  region:Region;
  projet:Projet;
  nomTache:Tache;
   columnsSuplimentaires:colsup[];
+
 
 
 

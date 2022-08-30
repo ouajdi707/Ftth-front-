@@ -13,7 +13,7 @@ data:any[]=[]
   header =[
     { field: 'demandeur', header: 'Demandeur' },
     { field: 'datereception', header: 'Date de reception'},
-    { field: 'charge', header: 'Chargé' },
+    
     { field: 'commentaire', header: 'Commentaire' },
     { field: 'etat', header: 'Etat' },
     { field: 'region', header: 'Region' },

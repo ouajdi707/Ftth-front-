@@ -59,7 +59,7 @@ step:any =1;
     this.addForm = new FormGroup({
       items: new FormArray([])
     });
-    
+
 
 
   }
@@ -95,13 +95,14 @@ let col=new colsup();
     nvtaches.commentaire=this.commentaire.value
     this.tache= this.tachee.value
     nomTache=this.tache.nom
-    nvtaches.username = this.usernamee.value
+    nvtaches.user = this.usernamee.value
     username=this.usernamee.value
+nvtaches.user=new User()
+    nvtaches.user=this.tokenStorage.getUser();
 
+console.log(nvtaches)
 
-
-
-    this.nvTacheService.addTache(nomTache,username,nvtaches).subscribe(res => {
+    this.nvTacheService.addTache(nomTache,nvtaches.user.id,nvtaches).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
 
