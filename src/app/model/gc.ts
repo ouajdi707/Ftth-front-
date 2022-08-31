@@ -1,5 +1,6 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
+import {User} from "./User";
 
 export class Gc{
   id:number
@@ -8,7 +9,7 @@ export class Gc{
   nbrpoteaux:number;
   reel:number;
   action:string;
-  charge:string;
+  user:User;
   datereception:Date;
   etat:string;
   region:Region;

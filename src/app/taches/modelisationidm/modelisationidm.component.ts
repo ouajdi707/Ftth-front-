@@ -9,6 +9,8 @@ import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../model/Creationsadirah";
 import {Projet} from "../../model/Projet";
 import {ProjetService} from "../../services/projet.service";
+import {TokenStorageService} from "../../services/token-storage.service";
+import {User} from "../../model/User";
 
 @Component({
   selector: 'app-modelisationidm',
@@ -26,13 +28,14 @@ export class ModelisationidmComponent implements OnInit {
   idms = new Modelisatioidm()
   NewDialog: boolean;
   fileName = 'ExcelSheet.xlsx';
+  username:any
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 
   constructor(private toast: ToastrService, private regionService: RegionService,
               private modelisationidmService:ModelisationidmService,
-              private projetService:ProjetService ,) { }
+              private projetService:ProjetService , private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.getallprojet()
@@ -112,10 +115,12 @@ export class ModelisationidmComponent implements OnInit {
 
   }
 
-  save(idms: Modelisatioidm) {
+  save(idms: Modelisatioidm,username:string) {
     idms.projet=this.projet
     idms.region=this.region
-    this.modelisationidmService.addModelisationidm(idms).subscribe(res => {
+    idms.user=new User()
+    idms.user=this.tokenStorage.getUser();
+    this.modelisationidmService.addModelisationidm(idms,idms.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
         this.NewDialog = false
@@ -140,8 +145,8 @@ export class ModelisationidmComponent implements OnInit {
 
 
   }
-  Onduplicate(list: Modelisatioidm) {
-    this.modelisationidmService.addModelisationidm(list).subscribe(res => {
+  Onduplicate(list: Modelisatioidm,username:number) {
+    this.modelisationidmService.addModelisationidm(list,username).subscribe(res => {
         this.modelisationidm.push({...list});
         this.toast.success("done")
 

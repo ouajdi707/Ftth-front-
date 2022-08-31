@@ -1,5 +1,6 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
+import {User} from "./User";
 
 export class Modelisationpbo{
   id:number;
@@ -12,7 +13,7 @@ export class Modelisationpbo{
   tache:string;
   etat:string;
   audit:string;
-  charge:string;
+  user:User;
   commentaire:string;
   emprise:string;
   region:Region;

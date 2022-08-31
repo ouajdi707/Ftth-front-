@@ -39,7 +39,9 @@ const routes: Routes = [
   {path:'regie',component:RegieComponent},
   {path:'vtl',component:VtlComponent},
   {path:'trame',component:TrameComponent},
-  {path:'user',component:UserComponent},
+  {path:'user',component:UserComponent,data:{
+  role:['ROLE_ADMIN']
+}},
   {path:'role',component:RoleComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},

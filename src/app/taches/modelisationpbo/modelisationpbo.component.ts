@@ -9,6 +9,8 @@ import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../model/Creationsadirah";
 import {Projet} from "../../model/Projet";
 import {ProjetService} from "../../services/projet.service";
+import {TokenStorageService} from "../../services/token-storage.service";
+import {User} from "../../model/User";
 
 @Component({
   selector: 'app-modelisationpbo',
@@ -26,11 +28,12 @@ export class ModelisationpboComponent implements OnInit {
   modes = new Modelisationpbo()
   NewDialog: boolean;
   fileName = 'ExcelSheet.xlsx';
+  username:any
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 
-  constructor(private toast: ToastrService, private regionService: RegionService,private modelisationpboService:ModelisationpboService,private projetService:ProjetService) { }
+  constructor(private toast: ToastrService, private regionService: RegionService,private modelisationpboService:ModelisationpboService,private projetService:ProjetService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.getallprojet()
@@ -118,10 +121,12 @@ export class ModelisationpboComponent implements OnInit {
 
   }
 
-  save(modes: Modelisationpbo) {
+  save(modes: Modelisationpbo,username:string) {
     modes.projet=this.projet
     modes.region=this.region
-    this.modelisationpboService.addModelisationpbo(modes).subscribe(res => {
+    modes.user=new User()
+    modes.user=this.tokenStorage.getUser();
+    this.modelisationpboService.addModelisationpbo(modes,modes.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
         this.NewDialog = false
@@ -138,8 +143,8 @@ export class ModelisationpboComponent implements OnInit {
 
 
   }
-  Onduplicate(list: Modelisationpbo) {
-    this.modelisationpboService.addModelisationpbo(list).subscribe(res => {
+  Onduplicate(list: Modelisationpbo,username:number) {
+    this.modelisationpboService.addModelisationpbo(list,username).subscribe(res => {
         this.modelisationpbo.push({...list});
         this.toast.success("done")
 

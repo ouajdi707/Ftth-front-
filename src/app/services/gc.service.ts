@@ -14,8 +14,8 @@ export class GcService {
   Get_Gc(){
     return this.httpClient.get<Gc[]>("http://localhost:8084/Gc/retrieve-all-gc");
   }
-  Add_Gc(data:any){
-    return this.httpClient.post("http://localhost:8084/Gc/Add-gc",data)
+  Add_Gc(data:any,username:number){
+    return this.httpClient.post("http://localhost:8084/Gc/Add-gc/"+username,data)
   }
   update_Gc(id:number , data:any ){
     return this.httpClient.put("http://localhost:8084/Gc/modifygc/"+id,data)

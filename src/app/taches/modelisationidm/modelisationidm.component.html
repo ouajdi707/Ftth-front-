@@ -57,7 +57,7 @@
               <label for="username1" class="block">Chargé</label>
             </div>
             <div class="col-6">
-              <input  type="text" class="form-control text-black" aria-describedby="username1-help" pInputText [(ngModel)]="idms.charge" />
+              <input  type="text" class="form-control text-black" aria-describedby="username1-help" pInputText  />
             </div>
           </div>
           <div class="row pt-2">
@@ -141,7 +141,7 @@
             </div>
           </div>
           <div class="row">
-            <button class="btn btn-success" label="Ajouter" (click)="save(idms)"> Ajouter </button>
+            <button class="btn btn-success" label="Ajouter" (click)="save(idms,username)"> Ajouter </button>
           </div>
         </ng-template></p-dialog>
 
@@ -263,7 +263,7 @@
             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="openDialog(list)"></button>
             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="Ondeletegc(list.id)"></button>
             &nbsp;
-            <button  pButton pRipple icon="pi pi-bookmark" class="p-button-rounded " (click)="Onduplicate(list)"></button>
+            <button  pButton pRipple icon="pi pi-bookmark" class="p-button-rounded " (click)="Onduplicate(list,username)"></button>
 
             <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Modelisation idm Details" [modal]="true" styleClass="p-fluid"   >
               <ng-template pTemplate="content">
@@ -328,7 +328,7 @@
                     <label for="username1" class="block">Chargé</label>
                   </div>
                   <div class="col-6">
-                    <input class="form-control text-black" id="username1588" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="idms.charge" />
+                    <input class="form-control text-black" id="username1588" type="text" aria-describedby="username1-help" pInputText  />
                   </div>
                 </div>
                 <div class="row pt-2">

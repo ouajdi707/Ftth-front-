@@ -8,6 +8,8 @@ import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
 import {Projet} from "../../model/Projet";
 import {ProjetService} from "../../services/projet.service";
+import {TokenStorageService} from "../../services/token-storage.service";
+import {User} from "../../model/User";
 
 @Component({
   selector: 'app-creationsadirah',
@@ -25,6 +27,7 @@ export class CreationsadirahComponent implements OnInit {
   creationsadirahs= new Creationsadirah()
   NewDialog:boolean;
   fileName = 'ExcelSheet.xlsx';
+  username:any
 
 
 
@@ -32,7 +35,7 @@ export class CreationsadirahComponent implements OnInit {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 
-  constructor( private projetService:ProjetService ,private toast: ToastrService,private regionService: RegionService , private creationsadirahservice:CreationsadirahService) { }
+  constructor( private projetService:ProjetService ,private toast: ToastrService,private regionService: RegionService , private creationsadirahservice:CreationsadirahService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.getallprojet()
@@ -121,10 +124,12 @@ export class CreationsadirahComponent implements OnInit {
 
   }
 
-  save(creationsadirahs: Creationsadirah) {
+  save(creationsadirahs: Creationsadirah,username:String) {
     creationsadirahs.projet=this.projet
     creationsadirahs.region=this.region
-    this.creationsadirahservice.addCreationsadirah(creationsadirahs).subscribe(res => {
+    creationsadirahs.user=new User()
+    creationsadirahs.user=this.tokenStorage.getUser();
+    this.creationsadirahservice.addCreationsadirah(creationsadirahs,creationsadirahs.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
         this.NewDialog = false
@@ -138,8 +143,8 @@ export class CreationsadirahComponent implements OnInit {
     this.NewDialog = true;
   }
 
-  Onduplicate(list: Creationsadirah) {
-    this.creationsadirahservice.addCreationsadirah(list).subscribe(res => {
+  Onduplicate(list: Creationsadirah,username:number) {
+    this.creationsadirahservice.addCreationsadirah(list,username).subscribe(res => {
         this.creationsadirah.push({...list});
         this.toast.success("done")
 

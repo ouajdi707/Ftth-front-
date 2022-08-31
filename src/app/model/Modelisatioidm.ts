@@ -1,5 +1,6 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
+import {User} from "./User";
 
 export class Modelisatioidm{
   id:number;
@@ -13,7 +14,7 @@ export class Modelisatioidm{
   pbo:string;
   bal:number;
   audit:string;
-  charge:string;
+  user:User;
   commentaire:string;
   etat:string;
   commune:string;

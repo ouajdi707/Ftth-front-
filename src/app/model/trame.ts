@@ -1,5 +1,6 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
+import {User} from "./User";
 
 export class Trame{
   id:number;
@@ -13,7 +14,7 @@ export class Trame{
   codepostal:number;
   ville:string;
   insee:number;
-  charge:string;
+  user:User;
   commentaire:string;
   region:Region;
   projet:Projet;

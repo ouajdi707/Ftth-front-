@@ -9,6 +9,8 @@ import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../model/Creationsadirah";
 import {Projet} from "../../model/Projet";
 import {ProjetService} from "../../services/projet.service";
+import {TokenStorageService} from "../../services/token-storage.service";
+import {User} from "../../model/User";
 
 @Component({
   selector: 'app-vtl',
@@ -26,10 +28,11 @@ export class VtlComponent implements OnInit {
   vtls = new Vtl()
   NewDialog: boolean;
   fileName = 'ExcelSheet.xlsx';
+  username:any
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
-  constructor(  private projetService:ProjetService,private toast: ToastrService, private regionService: RegionService, private vtlService:VtlService) { }
+  constructor(  private projetService:ProjetService,private toast: ToastrService, private regionService: RegionService, private vtlService:VtlService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.getallprojet()
@@ -105,10 +108,12 @@ export class VtlComponent implements OnInit {
       error => this.toast.error('some things wrong'))
   }
 
-  save(vtls: Vtl) {
+  save(vtls: Vtl,username:string) {
     vtls.projet=this.projet
     vtls.region=this.region
-    this.vtlService.addVtl(vtls).subscribe(res => {
+    vtls.user=new User()
+    vtls.user=this.tokenStorage.getUser();
+    this.vtlService.addVtl(vtls,vtls.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
         this.NewDialog = false
@@ -131,8 +136,8 @@ export class VtlComponent implements OnInit {
 
 
   }
-  Onduplicate(list: Vtl) {
-    this.vtlService.addVtl(list).subscribe(res => {
+  Onduplicate(list: Vtl,username:number) {
+    this.vtlService.addVtl(list,username).subscribe(res => {
         this.vtl.push({...list});
         this.toast.success("done")
 

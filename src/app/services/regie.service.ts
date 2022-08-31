@@ -12,8 +12,8 @@ export class RegieService {
   getregie() {
     return this.httpClient.get<Regie[]>("http://localhost:8084/Regie/retrieve-all-regie");
   }
-  addregie(data: any) {
-    return this.httpClient.post("http://localhost:8084/Regie/Add-regie", data)
+  addregie(data: any,username:number) {
+    return this.httpClient.post("http://localhost:8084/Regie/Add-regie/"+username, data)
   }
   updateregie(id: number, data: any) {
     return this.httpClient.put("http://localhost:8084/Regie/modifyregie/" + id, data)

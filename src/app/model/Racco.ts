@@ -1,5 +1,6 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
+import {User} from "./User";
 
 export class Racco{
   id:number;
@@ -13,7 +14,7 @@ export class Racco{
   pbo:string;
   distance:number;
   commentaire:string;
-  charge:string;
+  user:User;
   majnetworks:string;
   majsadirah:string;
   ancienpm:string;

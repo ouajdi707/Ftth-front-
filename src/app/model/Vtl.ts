@@ -1,5 +1,6 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
+import {User} from "./User";
 
 export class Vtl{
   id:number;
@@ -13,7 +14,7 @@ export class Vtl{
   pds:string;
   doe:string;
   etatsite:string;
-  charge:string;
+  user:User;
   commentaire:string;
   region:Region;
   projet:Projet;

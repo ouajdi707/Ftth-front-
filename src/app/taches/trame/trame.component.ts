@@ -9,6 +9,8 @@ import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../model/Creationsadirah";
 import {Projet} from "../../model/Projet";
 import {ProjetService} from "../../services/projet.service";
+import {TokenStorageService} from "../../services/token-storage.service";
+import {User} from "../../model/User";
 
 @Component({
   selector: 'app-trame',
@@ -26,11 +28,12 @@ export class TrameComponent implements OnInit {
   trames = new Trame()
   NewDialog: boolean;
   fileName = 'ExcelSheet.xlsx';
+  username:any
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 
-  constructor(  private projetService:ProjetService ,private toast: ToastrService, private regionService: RegionService, private trameService : TrameService) { }
+  constructor(  private projetService:ProjetService ,private toast: ToastrService, private regionService: RegionService, private trameService : TrameService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.getallprojet()
@@ -59,11 +62,13 @@ export class TrameComponent implements OnInit {
 
   }
 
-  save(trames: Trame) {
+  save(trames: Trame,username:String) {
     trames.projet=this.projet
 
     trames.region=this.region
-    this.trameService.addtrame(trames).subscribe(res => {
+    trames.user=new User()
+    trames.user=this.tokenStorage.getUser();
+    this.trameService.addtrame(trames,trames.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
         this.NewDialog = false
@@ -134,8 +139,8 @@ export class TrameComponent implements OnInit {
       error => this.toast.error('some things wrong'))
 
   }
-  Onduplicate(list: Trame) {
-    this.trameService.addtrame(list).subscribe(res => {
+  Onduplicate(list: Trame,username:number) {
+    this.trameService.addtrame(list,username).subscribe(res => {
         this.trame.push({...list});
         this.toast.success("done")
 

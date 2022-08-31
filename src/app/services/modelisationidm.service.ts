@@ -11,8 +11,8 @@ export class ModelisationidmService {
   getModelisationidm() {
     return this.httpClient.get<Modelisatioidm[]>("http://localhost:8084/Modelisationidm/retrieve-all-modelisationidm");
   }
-  addModelisationidm(data: any) {
-    return this.httpClient.post("http://localhost:8084/Modelisationidm/Add-modelisationidm", data)
+  addModelisationidm(data: any,username:number) {
+    return this.httpClient.post("http://localhost:8084/Modelisationidm/Add-modelisationidm/"+username, data)
   }
   updateModelisationidm(id: number, data: any) {
     return this.httpClient.put("http://localhost:8084/Modelisationidm/modifymodelisationidm/" + id, data)

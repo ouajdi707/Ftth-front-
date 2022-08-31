@@ -12,8 +12,8 @@ export class FscService {
   Get_Fsc():Observable<any>{
     return this.httpClient.get("http://localhost:8084/fsc/retrieve-all-fsc");
   }
-  Add_Fsc(data:any){
-    return this.httpClient.post("http://localhost:8084/fsc/Add-fsc",data)
+  Add_Fsc(data:any,username:number){
+    return this.httpClient.post("http://localhost:8084/fsc/Add-fsc/"+username,data)
   }
   update_Fsc(id:number , data:any ){
     return this.httpClient.put("http://localhost:8084/fsc/modifyfsc/"+id,data)

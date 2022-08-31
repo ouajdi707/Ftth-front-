@@ -9,6 +9,8 @@ import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../model/Creationsadirah";
 import {ProjetService} from "../../services/projet.service";
 import {Projet} from "../../model/Projet";
+import {TokenStorageService} from "../../services/token-storage.service";
+import {User} from "../../model/User";
 
 @Component({
   selector: 'app-racco',
@@ -26,11 +28,12 @@ export class RaccoComponent implements OnInit {
   raccos = new Racco()
   NewDialog: boolean;
   fileName = 'ExcelSheet.xlsx';
+  username:any
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 
-  constructor( private projetService:ProjetService ,private toast: ToastrService, private regionService: RegionService,private raccoService:RaccoService) { }
+  constructor( private projetService:ProjetService ,private toast: ToastrService, private regionService: RegionService,private raccoService:RaccoService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.getAllRacco()
@@ -111,11 +114,13 @@ getAllRacco(){
     })
   }
 
-  save(raccos: Racco) {
+  save(raccos: Racco,username:String) {
     raccos.projet=this.projet
 
     raccos.region=this.region
-    this.raccoService.addracco(raccos).subscribe(res => {
+    raccos.user=new User()
+    raccos.user=this.tokenStorage.getUser();
+    this.raccoService.addracco(raccos,raccos.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
         this.NewDialog = false
@@ -137,8 +142,8 @@ getAllRacco(){
     XLSX.writeFile(wb, this.fileName);
 
   }
-  Onduplicate(list: Racco) {
-    this.raccoService.addracco(list).subscribe(res => {
+  Onduplicate(list: Racco,username:number) {
+    this.raccoService.addracco(list,username).subscribe(res => {
         this.racco.push({...list});
         this.toast.success("done")
 

@@ -11,6 +11,8 @@ import {Creationsadirah} from "../../../model/Creationsadirah";
 import {Projet} from "../../../model/Projet";
 import {ProjetService} from "../../../services/projet.service";
 import {Router} from "@angular/router";
+import {TokenStorageService} from "../../../services/token-storage.service";
+import {User} from "../../../model/User";
 
 
 @Component({
@@ -28,6 +30,7 @@ export class GcdisplayComponent implements OnInit {
   productDialog: boolean;
   submitted: boolean;
   gcs = new Gc();
+  username:any
 
 
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
@@ -37,7 +40,7 @@ export class GcdisplayComponent implements OnInit {
 
   constructor(private toast: ToastrService,
               private gcService: GcService, private regionService: RegionService,  private primengConfig: PrimeNGConfig,
-  private projetService:ProjetService ,private route:Router) {
+  private projetService:ProjetService ,private route:Router, private tokenStorage: TokenStorageService) {
   }
 
   ngOnInit(): void {
@@ -128,10 +131,12 @@ this.regionService.getAll().subscribe(data=>this.regions=data);
 
   }
 
-  save(gcs: Gc) {
+  save(gcs: Gc,username:String) {
     gcs.projet=this.projet
     gcs.region = this.region
-    this.gcService.Add_Gc(gcs).subscribe(res => {
+    gcs.user=new User()
+    gcs.user=this.tokenStorage.getUser();
+    this.gcService.Add_Gc(gcs ,gcs.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
         this.NewDialog = false
@@ -153,8 +158,8 @@ this.regionService.getAll().subscribe(data=>this.regions=data);
     XLSX.writeFile(wb, this.fileName);
 
   }
-  Onduplicate(list: Gc) {
-    this.gcService.Add_Gc(list).subscribe(res => {
+  Onduplicate(list: Gc,username:number) {
+    this.gcService.Add_Gc(list,username).subscribe(res => {
         this.gc.push({...list});
         this.toast.success("done")
 

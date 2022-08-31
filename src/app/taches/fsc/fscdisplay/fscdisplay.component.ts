@@ -10,6 +10,8 @@ import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../../model/Creationsadirah";
 import {Projet} from "../../../model/Projet";
 import {ProjetService} from "../../../services/projet.service";
+import {TokenStorageService} from "../../../services/token-storage.service";
+import {User} from "../../../model/User";
 
 @Component({
   selector: 'app-fscdisplay',
@@ -18,7 +20,7 @@ import {ProjetService} from "../../../services/projet.service";
 })
 export class FscdisplayComponent implements OnInit {
 
-  constructor( private projetService:ProjetService , private fscService:FscService ,router:Router ,private toast: ToastrService, private regionService: RegionService) { }
+  constructor( private projetService:ProjetService , private tokenStorage: TokenStorageService, private fscService:FscService ,router:Router ,private toast: ToastrService, private regionService: RegionService) { }
   projets:Projet[];
   projet =new Projet();
   regions:Region[]
@@ -27,6 +29,7 @@ export class FscdisplayComponent implements OnInit {
   productDialog: boolean;
   fscs=new Fsc()
   NewDialog:boolean;
+  username:any
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
@@ -60,10 +63,12 @@ export class FscdisplayComponent implements OnInit {
     this.NewDialog = true;
   }
 
-  save(fscs: Fsc) {
+  save(fscs: Fsc,username:String) {
     fscs.projet=this.projet
     fscs.region = this.region
-    this.fscService.Add_Fsc(fscs).subscribe(res => {
+    fscs.user=new User()
+    fscs.user=this.tokenStorage.getUser();
+    this.fscService.Add_Fsc(fscs,fscs.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
         this.NewDialog = false
@@ -140,8 +145,8 @@ export class FscdisplayComponent implements OnInit {
   getAllRegion(){
     this.regionService.getAll().subscribe(data=>this.regions=data);
   }
-  Onduplicate(list: Fsc) {
-    this.fscService.Add_Fsc(list).subscribe(res => {
+  Onduplicate(list: Fsc,username:number) {
+    this.fscService.Add_Fsc(list,username).subscribe(res => {
         this.fsc.push({...list});
         this.toast.success("done")
 

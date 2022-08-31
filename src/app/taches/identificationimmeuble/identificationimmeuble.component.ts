@@ -9,6 +9,8 @@ import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../model/Creationsadirah";
 import {Projet} from "../../model/Projet";
 import {ProjetService} from "../../services/projet.service";
+import {TokenStorageService} from "../../services/token-storage.service";
+import {User} from "../../model/User";
 
 @Component({
   selector: 'app-identificationimmeuble',
@@ -26,13 +28,14 @@ export class IdentificationimmeubleComponent implements OnInit {
   idms = new Identificationimmeuble()
   NewDialog: boolean;
   fileName = 'ExcelSheet.xlsx';
+  username:any
 
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 
   constructor(private toast: ToastrService, private regionService: RegionService,
-              private identificationimmeubleService: IdentificationimmeubleService,private projetService:ProjetService) {
+              private identificationimmeubleService: IdentificationimmeubleService,private projetService:ProjetService, private tokenStorage: TokenStorageService) {
   }
 
   ngOnInit(): void {
@@ -64,10 +67,12 @@ export class IdentificationimmeubleComponent implements OnInit {
   getAllRegion() {
     this.regionService.getAll().subscribe(data => this.regions = data);
   }
-  save(idms: Identificationimmeuble) {
+  save(idms: Identificationimmeuble,username:string) {
     idms.projet=this.projet
     idms.region=this.region
-    this.identificationimmeubleService.addIdentificationimmeuble(idms).subscribe(res => {
+    idms.user=new User()
+    idms.user=this.tokenStorage.getUser();
+    this.identificationimmeubleService.addIdentificationimmeuble(idms,idms.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
         this.NewDialog = false
@@ -140,8 +145,8 @@ export class IdentificationimmeubleComponent implements OnInit {
       error => this.toast.error('some things wrong'))
 
   }
-  Onduplicate(list: Identificationimmeuble) {
-    this.identificationimmeubleService.addIdentificationimmeuble(list).subscribe(res => {
+  Onduplicate(list: Identificationimmeuble,username:number) {
+    this.identificationimmeubleService.addIdentificationimmeuble(list,username).subscribe(res => {
         this.identificationimmeuble.push({...list});
         this.toast.success("done")
 

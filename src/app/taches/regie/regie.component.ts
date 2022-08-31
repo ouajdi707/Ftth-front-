@@ -9,6 +9,8 @@ import * as XLSX from "xlsx";
 import {Creationsadirah} from "../../model/Creationsadirah";
 import {Projet} from "../../model/Projet";
 import {ProjetService} from "../../services/projet.service";
+import {TokenStorageService} from "../../services/token-storage.service";
+import {User} from "../../model/User";
 
 @Component({
   selector: 'app-regie',
@@ -26,11 +28,12 @@ export class RegieComponent implements OnInit {
   regies = new Regie()
   NewDialog: boolean;
   fileName = 'ExcelSheet.xlsx';
+  username:any
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 
-  constructor( private projetService:ProjetService ,private toast: ToastrService, private regionService: RegionService, private regieService:RegieService) { }
+  constructor( private projetService:ProjetService ,private toast: ToastrService, private regionService: RegionService, private regieService:RegieService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.getallprojet()
@@ -119,11 +122,12 @@ getAllRegie(){
 
   }
 
-  save(regies: Regie) {
+  save(regies: Regie,username:String) {
     regies.projet=this.projet
-
     regies.region=this.region
-    this.regieService.addregie(regies).subscribe(res => {
+    regies.user=new User()
+    regies.user=this.tokenStorage.getUser();
+    this.regieService.addregie(regies,regies.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
         this.NewDialog = false
@@ -138,8 +142,8 @@ getAllRegie(){
     this.NewDialog = true;
 
   }
-  Onduplicate(list: Regie) {
-    this.regieService.addregie(list).subscribe(res => {
+  Onduplicate(list: Regie,username:number) {
+    this.regieService.addregie(list ,username).subscribe(res => {
         this.regie.push({...list});
         this.toast.success("done")
 

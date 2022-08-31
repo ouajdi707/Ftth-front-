@@ -14,8 +14,8 @@ export class CreationidmService {
   getCreationidm() {
     return this.httpClient.get<Creationidm[]>("http://localhost:8084/creationidm/retrieve-all-creationidm");
   }
-  addCreationidm(data: any) {
-    return this.httpClient.post("http://localhost:8084/creationidm/Add-creationidm", data)
+  addCreationidm(data: any,username:number) {
+    return this.httpClient.post("http://localhost:8084/creationidm/Add-creationidm/"+username, data)
   }
   updateCreationidm(id: number, data: any) {
     return this.httpClient.put("http://localhost:8084/creationidm/modifycreationidm/" + id, data)

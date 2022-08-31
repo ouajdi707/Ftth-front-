@@ -13,8 +13,8 @@ export class IdentificationimmeubleService {
   getIdentificationimmeuble()  {
     return this.httpClient.get<Identificationimmeuble[]>("http://localhost:8084/Identificationimmeuble/retrieve-all-identificationimmeuble");
   }
-  addIdentificationimmeuble(data: any):Observable<Identificationimmeuble> {
-    return this.httpClient.post<Identificationimmeuble>("http://localhost:8084/Identificationimmeuble/Add-identificationimmeuble", data)
+  addIdentificationimmeuble(data: any,username:number):Observable<Identificationimmeuble> {
+    return this.httpClient.post<Identificationimmeuble>("http://localhost:8084/Identificationimmeuble/Add-identificationimmeuble/"+username, data)
   }
 
   updateIdentificationimmeuble(id: number, data: any) {

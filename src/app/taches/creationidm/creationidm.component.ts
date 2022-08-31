@@ -8,6 +8,8 @@ import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
 import {ProjetService} from "../../services/projet.service";
 import {Projet} from "../../model/Projet";
+import {User} from "../../model/User";
+import {TokenStorageService} from "../../services/token-storage.service";
 
 
 @Component({
@@ -26,10 +28,11 @@ export class CreationidmComponent implements OnInit {
   creationidms= new Creationidm()
   NewDialog:boolean;
   fileName = 'ExcelSheet.xlsx';
+  username:any;
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
-  constructor( private projetService:ProjetService ,private toast: ToastrService,private regionService: RegionService , private creationidmService:CreationidmService) { }
+  constructor( private projetService:ProjetService ,  private tokenStorage: TokenStorageService,private toast: ToastrService,private regionService: RegionService , private creationidmService:CreationidmService) { }
   ngOnInit(): void {
     this.getCreationidm()
     this.getAllRegion()
@@ -61,10 +64,12 @@ export class CreationidmComponent implements OnInit {
     this.creationidms =new Creationidm();
     this.NewDialog = true;
   }
-  save(creationidms:Creationidm) {
+  save(creationidms:Creationidm,username:String) {
     creationidms.projet=this.projet
     creationidms.region=this.region
-    this.creationidmService.addCreationidm(creationidms).subscribe(res => {
+    creationidms.user=new User()
+    creationidms.user=this.tokenStorage.getUser();
+    this.creationidmService.addCreationidm(creationidms,creationidms.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
         this.NewDialog = false
@@ -129,9 +134,9 @@ export class CreationidmComponent implements OnInit {
   }
 
 
-  Onduplicate(list:Creationidm ) {
+  Onduplicate(list:Creationidm,username:number ) {
 
-    this.creationidmService.addCreationidm(list).subscribe(res => {
+    this.creationidmService.addCreationidm(list,username).subscribe(res => {
         this.creationidm.push({...list});
         this.toast.success("done")
 

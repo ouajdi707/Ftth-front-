@@ -11,8 +11,8 @@ export class TrameService {
   gettrame() {
     return this.httpCLient.get<Trame[]>("http://localhost:8084/Trame/retrieve-all-trame");
   }
-  addtrame(data: any) {
-    return this.httpCLient.post("http://localhost:8084/Trame/Add-trame", data)
+  addtrame(data: any,username:number) {
+    return this.httpCLient.post("http://localhost:8084/Trame/Add-trame/"+username, data)
   }
   updatetrame(id: number, data: any) {
     return this.httpCLient.put("http://localhost:8084/Trame/modifytrame/" + id, data)

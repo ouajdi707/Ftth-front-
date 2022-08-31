@@ -12,8 +12,8 @@ export class RaccoService {
   getracco() {
     return this.httpClient.get<Racco[]>("http://localhost:8084/Racco/retrieve-all-racco");
   }
-  addracco(data: any) {
-    return this.httpClient.post("http://localhost:8084/Racco/Add-racco", data)
+  addracco(data: any,username:number) {
+    return this.httpClient.post("http://localhost:8084/Racco/Add-racco/"+username, data)
   }
   updateracco(id: number, data: any) {
     return this.httpClient.put("http://localhost:8084/Racco/modifyracco/" + id, data)
