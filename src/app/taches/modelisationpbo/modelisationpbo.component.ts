@@ -18,6 +18,7 @@ import {User} from "../../model/User";
   styleUrls: ['./modelisationpbo.component.css']
 })
 export class ModelisationpboComponent implements OnInit {
+  user:User;
   projets:Projet[];
   projet =new Projet();
   regions: Region[]
@@ -39,6 +40,7 @@ export class ModelisationpboComponent implements OnInit {
     this.getallprojet()
     this.getmodelisationpbo()
     this.getAllRegion()
+    this.getName()
   }
   getallprojet(){
     this.projetService.getAll().subscribe(res=>{
@@ -126,6 +128,7 @@ export class ModelisationpboComponent implements OnInit {
     modes.region=this.region
     modes.user=new User()
     modes.user=this.tokenStorage.getUser();
+    modes.nom=this.user.username
     this.modelisationpboService.addModelisationpbo(modes,modes.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
@@ -151,6 +154,10 @@ export class ModelisationpboComponent implements OnInit {
       },
       error => this.toast.error('some things wrong')
     )
+
+  }
+  getName (){
+    this.user = this.tokenStorage.getUser();
 
   }
 

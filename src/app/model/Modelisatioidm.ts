@@ -20,4 +20,6 @@ export class Modelisatioidm{
   commune:string;
   region:Region;
   projet:Projet;
+  nom:string;
+
 }

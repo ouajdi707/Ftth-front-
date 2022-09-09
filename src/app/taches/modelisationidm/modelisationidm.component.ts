@@ -18,6 +18,7 @@ import {User} from "../../model/User";
   styleUrls: ['./modelisationidm.component.css']
 })
 export class ModelisationidmComponent implements OnInit {
+  user:User
   projets:Projet[];
   projet =new Projet();
   regions: Region[]
@@ -41,6 +42,7 @@ export class ModelisationidmComponent implements OnInit {
     this.getallprojet()
     this.getmodelisationidm()
     this.getAllRegion()
+    this.getName()
   }
   getallprojet(){
     this.projetService.getAll().subscribe(res=>{
@@ -120,6 +122,7 @@ export class ModelisationidmComponent implements OnInit {
     idms.region=this.region
     idms.user=new User()
     idms.user=this.tokenStorage.getUser();
+    idms.nom=this.user.username
     this.modelisationidmService.addModelisationidm(idms,idms.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
@@ -153,6 +156,10 @@ export class ModelisationidmComponent implements OnInit {
       },
       error => this.toast.error('some things wrong')
     )
+
+  }
+  getName (){
+    this.user = this.tokenStorage.getUser();
 
   }
 }

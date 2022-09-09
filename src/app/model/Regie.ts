@@ -17,4 +17,6 @@ export class Regie{
   commentaire:string;
   region:Region;
   projet:Projet;
+  nom:string;
+
 }

@@ -13,4 +13,6 @@ export class Identificationimmeuble{
   commentaire:string;
   region:Region;
   projet:Projet;
+  nom:string;
+
 }

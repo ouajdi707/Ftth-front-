@@ -18,4 +18,5 @@ export class Vtl{
   commentaire:string;
   region:Region;
   projet:Projet;
+  nomcharge:string;
 }

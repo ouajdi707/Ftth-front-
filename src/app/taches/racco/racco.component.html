@@ -41,7 +41,7 @@
               <label for="username1" class="block">Chargé</label>
             </div>
             <div class="col-6">
-              <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText  />
+              <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText value="{{user.username}}" />
             </div>
           </div>
           <div class="row pt-2">
@@ -273,7 +273,7 @@
           <td> {{list.datereception | date:'dd/MM/YYYY' }}</td>
           <td> {{list.refpav}}</td>
           <td> {{list.idra}}</td>
-          <td> {{list.charge}}</td>
+          <td> {{list.nom}}</td>
           <td> {{list.nblgts}}</td>
           <td> {{list.pbo}}</td>
           <td> {{list.idimmeuble}}</td>

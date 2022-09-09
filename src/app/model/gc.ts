@@ -15,4 +15,5 @@ export class Gc{
   region:Region;
   commentaire:string;
   projet:Projet;
+  nom:string;
 }

@@ -18,6 +18,7 @@ import {User} from "../../model/User";
   styleUrls: ['./regie.component.css']
 })
 export class RegieComponent implements OnInit {
+  user:User
   projets:Projet[];
   projet =new Projet();
   regions: Region[]
@@ -39,6 +40,7 @@ export class RegieComponent implements OnInit {
     this.getallprojet()
     this.getAllRegie()
     this.getAllRegion()
+    this.getName()
   }
   getallprojet(){
     this.projetService.getAll().subscribe(res=>{
@@ -127,6 +129,7 @@ getAllRegie(){
     regies.region=this.region
     regies.user=new User()
     regies.user=this.tokenStorage.getUser();
+    regies.nom=this.user.username
     this.regieService.addregie(regies,regies.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
@@ -150,6 +153,10 @@ getAllRegie(){
       },
       error => this.toast.error('some things wrong')
     )
+
+  }
+  getName (){
+    this.user = this.tokenStorage.getUser();
 
   }
 }

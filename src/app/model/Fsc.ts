@@ -12,4 +12,6 @@ export class Fsc {
   datereception:Date;
   region:Region;
   projet:Projet;
+  nom:string;
+
 }

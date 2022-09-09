@@ -1,5 +1,7 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
+import { NgxEchartsModule } from 'ngx-echarts';
+
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from "@angular/common/http";
@@ -50,6 +52,8 @@ import { HomeLayoutComponent } from './home-layout/home-layout.component';
 import {RouterModule} from "@angular/router";
 import {TableModule} from "primeng/table";
 import {TacheComponent} from "./tache/tache.component";
+import {NgxSpinnerModule} from "ngx-spinner";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 
 /*FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -107,7 +111,12 @@ const P_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TreeSelectModule,
     CalendarModule,
     FileUploadModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule,
+    ProgressSpinnerModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
   ],
   providers: [GcService, DatePipe, FscService, authInterceptorProviders,
     {
@@ -115,7 +124,9 @@ const P_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       useValue: P_SCROLLBAR_CONFIG
     }
   ],
-  bootstrap: [AppComponent]
+
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {
 }

@@ -18,4 +18,6 @@ export class Modelisationpbo{
   emprise:string;
   region:Region;
   projet:Projet;
+  nom:string;
+
 }

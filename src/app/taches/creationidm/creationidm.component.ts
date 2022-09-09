@@ -29,6 +29,7 @@ export class CreationidmComponent implements OnInit {
   NewDialog:boolean;
   fileName = 'ExcelSheet.xlsx';
   username:any;
+  user:User
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
@@ -37,6 +38,7 @@ export class CreationidmComponent implements OnInit {
     this.getCreationidm()
     this.getAllRegion()
     this.getallprojet()
+    this.getName()
 
 
   }
@@ -69,6 +71,7 @@ export class CreationidmComponent implements OnInit {
     creationidms.region=this.region
     creationidms.user=new User()
     creationidms.user=this.tokenStorage.getUser();
+    creationidms.nom=this.user.username
     this.creationidmService.addCreationidm(creationidms,creationidms.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
@@ -144,7 +147,10 @@ export class CreationidmComponent implements OnInit {
       error => this.toast.error('some things wrong')
     )
   }
+  getName (){
+    this.user = this.tokenStorage.getUser();
 
+  }
 
 
 }

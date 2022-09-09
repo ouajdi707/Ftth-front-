@@ -29,7 +29,7 @@ export class IdentificationimmeubleComponent implements OnInit {
   NewDialog: boolean;
   fileName = 'ExcelSheet.xlsx';
   username:any
-
+user:User;
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
@@ -42,6 +42,7 @@ export class IdentificationimmeubleComponent implements OnInit {
     this.getallprojet()
     this.getidentificationimmeuble()
     this.getAllRegion()
+    this.getName()
 
   }
   getallprojet(){
@@ -72,6 +73,7 @@ export class IdentificationimmeubleComponent implements OnInit {
     idms.region=this.region
     idms.user=new User()
     idms.user=this.tokenStorage.getUser();
+    idms.nom=this.user.username;
     this.identificationimmeubleService.addIdentificationimmeuble(idms,idms.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
@@ -155,7 +157,10 @@ export class IdentificationimmeubleComponent implements OnInit {
     )
 
   }
+  getName (){
+    this.user = this.tokenStorage.getUser();
 
+  }
 
 
 

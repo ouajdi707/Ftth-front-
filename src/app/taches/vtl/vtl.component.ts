@@ -18,6 +18,7 @@ import {User} from "../../model/User";
   styleUrls: ['./vtl.component.css']
 })
 export class VtlComponent implements OnInit {
+  user:User
   projets:Projet[];
   projet =new Projet();
   regions: Region[]
@@ -38,6 +39,7 @@ export class VtlComponent implements OnInit {
     this.getallprojet()
     this.getallvtl()
     this.getAllRegion()
+    this.getName()
   }
   getallprojet(){
     this.projetService.getAll().subscribe(res=>{
@@ -113,6 +115,7 @@ export class VtlComponent implements OnInit {
     vtls.region=this.region
     vtls.user=new User()
     vtls.user=this.tokenStorage.getUser();
+    vtls.nomcharge=this.user.username
     this.vtlService.addVtl(vtls,vtls.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
@@ -144,6 +147,10 @@ export class VtlComponent implements OnInit {
       },
       error => this.toast.error('some things wrong')
     )
+
+  }
+  getName (){
+    this.user = this.tokenStorage.getUser();
 
   }
 }

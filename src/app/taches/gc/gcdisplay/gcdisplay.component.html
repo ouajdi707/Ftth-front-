@@ -46,10 +46,10 @@
           </div>
           <div class="row pt-2">
             <div class="col-6">
-            <label for="username1" class=" block">Charge</label>
+            <label for="username1" class=" block">chargé</label>
             </div>
             <div class="col-6">
-            <input  type="text" aria-describedby="username1-help" class="form-control text-black" pInputText  />
+            <input  type="text" aria-describedby="username1-help" class="form-control text-black"  value="{{user.username}}" pInputText  />
             </div>
           </div>
           <div class="row pt-2">
@@ -186,11 +186,11 @@
       <td>{{list.nbrpoteaux}}</td>
       <td> {{list.reel}}</td>
       <td> {{list.action}}</td>
-      <td> {{list.charge}}</td>
+      <td> {{list.nom}} </td>
       <td> {{list.etat}}</td>
       <td> {{list.datereception |date:'dd/MM/YYYY'}}</td>
       <td> {{list.commentaire}}</td>
-      <td> {{list.region.name}}</td>
+      <td> {{list.nom}}</td>
       <td> {{list.projet.name}}</td>
 
       <td>

@@ -22,6 +22,8 @@ export class Racco{
   datereception:Date;
   region:Region;
   projet:Projet;
+  nom:string;
+
 
 
 }

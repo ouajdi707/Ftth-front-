@@ -17,6 +17,7 @@ export class Creationidm {
   commentaire:string;
   region:Region;
   projet:Projet;
+  nom:string;
 
 
 

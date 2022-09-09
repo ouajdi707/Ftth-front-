@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Gc} from "../model/gc";
+import {Observable} from "rxjs";
+import {Stat} from "../model/Stat";
 
 
 
@@ -23,5 +25,7 @@ export class GcService {
   Remove_Gc(id:number ) {
     return this.httpClient.delete("http://localhost:8084/Gc/remove-gc/"+id)
   }
-
+  getStat() :Observable<Stat[]>{
+    return this.httpClient.get<Stat[]>("http://localhost:8084/Gc/xx");
+  }
 }

@@ -4,6 +4,7 @@ import {Projet} from "../model/Projet";
 import {RegionService} from "../services/region.service";
 import {ToastrService} from "ngx-toastr";
 import {ProjetService} from "../services/projet.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-projet',
@@ -18,9 +19,12 @@ export class ProjetComponent implements OnInit {
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
-  constructor(private projetService:ProjetService ,private toast: ToastrService) { }
-
+  constructor(private projetService:ProjetService ,private toast: ToastrService,private spinner:NgxSpinnerService) { }
+  spinnerName:string;
+  spinnerType:string;
   ngOnInit(): void {
+
+
     this.getallprojets()
   }
   getallprojets(){

@@ -18,5 +18,7 @@ export class Trame{
   commentaire:string;
   region:Region;
   projet:Projet;
+  nom:string;
+
 
 }

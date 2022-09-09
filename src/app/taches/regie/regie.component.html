@@ -81,7 +81,7 @@
               <label for="username1" class="block">Chargé</label>
             </div>
             <div class="col-6">
-              <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText  />
+              <input class="form-control text-black"  type="text" aria-describedby="username1-help"  value="{{user.username}}" pInputText  />
             </div>
           </div>
           <div class="row pt-2">
@@ -214,7 +214,7 @@
           <td> {{list.tache}}</td>
           <td> {{list.duree}}</td>
           <td> {{list.etat}}</td>
-          <td> {{list.charge}}</td>
+          <td> {{list.nom}}</td>
           <td> {{list.commentaire}}</td>
           <td> {{list.region.name}}</td>
           <td> {{list.projet.name}}</td>

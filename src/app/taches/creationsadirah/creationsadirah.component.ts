@@ -28,6 +28,7 @@ export class CreationsadirahComponent implements OnInit {
   NewDialog:boolean;
   fileName = 'ExcelSheet.xlsx';
   username:any
+  user:User
 
 
 
@@ -41,6 +42,7 @@ export class CreationsadirahComponent implements OnInit {
     this.getallprojet()
     this.getCreationsadirah()
     this.getAllRegion()
+    this.getName()
   }
   getallprojet(){
     this.projetService.getAll().subscribe(res=>{
@@ -129,6 +131,7 @@ export class CreationsadirahComponent implements OnInit {
     creationsadirahs.region=this.region
     creationsadirahs.user=new User()
     creationsadirahs.user=this.tokenStorage.getUser();
+    creationsadirahs.nom=this.user.username
     this.creationsadirahservice.addCreationsadirah(creationsadirahs,creationsadirahs.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
@@ -153,4 +156,9 @@ export class CreationsadirahComponent implements OnInit {
     )
 
   }
+  getName (){
+    this.user = this.tokenStorage.getUser();
+
+  }
+
 }

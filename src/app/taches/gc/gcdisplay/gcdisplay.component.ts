@@ -13,6 +13,7 @@ import {ProjetService} from "../../../services/projet.service";
 import {Router} from "@angular/router";
 import {TokenStorageService} from "../../../services/token-storage.service";
 import {User} from "../../../model/User";
+import {FormControl, Validators} from "@angular/forms";
 
 
 @Component({
@@ -22,6 +23,10 @@ import {User} from "../../../model/User";
 })
 
 export class GcdisplayComponent implements OnInit {
+
+
+  user:User
+
   projets:Projet[];
   projet =new Projet();
   regions:Region[]
@@ -31,6 +36,9 @@ export class GcdisplayComponent implements OnInit {
   submitted: boolean;
   gcs = new Gc();
   username:any
+  aaa:string
+
+
 
 
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
@@ -47,6 +55,7 @@ export class GcdisplayComponent implements OnInit {
     this.getallprojet()
     this.getgc();
     this.getAllRegion();
+    this.getName()
     this.primengConfig.ripple = true;
 
 
@@ -136,6 +145,8 @@ this.regionService.getAll().subscribe(data=>this.regions=data);
     gcs.region = this.region
     gcs.user=new User()
     gcs.user=this.tokenStorage.getUser();
+    gcs.nom=this.user.username;
+
     this.gcService.Add_Gc(gcs ,gcs.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
@@ -166,6 +177,10 @@ this.regionService.getAll().subscribe(data=>this.regions=data);
       },
       error => this.toast.error('some things wrong')
     )
+
+  }
+  getName (){
+    this.user = this.tokenStorage.getUser();
 
   }
 

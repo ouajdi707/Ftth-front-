@@ -30,6 +30,8 @@ export class FscdisplayComponent implements OnInit {
   fscs=new Fsc()
   NewDialog:boolean;
   username:any
+  user:User
+
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
@@ -38,6 +40,7 @@ export class FscdisplayComponent implements OnInit {
     this.OngetFsc()
     this.getAllRegion();
     this.getallprojet()
+    this.getName()
 
 
 
@@ -68,6 +71,7 @@ export class FscdisplayComponent implements OnInit {
     fscs.region = this.region
     fscs.user=new User()
     fscs.user=this.tokenStorage.getUser();
+    fscs.nom=this.user.username;
     this.fscService.Add_Fsc(fscs,fscs.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
@@ -153,6 +157,10 @@ export class FscdisplayComponent implements OnInit {
       },
       error => this.toast.error('some things wrong')
     )
+
+  }
+  getName (){
+    this.user = this.tokenStorage.getUser();
 
   }
 }

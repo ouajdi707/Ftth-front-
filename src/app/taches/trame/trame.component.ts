@@ -18,6 +18,7 @@ import {User} from "../../model/User";
   styleUrls: ['./trame.component.css']
 })
 export class TrameComponent implements OnInit {
+  user:User
   projets:Projet[];
   projet =new Projet();
   regions: Region[]
@@ -38,7 +39,9 @@ export class TrameComponent implements OnInit {
   ngOnInit(): void {
     this.getallprojet()
     this.getAllRegion()
-    this.getallTrame()}
+    this.getallTrame()
+  this.getName()}
+
   getallprojet(){
     this.projetService.getAll().subscribe(res=>{
       this.projets=res
@@ -68,6 +71,7 @@ export class TrameComponent implements OnInit {
     trames.region=this.region
     trames.user=new User()
     trames.user=this.tokenStorage.getUser();
+    trames.nom=this.user.username
     this.trameService.addtrame(trames,trames.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
@@ -139,14 +143,16 @@ export class TrameComponent implements OnInit {
       error => this.toast.error('some things wrong'))
 
   }
-  Onduplicate(list: Trame,username:number) {
-    this.trameService.addtrame(list,username).subscribe(res => {
+  Onduplicate(list: Trame) {
+
         this.trame.push({...list});
         this.toast.success("done")
 
-      },
-      error => this.toast.error('some things wrong')
-    )
+
+
+  }
+  getName (){
+    this.user = this.tokenStorage.getUser();
 
   }
 }

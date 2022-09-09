@@ -11,10 +11,12 @@ export class Creationsadirah {
   poche:string;
   etatsadirah:string;
   etat:string;
+
   user:User;
   commentaire:string;
   region:Region;
   projet:Projet;
+  nom:string;
 
 
 

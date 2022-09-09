@@ -18,6 +18,7 @@ import {User} from "../../model/User";
   styleUrls: ['./racco.component.css']
 })
 export class RaccoComponent implements OnInit {
+  user:User
   projets:Projet[];
   projet =new Projet();
   regions: Region[]
@@ -39,6 +40,7 @@ export class RaccoComponent implements OnInit {
     this.getAllRacco()
     this.getAllRegion()
     this.getallprojet()
+    this.getName()
 
   }
 
@@ -120,6 +122,7 @@ getAllRacco(){
     raccos.region=this.region
     raccos.user=new User()
     raccos.user=this.tokenStorage.getUser();
+    raccos.nom=this.user.username
     this.raccoService.addracco(raccos,raccos.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
@@ -142,14 +145,24 @@ getAllRacco(){
     XLSX.writeFile(wb, this.fileName);
 
   }
-  Onduplicate(list: Racco,username:number) {
-    this.raccoService.addracco(list,username).subscribe(res => {
-        this.racco.push({...list});
+
+  Onduplicate(raccos: Racco ,username:number) {
+    raccos.user=this.tokenStorage.getUser();
+    raccos:this.racco.push({...raccos})
+    
+        this.raccoService.addracco(raccos,raccos.user.id).subscribe(res => {
+
         this.toast.success("done")
 
       },
       error => this.toast.error('some things wrong')
     )
+
+  }
+
+
+  getName (){
+    this.user = this.tokenStorage.getUser();
 
   }
 }
