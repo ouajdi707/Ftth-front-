@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Regie} from "../model/Regie";
 import {Trame} from "../model/trame";
+import {Observable} from "rxjs";
+import {Stat} from "../model/Stat";
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +21,8 @@ export class TrameService {
   }
   removetrame(id: number) {
     return this.httpCLient.delete("http://localhost:8084/Trame/remove-trame/" + id)
+  }
+  getStat() :Observable<Stat[]>{
+    return this.httpCLient.get<Stat[]>("http://localhost:8084/Trame/stattrame");
   }
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Creationidm} from "../model/Creationidm";
+import {Observable} from "rxjs";
+import {Stat} from "../model/Stat";
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +24,11 @@ export class CreationidmService {
   }
   removeCreationidm(id: number) {
     return this.httpClient.delete("http://localhost:8084/creationidm/remove-creationidm/" + id)
+  }
+  getStat() :Observable<Stat[]>{
+    return this.httpClient.get<Stat[]>("http://localhost:8084/creationidm/creationidmstat");
+  }
+  getStattotal() :Observable<Stat[]>{
+    return this.httpClient.get<Stat[]>("http://localhost:8084/creationidm/stattotal");
   }
 }

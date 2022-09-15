@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Creationidm} from "../model/Creationidm";
 import {Identificationimmeuble} from "../model/Identificationimmeuble";
 import {Observable} from "rxjs";
+import {Stat} from "../model/Stat";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,9 @@ export class IdentificationimmeubleService {
 
   removeIdentificationimmeuble(id: number) {
     return this.httpClient.delete("http://localhost:8084/Identificationimmeuble/remove-identificationimmeuble/" + id)
+  }
+  getStat() :Observable<Stat[]>{
+    return this.httpClient.get<Stat[]>("http://localhost:8084/Identificationimmeuble/idimmeublestat");
   }
 
 }

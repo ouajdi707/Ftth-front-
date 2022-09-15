@@ -20,6 +20,7 @@ import {RegisterComponent} from "./register/register.component";
 import {AddtacheComponent} from "./taches/addtache/addtache.component";
 import {ProjetComponent} from "./projet/projet.component";
 import {TacheComponent} from "./tache/tache.component";
+import {StatfscComponent} from "./stat/statfsc/statfsc.component";
 
 
 const routes: Routes = [
@@ -47,7 +48,11 @@ const routes: Routes = [
   {path:'register',component:RegisterComponent},
   {path:'ajouter',component:AddtacheComponent},
   {path:'projet',component:ProjetComponent},
+  {path: 'statfsc', component:StatfscComponent},
   {path: ':id', component:TacheComponent},
+
+
+
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: '**', redirectTo: 'login'},
 

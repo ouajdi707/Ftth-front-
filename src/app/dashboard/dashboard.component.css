@@ -1,0 +1,21 @@
+
+.tab ul {
+  padding:16px;
+  background:white;
+  display: inline-block;
+  border-radius: 2px;
+  margin: 0;
+  color:grey;
+}
+.tab ul li {
+  display:inline-block;
+  list-style-type: none;
+  border-right: 1px solid grey;
+  font-size: 10px;
+  padding: 0 24px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+
+}

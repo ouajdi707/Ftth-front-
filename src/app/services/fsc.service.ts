@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Stat} from "../model/Stat";
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,8 @@ export class FscService {
   }
   Remove_Fsc(id:number ) {
     return this.httpClient.delete("http://localhost:8084/fsc/remove-fsc/"+id)
+  }
+  getStat() :Observable<Stat[]>{
+    return this.httpClient.get<Stat[]>("http://localhost:8084/fsc/statfsc");
   }
 }

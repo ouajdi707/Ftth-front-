@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Identificationimmeuble} from "../model/Identificationimmeuble";
 import {Modelisatioidm} from "../model/Modelisatioidm";
+import {Observable} from "rxjs";
+import {Stat} from "../model/Stat";
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +21,8 @@ export class ModelisationidmService {
   }
   removeModelisationidm(id: number) {
     return this.httpClient.delete("http://localhost:8084/Modelisationidm/remove-modelisationidm/" + id)
+  }
+  getStat() :Observable<Stat[]>{
+    return this.httpClient.get<Stat[]>("http://localhost:8084/Modelisationidm/modelisationidmstat");
   }
 }

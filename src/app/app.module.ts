@@ -54,6 +54,7 @@ import {TableModule} from "primeng/table";
 import {TacheComponent} from "./tache/tache.component";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
+import { StatfscComponent } from './stat/statfsc/statfsc.component';
 
 /*FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -86,7 +87,9 @@ const P_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AddtacheComponent,
     ProjetComponent,
     HomeLayoutComponent,
-    TacheComponent
+    TacheComponent,
+    StatfscComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Racco} from "../model/Racco";
 import {Regie} from "../model/Regie";
+import {Observable} from "rxjs";
+import {Stat} from "../model/Stat";
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +22,8 @@ export class RegieService {
   }
   removeregie(id: number) {
     return this.httpClient.delete("http://localhost:8084/Regie/remove-regie/" + id)
+  }
+  getStat() :Observable<Stat[]>{
+    return this.httpClient.get<Stat[]>("http://localhost:8084/Regie/statregie");
   }
 }

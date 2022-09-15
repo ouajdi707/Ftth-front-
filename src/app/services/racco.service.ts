@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Modelisationpbo} from "../model/modelisationpbo";
 import {Racco} from "../model/Racco";
+import {Observable} from "rxjs";
+import {Stat} from "../model/Stat";
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +22,8 @@ export class RaccoService {
   }
   removeracco(id: number) {
     return this.httpClient.delete("http://localhost:8084/Racco/remove-racco/" + id)
+  }
+  getStat() :Observable<Stat[]>{
+    return this.httpClient.get<Stat[]>("http://localhost:8084/Racco/raccostat");
   }
 }

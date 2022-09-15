@@ -1,16 +1,70 @@
-<ul class="nav justify-content-center">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Active</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-  </li>
-</ul>
+<div class="container">
+  <div class="tab">
+    <ul>
+      <li id="fsc" (click)="tabChange('fsc')"> Fsc </li>
+      <li id="creationidm" (click)="tabChange('creationidm')"> Creationidm </li>
+      <li id="modelisationpbo" (click)="tabChange('modelisationpbo')"> Modelisationpbo </li>
+      <li id="racco" (click)="tabChange('racco')"> Racco </li>
+      <li id="vtl" (click)="tabChange('vtl')"> Vtl </li>
+      <li id="creationsadirah" (click)="tabChange('creationsadirah')"> Creationsadirah </li>
+      <li id="identificationimmeuble" (click)="tabChange('identificationimmeuble')"> idImm </li>
+      <li id="modelisationimmeuble" (click)="tabChange('modelisationimmeuble')"> modelisationidm </li>
+      <li id="regies" (click)="tabChange('regies')"> Regies </li>
+      <li id="trames" (click)="tabChange('trames')"> Trames </li>
+      <li id="gc" (click)="tabChange('gc')"> Gc </li>
+      <li id="stattotal" (click)="tabChange('stattotal')"> Stat total </li>
 
-<div echarts [options]="option"></div>
+    </ul>
+    <div class="content">
+      <div class="content-value" *ngIf="id ==='fsc'">
+
+        <div echarts [options]="option1"></div>
+      </div>
+      <div class="content-value" *ngIf="id ==='gc'">
+
+        <div echarts [options]="option"></div>
+      </div>
+      <div class="content-value" *ngIf="id ==='creationidm'">
+
+        <div echarts [options]="option2"></div>
+      </div>
+      <div class="content-value" *ngIf="id ==='modelisationpbo'">
+
+        <div echarts [options]="option6"></div>
+      </div>
+      <div class="content-value" *ngIf="id ==='racco'">
+
+        <div echarts [options]="option7"></div>
+      </div>
+      <div class="content-value" *ngIf="id ==='vtl'">
+
+        <div echarts [options]="option10"></div>
+      </div>
+      <div class="content-value" *ngIf="id ==='creationsadirah'">
+        <div echarts [options]="option3"></div>
+      </div>
+      <div class="content-value" *ngIf="id ==='identificationimmeuble'">
+
+        <div echarts [options]="option4"></div>
+      </div>
+      <div class="content-value" *ngIf="id ==='modelisationimmeuble'">
+
+        <div echarts [options]="option5"></div>
+      </div>
+      <div class="content-value" *ngIf="id ==='regies'">
+
+        <div echarts [options]="option8"></div>
+      </div>
+      <div class="content-value" *ngIf="id ==='trames'">
+
+        <div echarts [options]="option9"></div>
+      </div>
+      <div class="content-value" *ngIf="id ==='stattotal'">
+
+        <div echarts [options]="option11"></div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

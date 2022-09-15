@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Trame} from "../model/trame";
 import {Vtl} from "../model/Vtl";
+import {Observable} from "rxjs";
+import {Stat} from "../model/Stat";
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +22,8 @@ export class VtlService {
   }
   removevtl(id: number) {
     return this.httpClient.delete("http://localhost:8084/Vtl/remove-vtl/" + id)
+  }
+  getStat() :Observable<Stat[]>{
+    return this.httpClient.get<Stat[]>("http://localhost:8084/Vtl/statvtl");
   }
 }

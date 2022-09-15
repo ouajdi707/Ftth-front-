@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Modelisationpbo} from "../model/modelisationpbo";
+import {Observable} from "rxjs";
+import {Stat} from "../model/Stat";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,9 @@ export class ModelisationpboService {
   }
   removeModelisationpbo(id: number) {
     return this.httpClient.delete("http://localhost:8084/Modelisationpbo/remove-modelisationpbo/" + id)
+  }
+  getStat() :Observable<Stat[]>{
+    return this.httpClient.get<Stat[]>("http://localhost:8084/Modelisationpbo/modelisationpbostat");
   }
 
 }
