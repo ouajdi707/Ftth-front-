@@ -13,6 +13,7 @@
       <li id="trames" (click)="tabChange('trames')"> Trames </li>
       <li id="gc" (click)="tabChange('gc')"> Gc </li>
       <li id="stattotal" (click)="tabChange('stattotal')"> Stat total </li>
+      <li id="count" (click)="tabChange('count')"> count </li>
 
     </ul>
     <div class="content">
@@ -62,6 +63,11 @@
       <div class="content-value" *ngIf="id ==='stattotal'">
 
         <div echarts [options]="option11"></div>
+      </div>
+      <div class="content-value" *ngIf="id ==='count'">
+        <div echarts [options]="option15"></div>
+        <div> Nombre total des taches = {{total}}
+        </div>
       </div>
 
 

@@ -13,6 +13,8 @@ import {RaccoService} from "../services/racco.service";
 import {RegieService} from "../services/regie.service";
 import {TrameService} from "../services/trame.service";
 import {VtlService} from "../services/vtl.service";
+import {Statistique} from "../model/Statistique";
+import {Stattotal} from "../model/Stattotal";
 
 @Component({
   encapsulation : ViewEncapsulation.Emulated,
@@ -26,7 +28,7 @@ export class DashboardComponent implements OnInit {
   spinnerName: string;
   spinnerType: string;
   option: any;
-  stattotal:Stat[]
+  stattotal: Stat[]
   statgc: Stat[]
   option1: any;
   option2: any;
@@ -38,7 +40,8 @@ export class DashboardComponent implements OnInit {
   option8: any;
   option9: any;
   option10: any;
-  option11:any;
+  option11: any;
+  option15: any
   statfsc: Stat[]
   statidimm: Stat[]
   statcreationidm: Stat[]
@@ -49,13 +52,16 @@ export class DashboardComponent implements OnInit {
   statregie: Stat[]
   stattrame: Stat[]
   statvtl: Stat[]
+  countcreationidm: Statistique = new Statistique();
+  counttotal: Stattotal = new Stattotal();
+  total: number
 
 
-  constructor(private spinner: NgxSpinnerService, private gcservice:GcService,private fscservice:FscService,
-              private creationidmservice:CreationidmService,private creationsadirahservice:CreationsadirahService,
-              private identificationimmservice:IdentificationimmeubleService,private modelisationidmservice:ModelisationidmService,
-              private modelisationpboservice:ModelisationpboService,private raccoservice:RaccoService,private regieservice:RegieService,
-              private trameservice:TrameService,private vtlservice:VtlService) {
+  constructor(private spinner: NgxSpinnerService, private gcservice: GcService, private fscservice: FscService,
+              private creationidmservice: CreationidmService, private creationsadirahservice: CreationsadirahService,
+              private identificationimmservice: IdentificationimmeubleService, private modelisationidmservice: ModelisationidmService,
+              private modelisationpboservice: ModelisationpboService, private raccoservice: RaccoService, private regieservice: RegieService,
+              private trameservice: TrameService, private vtlservice: VtlService) {
   }
 
 
@@ -72,82 +78,86 @@ export class DashboardComponent implements OnInit {
     this.gettramestat()
     this.getmodelisationpbo()
     this.getstattotal()
+    this.getcounttotal()
+    this.gettotal()
+
+
   }
 
 
+  get() {
+    const data1: any[] = [];
+    const xAxisData: any[] = [];
+    let value = -1
+    this.gcservice.getStat().subscribe(data => {
+        this.statgc = data
+        for (let s of this.statgc) {
 
-get(){
-  const data1: any[] = [];
-  const xAxisData: any[] = [];
-  let value = -1
-  this.gcservice.getStat().subscribe(data => {
-    this.statgc = data
-    for (let s of this.statgc) {
+          xAxisData.push(s.name);
+          data1.push(s.value)
 
-      xAxisData.push(s.name);
-      data1.push(s.value)
+        }
+        this.option = {
+          title: {
+            text: 'Gc'
+          },
+          legend: {
+            data: xAxisData
+          },
+          toolbox: {
+            // y: 'bottom',
+            feature: {
 
-    }
-      this.option = {
-        title: {
-          text: 'Gc'
-        },
-        legend: {
-          data: xAxisData
-        },
-        toolbox: {
-          // y: 'bottom',
-          feature: {
+              dataView: {},
+              magicType: {show: true, type: ['bar', 'line']},
 
-            dataView: {},
-            magicType: { show: true, type: ['bar', 'line'] },
-
-            saveAsImage: {
-              pixelRatio: 2
+              saveAsImage: {
+                pixelRatio: 2
+              }
             }
-          }
-        },
-        tooltip: {
-        },
-        xAxis: {
-          data: xAxisData,
-          splitLine: {
-            show: false
-          }
-        },
-        yAxis: {
-          minInterval: 1
-        },
-        series: [
-          {
-            name: 'nombre de taches traitées',
-            type: 'bar',
-            data: data1,
-            barWidth: '20%',
-
-            emphasis: {
-              focus: 'series'
-            },
-            animationDelay: function (idx: number) {
-              return idx * 10;
+          },
+          tooltip: {},
+          xAxis: {
+            data: xAxisData,
+            splitLine: {
+              show: false
             }
+          },
+          yAxis: {
+            minInterval: 1
+          },
+          series: [
+            {
+              name: 'nombre de taches traitées',
+              type: 'bar',
+              data: data1,
+              barWidth: '20%',
+
+              emphasis: {
+                focus: 'series'
+              },
+              animationDelay: function (idx: number) {
+                return idx * 10;
+              }
+            }
+          ],
+          animationEasing: 'elasticOut',
+          animationDelayUpdate: function (idx: number) {
+            return idx * 5;
           }
-        ],
-        animationEasing: 'elasticOut',
-        animationDelayUpdate: function (idx: number) {
-          return idx * 5;
         }
       }
-    }
-  )
-};
+    )
+  };
 
-id:any
+  id: any
+
   tabChange(ids: any) {
-  this.id=ids
+    this.id = ids
 
   }
-  getfscstat(){
+
+  getfscstat() {
     const data1: any[] = [];
     const xAxisData: any[] = [];
     let value = -1
@@ -171,15 +181,14 @@ id:any
             feature: {
 
               dataView: {},
-              magicType: { show: true, type: ['bar', 'line'] },
+              magicType: {show: true, type: ['bar', 'line']},
 
               saveAsImage: {
                 pixelRatio: 2
               }
             }
           },
-          tooltip: {
-          },
+          tooltip: {},
           xAxis: {
             data: xAxisData,
             splitLine: {
@@ -212,7 +221,8 @@ id:any
       }
     )
   };
-  getcreationidmstat(){
+
+  getcreationidmstat() {
     const data1: any[] = [];
     const xAxisData: any[] = [];
     let value = -1
@@ -236,15 +246,14 @@ id:any
             feature: {
 
               dataView: {},
-              magicType: { show: true, type: ['bar', 'line'] },
+              magicType: {show: true, type: ['bar', 'line']},
 
               saveAsImage: {
                 pixelRatio: 2
               }
             }
           },
-          tooltip: {
-          },
+          tooltip: {},
           xAxis: {
             data: xAxisData,
             splitLine: {
@@ -277,7 +286,8 @@ id:any
       }
     )
   };
-  getcreationsadirahstat(){
+
+  getcreationsadirahstat() {
     const data1: any[] = [];
     const xAxisData: any[] = [];
     let value = -1
@@ -301,15 +311,14 @@ id:any
             feature: {
 
               dataView: {},
-              magicType: { show: true, type: ['bar', 'line'] },
+              magicType: {show: true, type: ['bar', 'line']},
 
               saveAsImage: {
                 pixelRatio: 2
               }
             }
           },
-          tooltip: {
-          },
+          tooltip: {},
           xAxis: {
             data: xAxisData,
             splitLine: {
@@ -342,7 +351,8 @@ id:any
       }
     )
   };
-  getidimmeustat(){
+
+  getidimmeustat() {
     const data1: any[] = [];
     const xAxisData: any[] = [];
     let value = -1
@@ -354,7 +364,7 @@ id:any
           data1.push(s.value)
 
         }
-        this.option4= {
+        this.option4 = {
           title: {
             text: 'Id Immeuble'
           },
@@ -366,15 +376,14 @@ id:any
             feature: {
 
               dataView: {},
-              magicType: { show: true, type: ['bar', 'line'] },
+              magicType: {show: true, type: ['bar', 'line']},
 
               saveAsImage: {
                 pixelRatio: 2
               }
             }
           },
-          tooltip: {
-          },
+          tooltip: {},
           xAxis: {
             data: xAxisData,
             splitLine: {
@@ -407,7 +416,8 @@ id:any
       }
     )
   };
-  getmodelisationidm(){
+
+  getmodelisationidm() {
     const data1: any[] = [];
     const xAxisData: any[] = [];
     let value = -1
@@ -431,15 +441,14 @@ id:any
             feature: {
 
               dataView: {},
-              magicType: { show: true, type: ['bar', 'line'] },
+              magicType: {show: true, type: ['bar', 'line']},
 
               saveAsImage: {
                 pixelRatio: 2
               }
             }
           },
-          tooltip: {
-          },
+          tooltip: {},
           xAxis: {
             data: xAxisData,
             splitLine: {
@@ -472,7 +481,8 @@ id:any
       }
     )
   };
-  getmodelisationpbo(){
+
+  getmodelisationpbo() {
     const data1: any[] = [];
     const xAxisData: any[] = [];
     let value = -1
@@ -496,15 +506,14 @@ id:any
             feature: {
 
               dataView: {},
-              magicType: { show: true, type: ['bar', 'line'] },
+              magicType: {show: true, type: ['bar', 'line']},
 
               saveAsImage: {
                 pixelRatio: 2
               }
             }
           },
-          tooltip: {
-          },
+          tooltip: {},
           xAxis: {
             data: xAxisData,
             splitLine: {
@@ -537,7 +546,8 @@ id:any
       }
     )
   };
-  getraccostat(){
+
+  getraccostat() {
     const data1: any[] = [];
     const xAxisData: any[] = [];
     let value = -1
@@ -561,15 +571,14 @@ id:any
             feature: {
 
               dataView: {},
-              magicType: { show: true, type: ['bar', 'line'] },
+              magicType: {show: true, type: ['bar', 'line']},
 
               saveAsImage: {
                 pixelRatio: 2
               }
             }
           },
-          tooltip: {
-          },
+          tooltip: {},
           xAxis: {
             data: xAxisData,
             splitLine: {
@@ -602,7 +611,8 @@ id:any
       }
     )
   };
-  getregiestat(){
+
+  getregiestat() {
     const data1: any[] = [];
     const xAxisData: any[] = [];
     let value = -1
@@ -614,7 +624,7 @@ id:any
           data1.push(s.value)
 
         }
-        this.option8= {
+        this.option8 = {
           title: {
             text: 'Regie'
           },
@@ -626,15 +636,14 @@ id:any
             feature: {
 
               dataView: {},
-              magicType: { show: true, type: ['bar', 'line'] },
+              magicType: {show: true, type: ['bar', 'line']},
 
               saveAsImage: {
                 pixelRatio: 2
               }
             }
           },
-          tooltip: {
-          },
+          tooltip: {},
           xAxis: {
             data: xAxisData,
             splitLine: {
@@ -667,7 +676,8 @@ id:any
       }
     )
   };
-  gettramestat(){
+
+  gettramestat() {
     const data1: any[] = [];
     const xAxisData: any[] = [];
     let value = -1
@@ -691,15 +701,14 @@ id:any
             feature: {
 
               dataView: {},
-              magicType: { show: true, type: ['bar', 'line'] },
+              magicType: {show: true, type: ['bar', 'line']},
 
               saveAsImage: {
                 pixelRatio: 2
               }
             }
           },
-          tooltip: {
-          },
+          tooltip: {},
           xAxis: {
             data: xAxisData,
             splitLine: {
@@ -732,7 +741,8 @@ id:any
       }
     )
   };
-  getvtlstat(){
+
+  getvtlstat() {
     const data1: any[] = [];
     const xAxisData: any[] = [];
     let value = -1
@@ -756,15 +766,14 @@ id:any
             feature: {
 
               dataView: {},
-              magicType: { show: true, type: ['bar', 'line'] },
+              magicType: {show: true, type: ['bar', 'line']},
 
               saveAsImage: {
                 pixelRatio: 2
               }
             }
           },
-          tooltip: {
-          },
+          tooltip: {},
           xAxis: {
             data: xAxisData,
             splitLine: {
@@ -797,7 +806,8 @@ id:any
       }
     )
   };
-  getstattotal(){
+
+  getstattotal() {
     const data1: any[] = [];
     const xAxisData: any[] = [];
     let value = -1
@@ -821,15 +831,14 @@ id:any
             feature: {
 
               dataView: {},
-              magicType: { show: true, type: ['bar', 'line'] },
+              magicType: {show: true, type: ['bar', 'line']},
 
               saveAsImage: {
                 pixelRatio: 2
               }
             }
           },
-          tooltip: {
-          },
+          tooltip: {},
           xAxis: {
             data: xAxisData,
             splitLine: {
@@ -863,5 +872,57 @@ id:any
     )
   };
 
+  getcounttotal() {
+    this.creationidmservice.countCreationidm().subscribe(r => {
+      this.countcreationidm = r;
 
+
+      this.option15 = {
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['Creationidm', 'Creationsadirah', 'Fsc', 'Gc', 'Idimmeubles', 'Modelisationidm', 'Modelisationpbo', 'Racco', 'Regie', 'Trame', 'Vtl'],
+        },
+        series: [
+          {
+            name: 'Nombre de taches ',
+            type: 'pie',
+            radius: '80%',
+            center: ['50%', '50%'],
+            data: [
+              {value: this.countcreationidm.value, name: 'Creationidm'},
+              {value: this.countcreationidm.value1, name: 'Creationsadirah'},
+              {value: this.countcreationidm.value2, name: 'Fsc'},
+              {value: this.countcreationidm.value3, name: 'Gc'},
+              {value: this.countcreationidm.value4, name: 'Idimmeubles'},
+              {value: this.countcreationidm.value5, name: 'Modelisationidm'},
+              {value: this.countcreationidm.value6, name: 'Modelisationpbo'},
+              {value: this.countcreationidm.value7, name: 'Racco'},
+              {value: this.countcreationidm.value8, name: 'Regie'},
+              {value: this.countcreationidm.value9, name: 'Trame'},
+              {value: this.countcreationidm.value10, name: 'Vtl'},
+
+
+            ],
+          },
+        ],
+      };
+
+
+    })
+  }
+
+  gettotal() {
+    this.creationidmservice.countstattotal().subscribe(r => {
+      this.counttotal = r;
+      console.log("ctt",this.counttotal)
+      this.total=this.counttotal.nombretaches
+    })
+
+
+  }
 }

@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Creationidm} from "../model/Creationidm";
 import {Observable} from "rxjs";
 import {Stat} from "../model/Stat";
+import {Statistique} from "../model/Statistique";
+import {Stattotal} from "../model/Stattotal";
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +32,11 @@ export class CreationidmService {
   }
   getStattotal() :Observable<Stat[]>{
     return this.httpClient.get<Stat[]>("http://localhost:8084/creationidm/stattotal");
+  }
+  countCreationidm() :Observable<Statistique>{
+    return this.httpClient.get<Statistique>("http://localhost:8084/creationidm/countcreationidm");
+  }
+  countstattotal() :Observable<Stattotal>{
+    return this.httpClient.get<Stattotal>("http://localhost:8084/creationidm/counttotal");
   }
 }
