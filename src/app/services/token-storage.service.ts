@@ -28,5 +28,8 @@ export class TokenStorageService {
     }
     return {};
   }
+  loggedIn() {
+    return !!this.getToken();
+  }
 
 }

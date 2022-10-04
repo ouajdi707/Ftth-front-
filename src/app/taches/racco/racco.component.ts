@@ -146,18 +146,16 @@ getAllRacco(){
 
   }
 
-  Onduplicate(raccos: Racco ,username:number) {
-    raccos.user=this.tokenStorage.getUser();
-    raccos:this.racco.push({...raccos})
-    
-        this.raccoService.addracco(raccos,raccos.user.id).subscribe(res => {
-
+  Onduplicate(list: Racco ,username:number) {
+    list.id =NaN;
+    console.log(list)
+    this.raccoService.addracco(list,this.user.id).subscribe(res => {
+        this.racco.push({...list});
         this.toast.success("done")
 
       },
       error => this.toast.error('some things wrong')
     )
-
   }
 
 

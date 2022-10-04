@@ -115,7 +115,7 @@ export class VtlComponent implements OnInit {
     vtls.region=this.region
     vtls.user=new User()
     vtls.user=this.tokenStorage.getUser();
-    vtls.nomcharge=this.user.username
+    vtls.nom=this.user.username
     this.vtlService.addVtl(vtls,vtls.user.id).subscribe(res => {
         this.toast.success("done")
         this.ngOnInit()
@@ -139,8 +139,9 @@ export class VtlComponent implements OnInit {
 
 
   }
-  Onduplicate(list: Vtl,username:number) {
-    this.vtlService.addVtl(list,username).subscribe(res => {
+  Onduplicate(list: Vtl) {
+    list.id=NaN;
+    this.vtlService.addVtl(list,this.user.id).subscribe(res => {
         this.vtl.push({...list});
         this.toast.success("done")
 

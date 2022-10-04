@@ -146,14 +146,14 @@ getAllRegie(){
 
   }
   Onduplicate(list: Regie,username:number) {
-    this.regieService.addregie(list ,username).subscribe(res => {
+    list.id =NaN;
+    this.regieService.addregie(list,this.user.id).subscribe(res => {
         this.regie.push({...list});
         this.toast.success("done")
 
       },
       error => this.toast.error('some things wrong')
     )
-
   }
   getName (){
     this.user = this.tokenStorage.getUser();

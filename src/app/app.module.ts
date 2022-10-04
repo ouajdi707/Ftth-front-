@@ -55,6 +55,7 @@ import {TacheComponent} from "./tache/tache.component";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import { StatfscComponent } from './stat/statfsc/statfsc.component';
+import {AuthGuard} from "./auth.guard";
 
 /*FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -121,7 +122,7 @@ const P_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       echarts: () => import('echarts'),
     }),
   ],
-  providers: [GcService, DatePipe, FscService, authInterceptorProviders,
+  providers: [GcService, AuthGuard, DatePipe, FscService, authInterceptorProviders,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: P_SCROLLBAR_CONFIG

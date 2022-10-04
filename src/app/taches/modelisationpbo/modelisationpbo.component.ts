@@ -147,14 +147,15 @@ export class ModelisationpboComponent implements OnInit {
 
   }
   Onduplicate(list: Modelisationpbo,username:number) {
-    this.modelisationpboService.addModelisationpbo(list,username).subscribe(res => {
+    list.id =NaN;
+    console.log(list)
+    this.modelisationpboService.addModelisationpbo(list,this.user.id).subscribe(res => {
         this.modelisationpbo.push({...list});
         this.toast.success("done")
 
       },
       error => this.toast.error('some things wrong')
     )
-
   }
   getName (){
     this.user = this.tokenStorage.getUser();

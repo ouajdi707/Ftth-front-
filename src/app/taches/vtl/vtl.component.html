@@ -22,7 +22,7 @@
           </div>
           <div class="row pt-2">
             <div class="col-6">
-              <label for="username1" class="block">Nom</label>
+              <label for="username1" class="block">Nom tache</label>
             </div>
             <div class="col-6">
               <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.nom" />
@@ -219,7 +219,7 @@
         <tr>
           <td>{{list.demandeur}}</td>
           <td> {{list.datereception | date:'dd/MM/YYYY' }}</td>
-          <td> {{list.nom}}</td>
+          <td> {{list.nomtache}}</td>
           <td> {{list.nbal}}</td>
           <td> {{list.pm}}</td>
           <td> {{list.modelisation}}</td>
@@ -227,7 +227,7 @@
           <td> {{list.pds}}</td>
           <td> {{list.doe}}</td>
           <td> {{list.etatsite}}</td>
-          <td> {{list.nomcharge}}</td>
+          <td> {{list.nom}}</td>
           <td> {{list.commentaire}}</td>
           <td> {{list.region.name}}</td>
           <td> {{list.projet.name}}</td>
@@ -235,7 +235,7 @@
             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="openDialog(list)"></button>
             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="Ondeletegc(list.id)"></button>
             &nbsp;
-            <button  pButton pRipple icon="pi pi-bookmark" class="p-button-rounded " (click)="Onduplicate(list,username)"></button>
+            <button  pButton pRipple icon="pi pi-bookmark" class="p-button-rounded " (click)="Onduplicate(list)"></button>
 
             <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Racco Details" [modal]="true" styleClass="p-fluid"   >
               <ng-template pTemplate="content">

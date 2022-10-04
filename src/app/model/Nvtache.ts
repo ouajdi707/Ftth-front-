@@ -15,6 +15,7 @@ export class Nvtache {
  projet:Projet;
  nomTache:Tache;
   columnsSuplimentaires:colsup[];
+  nom:string;
 
 
 

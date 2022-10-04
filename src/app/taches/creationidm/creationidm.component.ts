@@ -139,7 +139,9 @@ export class CreationidmComponent implements OnInit {
 
   Onduplicate(list:Creationidm,username:number ) {
 
-    this.creationidmService.addCreationidm(list,username).subscribe(res => {
+    list.id =NaN;
+    console.log(list)
+    this.creationidmService.addCreationidm(list,this.user.id).subscribe(res => {
         this.creationidm.push({...list});
         this.toast.success("done")
 

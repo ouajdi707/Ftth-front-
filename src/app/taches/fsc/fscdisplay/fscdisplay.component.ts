@@ -150,14 +150,15 @@ export class FscdisplayComponent implements OnInit {
     this.regionService.getAll().subscribe(data=>this.regions=data);
   }
   Onduplicate(list: Fsc,username:number) {
-    this.fscService.Add_Fsc(list,username).subscribe(res => {
+    list.id =NaN;
+
+    this.fscService.Add_Fsc(list,this.user.id).subscribe(res => {
         this.fsc.push({...list});
         this.toast.success("done")
 
       },
       error => this.toast.error('some things wrong')
     )
-
   }
   getName (){
     this.user = this.tokenStorage.getUser();

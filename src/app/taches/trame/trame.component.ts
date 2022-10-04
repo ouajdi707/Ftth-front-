@@ -145,8 +145,14 @@ export class TrameComponent implements OnInit {
   }
   Onduplicate(list: Trame) {
 
+    list.id =NaN;
+    this.trameService.addtrame(list,this.user.id).subscribe(res => {
         this.trame.push({...list});
         this.toast.success("done")
+
+      },
+      error => this.toast.error('some things wrong')
+    )
 
 
 

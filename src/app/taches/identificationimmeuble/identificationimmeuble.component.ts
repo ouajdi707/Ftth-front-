@@ -148,7 +148,9 @@ user:User;
 
   }
   Onduplicate(list: Identificationimmeuble,username:number) {
-    this.identificationimmeubleService.addIdentificationimmeuble(list,username).subscribe(res => {
+    list.id =NaN;
+    console.log(list)
+    this.identificationimmeubleService.addIdentificationimmeuble(list,this.user.id).subscribe(res => {
         this.identificationimmeuble.push({...list});
         this.toast.success("done")
 

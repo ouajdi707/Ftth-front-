@@ -149,14 +149,15 @@ export class ModelisationidmComponent implements OnInit {
 
   }
   Onduplicate(list: Modelisatioidm,username:number) {
-    this.modelisationidmService.addModelisationidm(list,username).subscribe(res => {
+    list.id =NaN;
+    console.log(list)
+    this.modelisationidmService.addModelisationidm(list,this.user.id).subscribe(res => {
         this.modelisationidm.push({...list});
         this.toast.success("done")
 
       },
       error => this.toast.error('some things wrong')
     )
-
   }
   getName (){
     this.user = this.tokenStorage.getUser();

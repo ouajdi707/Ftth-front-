@@ -1,16 +1,21 @@
 <div class="card">
-<p-table [value]="data" [responsive]="true" responsiveLayout="scroll"   >
-  <ng-template pTemplate="caption">
-    <div class="datatable-header">
-      Liste de {{nom}}
-    </div>
+  <p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+      <div class="datatable-header">
+        Liste de {{nom}}
+      </div>
+    </ng-template>
+  <ng-template pTemplate="right">&nbsp;&nbsp;
+    <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="Onexportexcel()"  icon="pi pi-upload"></button>
   </ng-template>
-
+  </p-toolbar>
+<p-table [value]="data" [responsive]="true" responsiveLayout="scroll" id="excel-table" >
     <ng-template pTemplate="header">
       <tr>
         <th *ngFor="let col of header">
           {{col.header}}
         </th>
+        <th></th>
       </tr>
     </ng-template>
 
@@ -18,6 +23,13 @@
     <tr>
       <td *ngFor="let col of header">
         {{list[col.field] }}
+      </td>
+
+      <td>
+        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="openDialog(list)"></button>
+        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="Ondeletegc(list.id)"></button>
+        &nbsp;
+        <button  pButton pRipple icon="pi pi-bookmark" class="p-button-rounded " (click)="Onduplicate(list)"></button>
       </td>
     </tr>
   </ng-template>
@@ -43,3 +55,138 @@
      <td>{{d.projet.name}}</td>
    </tr>
  </table>-->
+<p-dialog [(visible)]="NewDialog" [style]="{width: '880px', height:630}" header="Modifier" [modal]="true" styleClass="p-fluid"   >
+  <div class="row">
+    <div class=" offset-md-2 col col-md-8 col-sm-12">
+      <div class="card h-auto">
+        <div class="card-body">
+          <form [formGroup]="addForm" (ngSubmit)="OnSubmit()">
+            <div class="row">
+              <div class="col col-md-12 col-sm-12">
+                <div class="row">
+                  <div class="col-md-4 col-sm-12">
+                    <div class="form-group">
+                      <label> Demandeur:</label>
+                      <input type="text" class="form-control" placeholder="" [ngModel]="nvtaches.demandeur"
+                             [formControl]="demandeur">
+                    </div>
+                  </div>
+
+                  <div class="col-md-3 col-sm-12">
+                    <div class="form-group">
+                      <label>Etat </label>
+                      <input type="text" class="form-control" placeholder="" [ngModel]="nvtaches.etat"
+                             [formControl]="etat">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <nav class="nav nav-tabs">
+                  <a class="nav-item nav-link active font-weight-bold" href="#p6" data-toggle="tab">Adresse</a>
+                </nav>
+              </div>
+              <div class="col-md-12 col-sm-12">
+                <div class="tab-content table-bordered border-top-0">
+                  <div class="tab-pane active p-2" id="p6">
+                    <div class="row">
+                      <div class="col-md-5 col-sm-12">
+                        <div class="form-group">
+                          <label>Date de reception: </label>
+                          <input type="date" class="form-control" placeholder="" [ngModel]="nvtaches.datereception"
+                                 [formControl]="datereception">
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-sm-12">
+                        <div class="form-group">
+                          <label>Region :</label>
+                          <select [(ngModel)]="region" name="status" placeholder="select" class="form-select"
+                                  [formControl]="regionn">
+                            <option *ngFor="let region of regions" [ngValue]="region">{{region.name}}</option>
+                          </select>
+                        </div>
+                      </div>
+
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <nav class="nav nav-tabs pt-3">
+                  <a class="nav-item nav-link active font-weight-bold" href="#p4" data-toggle="tab">Projet</a>
+                </nav>
+              </div>
+              <div class="col-md-12 col-sm-12">
+                <div class="tab-content table-bordered border-top-0">
+                  <div class="tab-pane active p-2" id="p1">
+                    <div class="row">
+
+
+                      <div class="col-md-5 col-sm-12">
+                        <div class="form-group">
+                          <label>Projet:</label>
+                          <select name="status" placeholder="select" class="form-select" [formControl]="projett">
+                            <option *ngFor="let projet of projets" [ngValue]="projet">{{projet.name}}</option>
+                          </select>
+                        </div>
+                      </div>
+
+
+                      <div class="col-md-7 col-sm-12">
+                        <div class="form-group">
+                          <label>Commentaire:</label>
+                          <input type="text" class="form-control" placeholder="" [ngModel]="nvtaches.commentaire "
+                                 [formControl]="commentaire">
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <nav class="nav nav-tabs pt-3">
+                  <a class="nav-item nav-link active font-weight-bold" href="#p4" data-toggle="tab">Nouvelles Colonnes</a>
+                </nav>
+              </div>
+              <div class="col-md-12 col-sm-12">
+                <div class="tab-content table-bordered border-top-0">
+                  <div class="tab-pane active p-2" id="p4">
+                    <div class="row">
+                      <div [formGroup]="addForm">
+
+                        <div formArrayName="items" *ngFor="let item of items.controls; let i = index;">
+                          <label for="nomchamp"> {{item.get('name')?.value}} :</label>
+                          <div class="row g-1" [formGroupName]="i">
+                            <div class="col-5">
+                              <input class="form-control ps-2" id="value" type="text" formControlName="value"
+                                     placeholder="entrer la valeur">
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end ms-auto mx-4 ">
+              <button type="button" class="btn  btn-success " (click)="save(nomTache,username,nvtaches)"> Generer
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</p-dialog>

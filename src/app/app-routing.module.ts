@@ -21,40 +21,33 @@ import {AddtacheComponent} from "./taches/addtache/addtache.component";
 import {ProjetComponent} from "./projet/projet.component";
 import {TacheComponent} from "./tache/tache.component";
 import {StatfscComponent} from "./stat/statfsc/statfsc.component";
+import {AuthGuard} from "./auth.guard";
 
 
 const routes: Routes = [
-  {path: 'dashboard', component : DashboardComponent},
+  {path: 'dashboard', component : DashboardComponent,canActivate:[AuthGuard]},
   {path: 'gc', component:GcdisplayComponent},
-
   {path: 'fsc', component:FscdisplayComponent},
   {path:'region', component:RegionComponent},
   {path:'creationidm',component:CreationidmComponent},
   {path:'creationsadirah',component:CreationsadirahComponent},
   {path:'identificationimmeuble',component:IdentificationimmeubleComponent},
-  {path:'modelisationidm',component:ModelisationidmComponent,data:{
-      role:['ROLE_ADMIN','ROLE_USER']
-    }},
+  {path:'modelisationidm',component:ModelisationidmComponent},
   {path:'modelisationpbo',component:ModelisationpboComponent},
   {path:'racco',component:RaccoComponent},
   {path:'regie',component:RegieComponent},
   {path:'vtl',component:VtlComponent},
   {path:'trame',component:TrameComponent},
-  {path:'user',component:UserComponent,data:{
-  role:['ROLE_ADMIN']
-}},
-  {path:'role',component:RoleComponent},
+  {path:'user',component:UserComponent,canActivate:[AuthGuard]},
+  {path:'role',component:RoleComponent ,canActivate:[AuthGuard]},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
   {path:'ajouter',component:AddtacheComponent},
   {path:'projet',component:ProjetComponent},
   {path: 'statfsc', component:StatfscComponent},
   {path: ':id', component:TacheComponent},
-
-
-
   {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: '**', redirectTo: 'login'},
+  {path: '**', redirectTo: 'login' },
 
 
 

@@ -6,7 +6,7 @@ export class Vtl{
   id:number;
   demandeur:string;
   datereception:Date;
-  nom:string;
+  nomtache:string;
   nbal:number;
   pm:string;
   modelisation:string;
@@ -18,5 +18,5 @@ export class Vtl{
   commentaire:string;
   region:Region;
   projet:Projet;
-  nomcharge:string;
+  nom:string;
 }

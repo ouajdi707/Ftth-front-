@@ -99,7 +99,8 @@ export class DashboardComponent implements OnInit {
         }
         this.option = {
           title: {
-            text: 'Gc'
+            text: 'Gc',
+
           },
           legend: {
             data: xAxisData
@@ -130,6 +131,7 @@ export class DashboardComponent implements OnInit {
             {
               name: 'nombre de taches traitées',
               type: 'bar',
+              showBackground: true,
               data: data1,
               barWidth: '20%',
 
@@ -171,7 +173,8 @@ export class DashboardComponent implements OnInit {
         }
         this.option1 = {
           title: {
-            text: 'Fsc'
+            text: 'Fsc',
+
           },
           legend: {
             data: xAxisData
@@ -267,6 +270,7 @@ export class DashboardComponent implements OnInit {
             {
               name: 'nombre de taches traitées',
               type: 'bar',
+
               data: data1,
               barWidth: '20%',
 

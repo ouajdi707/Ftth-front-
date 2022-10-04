@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
         if (this.tokenStorage.getUser().roles == 'ROLE_ADMIN'){
-          this.router.navigate(['/user']).then(() => { window.location.reload();
+          this.router.navigate(['/dashboard']).then(() => { window.location.reload();
           })}
         else {
-          this.router.navigate(['/dashboard']).then(() => { window.location.reload(); })
+          this.router.navigate(['/gc']).then(() => { window.location.reload(); })
         }
 
         this.reloadPage();

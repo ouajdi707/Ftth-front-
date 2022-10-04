@@ -26,6 +26,8 @@ export class GcdisplayComponent implements OnInit {
 
 
   user:User
+  isAuth: boolean = false;
+  isLoggedIn = false;
 
   projets:Projet[];
   projet =new Projet();
@@ -52,6 +54,13 @@ export class GcdisplayComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorage.getToken();
+    if (this.isLoggedIn) {
+      this.isAuth = true;
+      this.user = this.tokenStorage.getUser();
+    } else {
+      this.isAuth = false;
+    }
     this.getallprojet()
     this.getgc();
     this.getAllRegion();
@@ -170,7 +179,9 @@ this.regionService.getAll().subscribe(data=>this.regions=data);
 
   }
   Onduplicate(list: Gc,username:number) {
-    this.gcService.Add_Gc(list,username).subscribe(res => {
+    list.id =NaN;
+    console.log(list)
+    this.gcService.Add_Gc(list,this.user.id).subscribe(res => {
         this.gc.push({...list});
         this.toast.success("done")
 
