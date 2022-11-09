@@ -1,6 +1,7 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
 import {User} from "./User";
+import {Etat} from "./Etat";
 
 export class Racco{
   id:number;
@@ -23,6 +24,7 @@ export class Racco{
   region:Region;
   projet:Projet;
   nom:string;
+  etat:Etat;
 
 
 

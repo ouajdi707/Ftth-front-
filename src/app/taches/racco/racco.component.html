@@ -14,6 +14,18 @@
           </div>
           <div class="row pt-2">
             <div class="col-6">
+              <label for="pet-select">Etat</label>
+            </div>
+            <div class="col-6">
+              <select name="etat" [(ngModel)]="raccos.etat" >
+                <option value="">--Entrez l'etat--</option>
+                <option value="ENCOURS">ENCOURS</option>
+                <option value="TERMINE">TERMINE</option>
+              </select>
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
               <label for="username1" class="block"> Date de reception </label>
             </div>
             <div class="col-6">
@@ -169,7 +181,7 @@
     </ng-template>
   </p-toolbar>
   <div style="font-size: 5px ;">
-    <p-table #raccotable  [value]="racco" [responsive]="true"  columnResizeMode="expand"  [tableStyle]="{width: 'max-content'  }" [filterDelay]="0" [globalFilterFields]="['demandeur','datereception','refpav','idra','charge','nblgts',
+    <p-table #raccotable  [value]="racco" [responsive]="true"  columnResizeMode="expand"  [tableStyle]="{width: 'max-content'  }" [filterDelay]="0" [globalFilterFields]="['demandeur','etat','datereception','refpav','idra','charge','nblgts',
     'pbo','idimmeuble','distancepbopto',
     'action','commentaire','etat','commentaire','distance',
     'majnetworks','majsadirah','ancienpm','nouveaupm','region.name','projet.name']"
@@ -187,6 +199,7 @@
         <tr>
 
           <th pSortableColumn="demandeur"> Demandeur <p-sortIcon field="demandeur"></p-sortIcon> </th>
+          <th pSortableColumn="etat"> Etat <p-sortIcon field="etat"></p-sortIcon> </th>
           <th pSortableColumn="datereception"> Date reception <p-sortIcon field="datereception"></p-sortIcon> </th>
           <th pSortableColumn="refpav"> Réf Pav  <p-sortIcon field="refpav"></p-sortIcon> </th>
           <th pSortableColumn="idra"> Id ra  <p-sortIcon field="idra"></p-sortIcon> </th>
@@ -211,6 +224,9 @@
 
           <th>
             <p-columnFilter type="text" field="demandeur"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="etat"></p-columnFilter>
           </th>
           <th>
             <p-columnFilter type="text" field="datereception"></p-columnFilter>
@@ -270,6 +286,7 @@
         <tr>
 
           <td>{{list.demandeur}}</td>
+          <td>{{list.etat}}</td>
           <td> {{list.datereception | date:'dd/MM/YYYY' }}</td>
           <td> {{list.refpav}}</td>
           <td> {{list.idra}}</td>
@@ -309,6 +326,18 @@
                   </div>
                   <div class="col-6">
                     <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="raccos.demandeur" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="pet-select">Etat</label>
+                  </div>
+                  <div class="col-6">
+                    <select name="etat" [(ngModel)]="raccos.etat" >
+                      <option value="">--Entrez l'etat--</option>
+                      <option value="ENCOURS">ENCOURS</option>
+                      <option value="TERMINE">TERMINE</option>
+                    </select>
                   </div>
                 </div>
                 <div class="row pt-2">

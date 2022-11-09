@@ -1,6 +1,7 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
 import {User} from "./User";
+import {Etat} from "./Etat";
 
 export class Gc{
   id:number
@@ -11,9 +12,10 @@ export class Gc{
   action:string;
   user:User;
   datereception:Date;
-  etat:string;
+  etat:Etat;
   region:Region;
   commentaire:string;
   projet:Projet;
   nom:string;
+
 }

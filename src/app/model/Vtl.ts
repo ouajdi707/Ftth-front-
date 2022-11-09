@@ -1,6 +1,7 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
 import {User} from "./User";
+import {Etat} from "./Etat";
 
 export class Vtl{
   id:number;
@@ -19,4 +20,5 @@ export class Vtl{
   region:Region;
   projet:Projet;
   nom:string;
+  etat:Etat;
 }

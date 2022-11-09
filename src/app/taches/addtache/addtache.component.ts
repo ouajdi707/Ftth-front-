@@ -44,7 +44,8 @@ export class AddtacheComponent implements OnInit {
 step:any =1;
   aaaa: any;
   nomTache: string;
-  username:string;
+  username:any;
+
 
 
   constructor(private fb:FormBuilder,private toast: ToastrService ,private regionService: RegionService,
@@ -53,6 +54,7 @@ step:any =1;
 
 
   ngOnInit(): void {
+    this.getName()
     this.getallprojet()
     this.getAllRegion()
     this.getalltaches()
@@ -99,6 +101,7 @@ let col=new colsup();
     username=this.usernamee.value
 nvtaches.user=new User()
     nvtaches.user=this.tokenStorage.getUser();
+    nvtaches.nom=this.user.username
 
 console.log(nvtaches)
 
@@ -137,6 +140,10 @@ console.log(nvtaches)
     for(let  t of tache.columnsSuplimentaires.split(',')){
       this.addItem(t);
     }
+
+  }
+  getName (){
+    this.user = this.tokenStorage.getUser();
 
   }
 }

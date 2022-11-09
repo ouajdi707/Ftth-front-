@@ -1,6 +1,7 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
 import {User} from "./User";
+import {Etat} from "./Etat";
 
 export class Creationsadirah {
   id :number;
@@ -10,7 +11,7 @@ export class Creationsadirah {
   pav:string;
   poche:string;
   etatsadirah:string;
-  etat:string;
+  etat:Etat;
 
   user:User;
   commentaire:string;

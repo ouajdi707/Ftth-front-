@@ -1,6 +1,7 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
 import {User} from "./User";
+import {Etat} from "./Etat";
 
 export class Identificationimmeuble{
   id:number;
@@ -9,7 +10,7 @@ export class Identificationimmeuble{
   refimmo:string;
   adresse:string;
   user:User;
-  etat:string;
+  etat:Etat;
   commentaire:string;
   region:Region;
   projet:Projet;

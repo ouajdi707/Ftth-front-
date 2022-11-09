@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {Stat} from "../model/Stat";
 import {Statistique} from "../model/Statistique";
 import {Stattotal} from "../model/Stattotal";
+import {Statetat} from "../model/Statetat";
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,12 @@ export class CreationidmService {
   countCreationidm() :Observable<Statistique>{
     return this.httpClient.get<Statistique>("http://localhost:8084/creationidm/countcreationidm");
   }
-  countstattotal() :Observable<Stattotal>{
+  countstattotal() :Observable<Stattotal> {
     return this.httpClient.get<Stattotal>("http://localhost:8084/creationidm/counttotal");
   }
+    countetat() :Observable<Statetat>{
+      return this.httpClient.get<Statetat>("http://localhost:8084/creationidm/countetat");
+    }
+
+
 }

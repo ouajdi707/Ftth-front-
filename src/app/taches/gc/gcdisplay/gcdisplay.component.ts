@@ -94,14 +94,14 @@ export class GcdisplayComponent implements OnInit {
   }
 
     Ondeletegc(id: number) {
-    Swal.fire({
-      title: 'Etes-vous sur?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui!'
-    }).then((result) => {
+      Swal.fire({
+        title: 'Etes-vous sur?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui!'
+      }).then((result) => {
 
         //let confirm = window.confirm('do you want to delete this GC')
         if (result.value) {
@@ -110,20 +110,20 @@ export class GcdisplayComponent implements OnInit {
 
               this.ngOnInit()
 
-              this.toast.success('gc supprimé avec succés ');
-
-            },
-            error => {
               Swal.fire(
                 'Deleted!',
                 'Your file has been deleted.',
                 'success'
               )
+              //this.toast.success('gc supprimé avec succés ');
+            },
+            error => {
+
               console.log(error)
             })
         }
-    })
-  }
+      })
+    }
 
   openDialog(gc: Gc) {
     this.gcs = gc;
@@ -133,7 +133,6 @@ getAllRegion(){
 this.regionService.getAll().subscribe(data=>this.regions=data);
 }
   editgc(gc: any) {
-
     this.gcService.update_Gc(gc.id, gc).subscribe(data => {
 
         this.toast.success('done');
@@ -141,6 +140,7 @@ this.regionService.getAll().subscribe(data=>this.regions=data);
       },
       error => this.toast.error('some things wrong'))
   }
+
 
 
   openNew() {

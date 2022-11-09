@@ -4,7 +4,7 @@
   <p-toolbar styleClass="p-mb-4">
     <ng-template pTemplate="left">
       <button pButton pRipple label="Nouveau Projet" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()" ></button>
-      <p-dialog [(visible)]="NewDialog" [style]="{width: '700', height:500}" header="Ajout Region" [modal]="true" styleClass="p-fluid"   >
+      <p-dialog [(visible)]="NewDialog" [style]="{width: '700', height:500}" header="Ajout Projet" [modal]="true" styleClass="p-fluid"   >
         <ng-template pTemplate="content">
           <div class="row pt-2">
             <div class="col-6">
@@ -34,7 +34,7 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th  field="name"> NAME  </th>
+          <th  field="name"> Nom Projet  </th>
           <th > </th>
         </tr>
       </ng-template>

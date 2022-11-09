@@ -14,6 +14,18 @@
           </div>
           <div class="row pt-2">
             <div class="col-6">
+              <label for="pet-select">Etat</label>
+            </div>
+            <div class="col-6">
+              <select name="etat" [(ngModel)]="gcs.etat" >
+                <option value="">--Entrez l'etat--</option>
+                <option value="ENCOURS">ENCOURS</option>
+                <option value="TERMINE">TERMINE</option>
+              </select>
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
             <label for="username1" class="block">Adresse gc</label>
             </div>
             <div class="col-6">
@@ -50,14 +62,6 @@
             </div>
             <div class="col-6">
             <input  type="text" aria-describedby="username1-help" class="form-control text-black"  value="{{user.username}}" pInputText  />
-            </div>
-          </div>
-          <div class="row pt-2">
-            <div class="col-6">
-            <label for="username1" class="block">Etat</label>
-            </div>
-            <div class="col-6">
-            <input  type="text" class="form-control text-black" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.etat" />
             </div>
           </div>
           <div class="row pt-2">
@@ -106,7 +110,6 @@
         </ng-template></p-dialog>
     </ng-template>
     <ng-template pTemplate="right">
-      <p-fileUpload mode="basic" accept=".xlsx" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block" chooseIcon="pi pi-download"  ></p-fileUpload>
       &nbsp;&nbsp;
       <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="Onexportexcel()"  icon="pi pi-upload"></button>
     </ng-template>
@@ -128,12 +131,12 @@
     <tr>
 
       <th pSortableColumn="demandeur"> Demandeur <p-sortIcon field="demandeur"></p-sortIcon> </th>
+      <th pSortableColumn="etat"> Etat <p-sortIcon field="etat"></p-sortIcon> </th>
       <th pSortableColumn="adressegc"> Adresse Gc <p-sortIcon field="adressegc"></p-sortIcon></th>
       <th pSortableColumn="nbrpoteaux"> Nombre de poteaux <p-sortIcon field="nbrpoteaux"></p-sortIcon> </th>
       <th pSortableColumn="reel"> Réel <p-sortIcon field="reel"></p-sortIcon> </th>
       <th pSortableColumn="action"> Action <p-sortIcon field="action"></p-sortIcon></th>
       <th pSortableColumn="charge"> Chargé <p-sortIcon field="charge"></p-sortIcon> </th>
-      <th pSortableColumn="etat"> Etat <p-sortIcon field="etat"></p-sortIcon> </th>
       <th pSortableColumn="datereception"> Date reception <p-sortIcon field="datereception"></p-sortIcon> </th>
       <th pSortableColumn="commentaire"> Commentaire <p-sortIcon field="commentaire"></p-sortIcon> </th>
       <th pSortableColumn="region.name"> Region <p-sortIcon field="region.name"></p-sortIcon> </th>
@@ -145,6 +148,9 @@
     <th>
       <p-columnFilter type="text" field="demandeur"></p-columnFilter>
     </th>
+      <th>
+        <p-columnFilter type="text" field="etat"></p-columnFilter>
+      </th>
       <th>
         <p-columnFilter type="text" field="adressegc"></p-columnFilter>
       </th>
@@ -159,9 +165,6 @@
       </th>
       <th>
         <p-columnFilter type="text" field="charge"></p-columnFilter>
-      </th>
-      <th>
-        <p-columnFilter type="text" field="etat"></p-columnFilter>
       </th>
       <th>
         <p-columnFilter type="text" field="datereception"></p-columnFilter>
@@ -182,12 +185,12 @@
     <tr>
 
       <td>{{list.demandeur}}</td>
+      <td> {{list.etat}}</td>
       <td>{{list.adressegc}}</td>
       <td>{{list.nbrpoteaux}}</td>
       <td> {{list.reel}}</td>
       <td> {{list.action}}</td>
       <td> {{list.nom}} </td>
-      <td> {{list.etat}}</td>
       <td> {{list.datereception |date:'dd/MM/YYYY'}}</td>
       <td> {{list.commentaire}}</td>
       <td> {{list.nom}}</td>
@@ -203,18 +206,22 @@
           <ng-template pTemplate="content">
             <div class="row pt-2">
               <div class="col-6">
-              <label for="username1" class="block">ID</label>
-              </div>
-              <div class="col-6">
-              <label id="username198" > {{gcs.id}}</label>
-              </div>
-            </div>
-            <div class="row pt-2">
-              <div class="col-6">
               <label for="username1" class="block">Demandeur</label>
               </div>
               <div class="col-6">
               <input class="form-control text-black" id="username19" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.demandeur" />
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col-6">
+                <label for="pet-select">Etat</label>
+              </div>
+              <div class="col-6">
+                <select name="etat" [(ngModel)]="gcs.etat" >
+                  <option value="">--Entrez l'etat--</option>
+                  <option value="ENCOURS">ENCOURS</option>
+                  <option value="TERMINE">TERMINE</option>
+                </select>
               </div>
             </div>
             <div class="row pt-2">
@@ -250,14 +257,6 @@
               <input class="form-control text-black" id="username15" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="gcs.action" />
               </div>
              </div>
-            <div class="row pt-2">
-              <div class="col-6">
-              <label for="username1" class="block">Charge</label>
-              </div>
-              <div class="col-6">
-              <input class="form-control text-black" id="username157" type="text" aria-describedby="username1-help" pInputText  />
-              </div>
-            </div>
             <div class="row pt-2">
               <div class="col-6">
               <label for="username1" class="block">Etat</label>

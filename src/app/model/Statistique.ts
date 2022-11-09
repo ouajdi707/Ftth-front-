@@ -10,6 +10,7 @@ export class Statistique {
   value8: number;
   value9: number;
   value10: number;
+  value11:number;
 
 
 

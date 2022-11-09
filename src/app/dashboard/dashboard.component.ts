@@ -15,6 +15,8 @@ import {TrameService} from "../services/trame.service";
 import {VtlService} from "../services/vtl.service";
 import {Statistique} from "../model/Statistique";
 import {Stattotal} from "../model/Stattotal";
+import {Statetat} from "../model/Statetat";
+import {NvtacheService} from "../services/nvtache.service";
 
 @Component({
   encapsulation : ViewEncapsulation.Emulated,
@@ -42,6 +44,8 @@ export class DashboardComponent implements OnInit {
   option10: any;
   option11: any;
   option15: any
+  option16:any
+  option17:any
   statfsc: Stat[]
   statidimm: Stat[]
   statcreationidm: Stat[]
@@ -52,8 +56,10 @@ export class DashboardComponent implements OnInit {
   statregie: Stat[]
   stattrame: Stat[]
   statvtl: Stat[]
+  statnvtache:Stat[]
   countcreationidm: Statistique = new Statistique();
   counttotal: Stattotal = new Stattotal();
+  countetat:Statetat=new Statetat();
   total: number
 
 
@@ -61,7 +67,7 @@ export class DashboardComponent implements OnInit {
               private creationidmservice: CreationidmService, private creationsadirahservice: CreationsadirahService,
               private identificationimmservice: IdentificationimmeubleService, private modelisationidmservice: ModelisationidmService,
               private modelisationpboservice: ModelisationpboService, private raccoservice: RaccoService, private regieservice: RegieService,
-              private trameservice: TrameService, private vtlservice: VtlService) {
+              private trameservice: TrameService, private vtlservice: VtlService,private nvtacheservice:NvtacheService) {
   }
 
 
@@ -80,6 +86,8 @@ export class DashboardComponent implements OnInit {
     this.getstattotal()
     this.getcounttotal()
     this.gettotal()
+    this.getcountetat()
+    this.getnvtachestat()
 
 
   }
@@ -207,6 +215,7 @@ export class DashboardComponent implements OnInit {
               type: 'bar',
               data: data1,
               barWidth: '20%',
+              showBackground: true,
 
               emphasis: {
                 focus: 'series'
@@ -270,7 +279,7 @@ export class DashboardComponent implements OnInit {
             {
               name: 'nombre de taches traitées',
               type: 'bar',
-
+              showBackground: true,
               data: data1,
               barWidth: '20%',
 
@@ -338,6 +347,7 @@ export class DashboardComponent implements OnInit {
               type: 'bar',
               data: data1,
               barWidth: '20%',
+              showBackground: true,
 
               emphasis: {
                 focus: 'series'
@@ -403,6 +413,7 @@ export class DashboardComponent implements OnInit {
               type: 'bar',
               data: data1,
               barWidth: '20%',
+              showBackground: true,
 
               emphasis: {
                 focus: 'series'
@@ -468,6 +479,7 @@ export class DashboardComponent implements OnInit {
               type: 'bar',
               data: data1,
               barWidth: '20%',
+              showBackground: true,
 
               emphasis: {
                 focus: 'series'
@@ -533,6 +545,7 @@ export class DashboardComponent implements OnInit {
               type: 'bar',
               data: data1,
               barWidth: '20%',
+              showBackground: true,
 
               emphasis: {
                 focus: 'series'
@@ -598,6 +611,7 @@ export class DashboardComponent implements OnInit {
               type: 'bar',
               data: data1,
               barWidth: '20%',
+              showBackground: true,
 
               emphasis: {
                 focus: 'series'
@@ -663,7 +677,7 @@ export class DashboardComponent implements OnInit {
               type: 'bar',
               data: data1,
               barWidth: '20%',
-
+              showBackground: true,
               emphasis: {
                 focus: 'series'
               },
@@ -728,6 +742,7 @@ export class DashboardComponent implements OnInit {
               type: 'bar',
               data: data1,
               barWidth: '20%',
+              showBackground: true,
 
               emphasis: {
                 focus: 'series'
@@ -793,7 +808,72 @@ export class DashboardComponent implements OnInit {
               type: 'bar',
               data: data1,
               barWidth: '20%',
+              showBackground: true,
 
+              emphasis: {
+                focus: 'series'
+              },
+              animationDelay: function (idx: number) {
+                return idx * 10;
+              }
+            }
+          ],
+          animationEasing: 'elasticOut',
+          animationDelayUpdate: function (idx: number) {
+            return idx * 5;
+          }
+        }
+      }
+    )
+  };
+  getnvtachestat() {
+    const data1: any[] = [];
+    const xAxisData: any[] = [];
+    let value = -1
+    this.nvtacheservice.getStat().subscribe(data => {
+        this.statnvtache = data
+        for (let s of this.statnvtache) {
+
+          xAxisData.push(s.name);
+          data1.push(s.value)
+
+        }
+        this.option17 = {
+          title: {
+            text: 'Nouvelle tache'
+          },
+          legend: {
+            data: xAxisData
+          },
+          toolbox: {
+            // y: 'bottom',
+            feature: {
+
+              dataView: {},
+              magicType: {show: true, type: ['bar', 'line']},
+
+              saveAsImage: {
+                pixelRatio: 2
+              }
+            }
+          },
+          tooltip: {},
+          xAxis: {
+            data: xAxisData,
+            splitLine: {
+              show: false
+            }
+          },
+          yAxis: {
+            minInterval: 1
+          },
+          series: [
+            {
+              name: 'nombre de taches traitées',
+              type: 'bar',
+              data: data1,
+              barWidth: '20%',
+              showBackground: true,
               emphasis: {
                 focus: 'series'
               },
@@ -825,7 +905,7 @@ export class DashboardComponent implements OnInit {
         }
         this.option11 = {
           title: {
-            text: 'Stat total'
+            text: 'Statistique total'
           },
           legend: {
             data: xAxisData
@@ -889,7 +969,7 @@ export class DashboardComponent implements OnInit {
         legend: {
           orient: 'vertical',
           left: 'left',
-          data: ['Creationidm', 'Creationsadirah', 'Fsc', 'Gc', 'Idimmeubles', 'Modelisationidm', 'Modelisationpbo', 'Racco', 'Regie', 'Trame', 'Vtl'],
+          data: ['Creationidm', 'Creationsadirah', 'Fsc', 'Gc', 'Idimmeubles', 'Modelisationidm', 'Modelisationpbo', 'Racco', 'Regie', 'Trame', 'Vtl','Nouvelle tache'],
         },
         series: [
           {
@@ -909,6 +989,8 @@ export class DashboardComponent implements OnInit {
               {value: this.countcreationidm.value8, name: 'Regie'},
               {value: this.countcreationidm.value9, name: 'Trame'},
               {value: this.countcreationidm.value10, name: 'Vtl'},
+              {value: this.countcreationidm.value11, name: 'Nouvelle tache'},
+
 
 
             ],
@@ -919,6 +1001,53 @@ export class DashboardComponent implements OnInit {
 
     })
   }
+  getcountetat() {
+    this.creationidmservice.countetat().subscribe(r => {
+      this.countetat = r;
+      this.option16 = {
+        tooltip: {
+          trigger: 'item'
+        },
+        legend: {
+          top: '5%',
+          left: 'center',
+          data: ['Terminé', 'Encours'],
+        },
+        series: [
+          {
+            name: 'nombre de taches',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+              borderRadius: 10,
+              borderColor: '#fff',
+              borderWidth: 2
+            },
+            label: {
+              show: false,
+              position: 'center'
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: '40',
+                fontWeight: 'bold'
+              }
+            },
+            labelLine: {
+              show: false
+            },
+            data: [
+              {value: this.countetat.statTermine, name: 'Terminé'},
+              {value: this.countetat.statEncours, name: 'Encours'},
+
+
+            ],
+          }
+        ]
+      };
+    })}
 
   gettotal() {
     this.creationidmservice.countstattotal().subscribe(r => {

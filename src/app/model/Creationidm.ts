@@ -1,6 +1,7 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
 import {User} from "./User";
+import {Etat} from "./Etat";
 
 export class Creationidm {
   id:number;
@@ -18,6 +19,7 @@ export class Creationidm {
   region:Region;
   projet:Projet;
   nom:string;
+  etat:Etat;
 
 
 

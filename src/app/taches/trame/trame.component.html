@@ -14,6 +14,18 @@
           </div>
           <div class="row pt-2">
             <div class="col-6">
+              <label for="pet-select">Etat</label>
+            </div>
+            <div class="col-6">
+              <select name="etat" [(ngModel)]="trames.etat" >
+                <option value="">--Entrez l'etat--</option>
+                <option value="ENCOURS">ENCOURS</option>
+                <option value="TERMINE">TERMINE</option>
+              </select>
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
               <label for="username1" class="block"> Date de reception </label>
             </div>
             <div class="col-6">
@@ -137,7 +149,7 @@
     </ng-template>
   </p-toolbar>
   <div style="font-size: 5px ;">
-    <p-table #trametable  [value]="trame" [responsive]="true"  columnResizeMode="expand"  [tableStyle]="{width: 'max-content'  }" [filterDelay]="0" [globalFilterFields]="['demandeur','datereception','num','ext','libellevoie','typevoie',
+    <p-table #trametable  [value]="trame" [responsive]="true"  columnResizeMode="expand"  [tableStyle]="{width: 'max-content'  }" [filterDelay]="0" [globalFilterFields]="['demandeur','etat','datereception','num','ext','libellevoie','typevoie',
     'nomvoie','codepostal','ville','insee','charge','commentaire','region.name','projet.name']"
              [paginator]="true" [rows]="4" [showCurrentPageReport]="true"  [resizableColumns]='true' [autoLayout]="true" id="excel-table" >
       <ng-template pTemplate="caption">
@@ -152,6 +164,7 @@
       <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="demandeur"> Demandeur <p-sortIcon field="demandeur"></p-sortIcon> </th>
+          <th pSortableColumn="etat"> Etat <p-sortIcon field="etat"></p-sortIcon> </th>
           <th pSortableColumn="datereception"> Date reception <p-sortIcon field="datereception"></p-sortIcon> </th>
           <th pSortableColumn="num"> Num  <p-sortIcon field="num"></p-sortIcon> </th>
           <th pSortableColumn="ext"> Ext  <p-sortIcon field="ext"></p-sortIcon> </th>
@@ -171,6 +184,9 @@
         <tr>
           <th>
             <p-columnFilter type="text" field="demandeur"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="etat"></p-columnFilter>
           </th>
           <th>
             <p-columnFilter type="text" field="datereception"></p-columnFilter>
@@ -217,6 +233,7 @@
       <ng-template pTemplate="body" let-list >
         <tr>
           <td>{{list.demandeur}}</td>
+          <td>{{list.etat}}</td>
           <td> {{list.datereception | date:'dd/MM/YYYY' }}</td>
           <td> {{list.num}}</td>
           <td> {{list.ext}}</td>
@@ -240,18 +257,22 @@
               <ng-template pTemplate="content">
                 <div class="row pt-2">
                   <div class="col-6">
-                    <label for="username1" class="block">ID</label>
-                  </div>
-                  <div class="col-6">
-                    <label id="username198" > {{trames.id}}</label>
-                  </div>
-                </div>
-                <div class="row pt-2">
-                  <div class="col-6">
                     <label for="username1" class="block">Demandeur</label>
                   </div>
                   <div class="col-6">
                     <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="trames.demandeur" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="pet-select">Etat</label>
+                  </div>
+                  <div class="col-6">
+                    <select name="etat" [(ngModel)]="trames.etat" >
+                      <option value="">--Entrez l'etat--</option>
+                      <option value="ENCOURS">ENCOURS</option>
+                      <option value="TERMINE">TERMINE</option>
+                    </select>
                   </div>
                 </div>
                 <div class="row pt-2">

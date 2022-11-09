@@ -14,6 +14,18 @@
           </div>
           <div class="row pt-2">
             <div class="col-6">
+              <label for="pet-select">Etat</label>
+            </div>
+            <div class="col-6">
+              <select name="etat" [(ngModel)]="vtls.etat" >
+                <option value="">--Entrez l'etat--</option>
+                <option value="ENCOURS">ENCOURS</option>
+                <option value="TERMINE">TERMINE</option>
+              </select>
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
               <label for="username1" class="block"> Date de reception </label>
             </div>
             <div class="col-6">
@@ -152,6 +164,7 @@
       <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="demandeur"> Demandeur <p-sortIcon field="demandeur"></p-sortIcon> </th>
+          <th pSortableColumn="etat"> Etat <p-sortIcon field="etat"></p-sortIcon> </th>
           <th pSortableColumn="datereception"> Date reception <p-sortIcon field="datereception"></p-sortIcon> </th>
           <th pSortableColumn="nom"> nom  <p-sortIcon field="nom"></p-sortIcon> </th>
           <th pSortableColumn="nbal"> nbal  <p-sortIcon field="nbal"></p-sortIcon> </th>
@@ -172,6 +185,9 @@
 
           <th>
             <p-columnFilter type="text" field="demandeur"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="etat"></p-columnFilter>
           </th>
           <th>
             <p-columnFilter type="text" field="datereception"></p-columnFilter>
@@ -218,6 +234,7 @@
       <ng-template pTemplate="body" let-list >
         <tr>
           <td>{{list.demandeur}}</td>
+          <td>{{list.etat}}</td>
           <td> {{list.datereception | date:'dd/MM/YYYY' }}</td>
           <td> {{list.nomtache}}</td>
           <td> {{list.nbal}}</td>
@@ -241,18 +258,22 @@
               <ng-template pTemplate="content">
                 <div class="row pt-2">
                   <div class="col-6">
-                    <label for="username1" class="block">ID</label>
-                  </div>
-                  <div class="col-6">
-                    <label id="username198" > {{vtls.id}}</label>
-                  </div>
-                </div>
-                <div class="row pt-2">
-                  <div class="col-6">
                     <label for="username1" class="block">Demandeur</label>
                   </div>
                   <div class="col-6">
                     <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="vtls.demandeur" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="pet-select">Etat</label>
+                  </div>
+                  <div class="col-6">
+                    <select name="etat" [(ngModel)]="vtls.etat" >
+                      <option value="">--Entrez l'etat--</option>
+                      <option value="ENCOURS">ENCOURS</option>
+                      <option value="TERMINE">TERMINE</option>
+                    </select>
                   </div>
                 </div>
                 <div class="row pt-2">

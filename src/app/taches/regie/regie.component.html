@@ -14,6 +14,18 @@
           </div>
           <div class="row pt-2">
             <div class="col-6">
+              <label for="pet-select">Etat</label>
+            </div>
+            <div class="col-6">
+              <select name="etat" [(ngModel)]="regies.etat" >
+                <option value="">--Entrez l'etat--</option>
+                <option value="ENCOURS">ENCOURS</option>
+                <option value="TERMINE">TERMINE</option>
+              </select>
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
               <label for="username1" class="block">Date de reception </label>
             </div>
             <div class="col-6">
@@ -68,14 +80,7 @@
               <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="regies.duree" />
             </div>
           </div>
-          <div class="row pt-2">
-            <div class="col-6">
-              <label for="username1" class="block">Etat</label>
-            </div>
-            <div class="col-6">
-              <input class="form-control text-black"  type="text" aria-describedby="username1-help" pInputText [(ngModel)]="regies.etat" />
-            </div>
-          </div>
+
           <div class="row pt-2">
             <div class="col-6">
               <label for="username1" class="block">Chargé</label>
@@ -129,7 +134,7 @@
     </ng-template>
   </p-toolbar>
   <div style="font-size: 5px ;">
-    <p-table #regietable  [value]="regie" [responsive]="true"  columnResizeMode="expand"  [tableStyle]="{width: 'max-content'  }" [filterDelay]="0" [globalFilterFields]="['demandeur','datereception','pm','site','idra','idm','tache','duree','etat','charge','commentaire','region.name','projet.name']"
+    <p-table #regietable  [value]="regie" [responsive]="true"  columnResizeMode="expand"  [tableStyle]="{width: 'max-content'  }" [filterDelay]="0" [globalFilterFields]="['demandeur','etat','datereception','pm','site','idra','idm','tache','duree','etat','charge','commentaire','region.name','projet.name']"
              [paginator]="true" [rows]="4" [showCurrentPageReport]="true"  [resizableColumns]='true' [autoLayout]="true" id="excel-table" >
       <ng-template pTemplate="caption">
         <div class="datatable-header">
@@ -143,6 +148,7 @@
       <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="demandeur"> Demandeur <p-sortIcon field="demandeur"></p-sortIcon> </th>
+          <th pSortableColumn="etat"> Etat <p-sortIcon field="etat"></p-sortIcon> </th>
           <th pSortableColumn="datereception"> Date reception <p-sortIcon field="datereception"></p-sortIcon> </th>
           <th pSortableColumn="pm"> Pm <p-sortIcon field="pm"></p-sortIcon></th>
           <th pSortableColumn="site"> Site <p-sortIcon field="site"></p-sortIcon> </th>
@@ -150,7 +156,6 @@
           <th pSortableColumn="idm"> Idm  <p-sortIcon field="idm"></p-sortIcon> </th>
           <th pSortableColumn="tache"> Tache <p-sortIcon field="tache"></p-sortIcon> </th>
           <th pSortableColumn="duree"> Durée  <p-sortIcon field="duree"></p-sortIcon> </th>
-          <th pSortableColumn="etat"> Etat  <p-sortIcon field="etat"></p-sortIcon> </th>
           <th pSortableColumn="charge"> Chargé  <p-sortIcon field="charge"></p-sortIcon> </th>
           <th pSortableColumn="commentaire"> Commentaire  <p-sortIcon field="commentaire"></p-sortIcon> </th>
           <th pSortableColumn="region.name"> Region <p-sortIcon field="region.name"></p-sortIcon> </th>
@@ -162,6 +167,9 @@
 
           <th>
             <p-columnFilter type="text" field="demandeur"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="etat"></p-columnFilter>
           </th>
           <th>
             <p-columnFilter type="text" field="datereception"></p-columnFilter>
@@ -184,9 +192,7 @@
           <th>
             <p-columnFilter type="text" field="duree"></p-columnFilter>
           </th>
-          <th>
-            <p-columnFilter type="text" field="etat"></p-columnFilter>
-          </th>
+
           <th>
             <p-columnFilter type="text" field="charge"></p-columnFilter>
           </th>
@@ -206,6 +212,7 @@
         <tr>
 
           <td>{{list.demandeur}}</td>
+          <td>{{list.etat}}</td>
           <td> {{list.datereception | date:'dd/MM/YYYY' }}</td>
           <td>{{list.pm}}</td>
           <td> {{list.site}}</td>
@@ -213,7 +220,7 @@
           <td> {{list.idm}}</td>
           <td> {{list.tache}}</td>
           <td> {{list.duree}}</td>
-          <td> {{list.etat}}</td>
+
           <td> {{list.nom}}</td>
           <td> {{list.commentaire}}</td>
           <td> {{list.region.name}}</td>
@@ -226,20 +233,25 @@
 
             <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Regie Details" [modal]="true" styleClass="p-fluid"   >
               <ng-template pTemplate="content">
-                <div class="row pt-2">
-                  <div class="col-6">
-                    <label for="username1" class="block">ID</label>
-                  </div>
-                  <div class="col-6">
-                    <label id="username198" > {{regies.id}}</label>
-                  </div>
-                </div>
+
                 <div class="row pt-2">
                   <div class="col-6">
                     <label for="username1" class="block">Demandeur</label>
                   </div>
                   <div class="col-6">
                     <input class="form-control text-black" id="username19" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="regies.demandeur" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="pet-select">Etat</label>
+                  </div>
+                  <div class="col-6">
+                    <select name="etat" [(ngModel)]="regies.etat" >
+                      <option value="">--Entrez l'etat--</option>
+                      <option value="ENCOURS">ENCOURS</option>
+                      <option value="TERMINE">TERMINE</option>
+                    </select>
                   </div>
                 </div>
                 <div class="row pt-2">
@@ -296,14 +308,6 @@
                   </div>
                   <div class="col-6">
                     <input class="form-control text-black" id="username159" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="regies.duree" />
-                  </div>
-                </div>
-                <div class="row pt-2">
-                  <div class="col-6">
-                    <label for="username1" class="block">Etat</label>
-                  </div>
-                  <div class="col-6">
-                    <input class="form-control text-black" id="ouou" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="regies.etat" />
                   </div>
                 </div>
                 <div class="row pt-2">

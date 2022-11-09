@@ -3,6 +3,7 @@ import {Projet} from "./Projet";
 import {Tache} from "./Tache";
 import {colsup} from "./colsup";
 import {User} from "./User";
+import {Etat} from "./Etat";
 
 export class Nvtache {
  id:number;
@@ -10,7 +11,7 @@ export class Nvtache {
  datereception:Date;
  user:User;
  commentaire:string;
- etat:string;
+ etat:Etat;
  region:Region;
  projet:Projet;
  nomTache:Tache;

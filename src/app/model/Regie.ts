@@ -1,6 +1,7 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
 import {User} from "./User";
+import {Etat} from "./Etat";
 
 export class Regie{
   id:number
@@ -12,11 +13,12 @@ export class Regie{
   idm:string;
   tache:string;
   duree:string;
-  etat:string;
+  etat:Etat;
   user:User;
   commentaire:string;
   region:Region;
   projet:Projet;
   nom:string;
+
 
 }

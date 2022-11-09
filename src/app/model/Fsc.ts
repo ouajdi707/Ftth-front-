@@ -1,6 +1,7 @@
 import {Region} from "./Region";
 import {Projet} from "./Projet";
 import {User} from "./User";
+import {Etat} from "./Etat";
 
 export class Fsc {
   id:number;
@@ -13,5 +14,6 @@ export class Fsc {
   region:Region;
   projet:Projet;
   nom:string;
+  etat:Etat;
 
 }

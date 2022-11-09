@@ -14,6 +14,18 @@
           </div>
           <div class="row pt-2">
             <div class="col-6">
+              <label for="pet-select">Etat</label>
+            </div>
+            <div class="col-6">
+              <select name="etat" [(ngModel)]="creationidms.etat" >
+                <option value="">--Entrez l'etat--</option>
+                <option value="ENCOURS">ENCOURS</option>
+                <option value="TERMINE">TERMINE</option>
+              </select>
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
               <label for="username1" class="block">Adresse</label>
             </div>
             <div class="col-6">
@@ -129,7 +141,7 @@
     </ng-template>
   </p-toolbar>
   <div style="font-size: 5px ;">
-    <p-table #creationidmtable  [value]="creationidm" [responsive]="true"  columnResizeMode="expand"  [tableStyle]="{width: 'max-content'  }" [filterDelay]="0" [globalFilterFields]="['demandeur','adressegc','nbrpoteaux','codepostal','reel','action','charge','etat','datereception','commentaire','region.name','projet.name']"
+    <p-table #creationidmtable  [value]="creationidm" [responsive]="true"  columnResizeMode="expand"  [tableStyle]="{width: 'max-content'  }" [filterDelay]="0" [globalFilterFields]="['demandeur','etat','adressegc','nbrpoteaux','codepostal','reel','action','charge','etat','datereception','commentaire','region.name','projet.name']"
              [paginator]="true" [rows]="4" [showCurrentPageReport]="true"  [resizableColumns]='true' [autoLayout]="true" id="excel-table" >
       <ng-template pTemplate="caption">
         <div class="datatable-header">
@@ -145,6 +157,7 @@
         <tr>
 
           <th pSortableColumn="demandeur"> Demandeur <p-sortIcon field="demandeur"></p-sortIcon> </th>
+          <th pSortableColumn="etat"> Etat <p-sortIcon field="etat"></p-sortIcon> </th>
           <th pSortableColumn="datereception"> Date reception <p-sortIcon field="datereception"></p-sortIcon> </th>
           <th pSortableColumn="adresse"> Adresse <p-sortIcon field="adresse"></p-sortIcon></th>
           <th pSortableColumn="idra"> Id ra<p-sortIcon field="idra"></p-sortIcon> </th>
@@ -164,6 +177,10 @@
           <th>
             <p-columnFilter type="text" field="demandeur"></p-columnFilter>
           </th>
+          <th>
+            <p-columnFilter type="text" field="etat"></p-columnFilter>
+          </th>
+
           <th>
             <p-columnFilter type="text" field="datereception"></p-columnFilter>
           </th>
@@ -207,6 +224,7 @@
         <tr>
 
           <td>{{list.demandeur}}</td>
+          <td>{{list.etat}}</td>
           <td> {{list.datereception | date:'dd/MM/YYYY' }}</td>
           <td>{{list.adresse}}</td>
           <td>{{list.idra}}</td>
@@ -230,18 +248,22 @@
               <ng-template pTemplate="content">
                 <div class="row pt-2">
                   <div class="col-6">
-                    <label for="username1" class="block">ID</label>
-                  </div>
-                  <div class="col-6">
-                    <label id="username198" > {{creationidms.id}}</label>
-                  </div>
-                </div>
-                <div class="row pt-2">
-                  <div class="col-6">
                     <label for="username1" class="block">Demandeur</label>
                   </div>
                   <div class="col-6">
                     <input class="form-control text-black" id="username19" type="text" aria-describedby="username1-help" pInputText [(ngModel)]="creationidms.demandeur" />
+                  </div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-6">
+                    <label for="pet-select">Etat</label>
+                  </div>
+                  <div class="col-6">
+                    <select name="etat" [(ngModel)]="creationidms.etat" >
+                      <option value="">--Entrez l'etat--</option>
+                      <option value="ENCOURS">ENCOURS</option>
+                      <option value="TERMINE">TERMINE</option>
+                    </select>
                   </div>
                 </div>
                 <div class="row pt-2">
